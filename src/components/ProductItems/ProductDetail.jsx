@@ -12,10 +12,11 @@ import Stock from "../Helpers/Stock";
 import AddToWish from "../Helpers/AddToWish";
 import { useTranslation } from "react-i18next";
 import ShopBox from "./ShopBox";
-import { features } from "../../data/features";
 import NoReviews from "./NoReviews";
 import SimilarProducts from "./SimilarProducts";
 import HelmetTitle from "../../utils/HelmetTitle";
+import { getProduct } from "../../redux/product";
+import { features } from "../../data/features";
 
 const ProductDetail = () => {
   let { t } = useTranslation(["product"]);

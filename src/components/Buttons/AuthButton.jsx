@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import { signOut } from "../../redux/actions/authAction";
 import { useTranslation } from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -79,13 +78,12 @@ const AuthButton = () => {
           onClick={handleClick}
           className="flex flex-col items-center cursor-pointer"
         >
-          <LazyLoadImage
+          <img
             src={
               user.avatar?.url ||
               "https://www.ihp.ie/wp-content/uploads/profile-img.jpg"
             }
             alt={user.name}
-            effect="blur"
             className="bg-orange-500 w-[30px] h-[30px] object-cover rounded-full"
           />
           <p className="text-xs pt-1 sm:text-sm">{t("profile")}</p>
@@ -113,13 +111,12 @@ const AuthButton = () => {
         className="md:hidden flex justify-between text-gray-500 active:text-orange-400 transition_normal flex-col items-center"
       >
         <div className="flex_center text-xl">
-          <LazyLoadImage
+          <img
             src={
               user.avatar?.url ||
               "https://www.ihp.ie/wp-content/uploads/profile-img.jpg"
             }
             alt={user.name}
-            effect="blur"
             className="h-8 object-cover w-8 bg-purple-600 rounded-full"
           />
         </div>

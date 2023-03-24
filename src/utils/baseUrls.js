@@ -1,4 +1,4 @@
-var api = process.env.NODE_ENV !== "production" ?  "http://localhost:5000/api" : "https://e-commerce-first-api-qeof.onrender.com/api";
+const api = "/api";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const userUrl = `${api}/user/`;

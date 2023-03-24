@@ -20,12 +20,17 @@ import MyOrders from "./components/Profile/MyOrders";
 import Addresses from "./components/Profile/Addresses";
 import { EditMyProfile, Favorites, Settings } from "./components/Profile";
 import CheckOut from "./components/CheckOut";
+import { refreshToken } from "./redux/actions/authAction";
+import { FetchLoader } from "./components/SkeletonLoaders";
 
 function App() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const navigete = useNavigate();
   const { auth } = useSelector((state) => state);
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, [dispatch]);
 
   useEffect(() => {
     window.replainSettings = { id: "9ba7af42-4b86-455f-b953-ebe0286ecce7" };
