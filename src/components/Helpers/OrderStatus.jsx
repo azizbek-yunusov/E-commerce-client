@@ -1,20 +1,15 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { BsBagCheckFill, BsCartCheckFill } from "react-icons/bs";
+import { orderStatusData } from "../../data/OrderTypeData";
 
 const OrderStatus = ({ status }) => {
   let { t } = useTranslation(["order"]);
+  const orderStatus = orderStatusData.find((item) => item.value === status);
+  console.log(orderStatus);
   return (
-    <div className="">
-      {status === "Shipped" ? (
-        <div className="flex_betwen p-1 md:w-full max-w-max  px-1 text-sm font-semibold rounded-md bg-green-200 text-blue-500">
-          <BsCartCheckFill className="text-blue-500 text-xl mr-1" />
-          <span>{t("shipped")}</span>
-        </div>
-      ) : (
-        "not"
-      )}
-      <div className=""></div>
+    <div className={`${orderStatus.color} rounded-md px-2`}>
+      <p className="">{t(orderStatus.name)}</p>
     </div>
   );
 };

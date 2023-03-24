@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import UserProvider from "./redux/store";
 import "./i18n";
+import "./assets/styles/swipper.css";
 import { theme } from "./theme";
 import "moment/locale/uz-latn";
 import App from "./App";

@@ -1,0 +1,23 @@
+.AuthorGradientBorder::after {
+  content: "";
+  border-radius: 10px;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, #ffd800, #ff5520, #750cf2, #0cbcf2);
+  z-index: -1;
+}
+.AuthorGradientBorder::before {
+  content: "";
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #ffd800, #ff5520, #750cf2, #0cbcf2);
+  z-index: -2;
+  filter: blur(15px);
+}

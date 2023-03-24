@@ -10,6 +10,8 @@ import { datePicker } from "../Helpers/datePicker";
 import OrderStatus from "../Helpers/OrderStatus";
 import PaymentTypeText from "../Helpers/PaymentTypeText";
 import { HelmetTitle } from "../../utils";
+import moment from "moment";
+import OrderStatusText from "../Helpers/OrderStatusText";
 
 const MyOrders = () => {
   let { t } = useTranslation();
@@ -42,10 +44,10 @@ const MyOrders = () => {
                     <div className="">
                       <p className="md:text-lg font-bold text-gray-700">
                         {t("order:order-id")}
-                        {"-"}
+                        {" - "}
                         <span className="">
                           {"#"}
-                          {item._id.slice(-6).toUpperCase()}
+                          {item.orderId}
                         </span>
                         {/* {", "}
                         <span className="">
@@ -54,7 +56,23 @@ const MyOrders = () => {
                         </span>{" "} */}
                       </p>
                     </div>
-                    {/* <OrderStatus status={item.orderStatus} /> */}
+                    <div className="flex items-center">
+                      <OrderStatus status={item.orderStatus} />
+                      <div className="ml-2">
+                        {item.updatedAt ? (
+                          <div className="text-gray-600">
+                            <span className="mr-1 text-gray-500">
+                              {t("order:updated")}-
+                            </span>
+                            {moment(item.updatedAt).format("lll")}
+                          </div>
+                        ) : (
+                          <div className="text-gray-600">
+                            {moment(item.updatedAt).format("lll")}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div className="grid lg:grid-cols-12 grid-cols-1 gap-2">
                     <div className="mt-3 lg:col-span-5">
@@ -63,12 +81,12 @@ const MyOrders = () => {
                           <div className="my-2 flex">
                             <img
                               className={
-                                item.orderItems.length >= 2 ? "h-20" : "h-44"
+                                item.orderItems.length >= 2 ? "h-20" : "h-40"
                               }
                               src={ord.productId.images[0].url}
                               alt=""
                             />
-                            <div className="ml-2">
+                            <div className="ml-1">
                               <Link
                                 to={`/product/view/${ord.productId._id}`}
                                 className="md:text-lg text-gray-700"
@@ -93,7 +111,7 @@ const MyOrders = () => {
                               {":"}
                             </td>
                             <td className="w-full p-3 md:p-1 xl:p-2 text-gray-800  text-left block lg:table-cell relative lg:static">
-                              {item.orderStatus}
+                              <OrderStatusText status={item.orderStatus} />
                             </td>
                           </tr>
                           <tr className="flex text-sm w-full">

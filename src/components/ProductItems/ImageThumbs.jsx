@@ -1,4 +1,4 @@
-// import "../../../assets/styles/swipperThumbs.scss";
+import "../../assets/styles/swipperThumbs.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper";
 import { useState } from "react";

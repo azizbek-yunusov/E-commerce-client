@@ -45,38 +45,32 @@ export const deliveryTypeData = [
 export const orderStatusData = [
   {
     id: "1",
-    name: "order-placed",
-    value: "Order Placed",
-    color: "bg-orange-200 text-orange-500",
-  },
-  {
-    id: "2",
-    name: "shipped",
-    value: "Shipped",
+    name: "accepted",
+    value: "Accepted",
     color: "bg-blue-200 text-blue-500",
   },
   {
     id: "3",
-    name: "cash-by",
-    value: "Cash on Delivery",
-    color: "bg-green-200 text-green-500",
+    name: "under-analysis",
+    value: "UnderAnalysis",
+    color: "bg-orange-200 text-orange-500",
   },
   {
     id: "4",
-    name: "processing",
-    value: "Processing",
+    name: "done",
+    value: "Done",
     color: "bg-teal-200 text-teal-500",
   },
   {
     id: "5",
     name: "dispatched",
     value: "Dispatched",
-    color: "bg-pink-200 text-pink-500",
+    color: "bg-purple-200 text-purple-500",
   },
   {
     id: "6",
-    name: "cancelled",
-    value: "Cancelled",
+    name: "rejected",
+    value: "Rejected",
     color: "bg-red-200 text-red-500",
   },
   {

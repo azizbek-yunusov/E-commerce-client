@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-// import Payme from "../../assets/svg/payme.svg";
+import Payme from "../../assets/svg/payme.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
@@ -115,7 +115,7 @@ const CheckOut = () => {
         paymentMethod: payment,
         deliveryType: delivery,
         totalPrice,
-        orderStatus: "Shipped",
+        orderStatus: "Accepted",
       };
       await disptach(newOrder({ access_token, orderData }));
       if (!isLoading) {

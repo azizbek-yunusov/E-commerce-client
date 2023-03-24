@@ -67,7 +67,7 @@
   "payment-active": "qilingan",
   "payment-no": "qilinmagan",
   "payment-date": "To'lov qilingan sana",
-  "order-id": "Buyurtma - ",
+  "order-id": "Buyurtma ID raqami",
   "price": "Narxi",
   "client": "Mijoz",
   "order-placed": "Buyurtma berilgan",
@@ -78,5 +78,6 @@
   "cancelled": "Bekor qilingan",
   "delivered": "Yetkazilgan",
   "new-order-added": "Buyutmangiz qabul qilindi",
-  "enter-address": "Yetkazib berish manzilini kiriting"
+  "enter-address": "Yetkazib berish manzilini kiriting",
+  "updated": "Yangilangan"
 }

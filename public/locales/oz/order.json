@@ -67,16 +67,19 @@
   "payment-active": "qilingan",
   "payment-no": "qilinmagan",
   "payment-date": "To'lov qilingan sana",
-  "order-id": "Buyurtma - ",
+  "order-id": "Buyurtma ID raqami",
   "price": "Narxi",
   "client": "Mijoz",
   "order-placed": "Buyurtma berilgan",
   "shipped": "Buyurtma jo'natilgan",
   "cash-by": "Naqd pul orqali",
-  "processing": "Qayta ishlash",
+  "accepted": "Qabul qilindi",
+  "under-analysis": "Tahlil qilinmoqda",
+  "done": "Bajarildi",
   "dispatched": "Yuborilgan",
   "cancelled": "Bekor qilingan",
   "delivered": "Yetkazilgan",
   "new-order-added": "Buyutmangiz qabul qilindi",
-  "enter-address": "Yetkazib berish manzilini kiriting"
+  "enter-address": "Yetkazib berish manzilini kiriting",
+  "updated": "Yangilangan"
 }
