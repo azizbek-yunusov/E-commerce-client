@@ -8,7 +8,8 @@ import { useTranslation } from "react-i18next";
 
 export const ReviewsBox = () => {
   let { t } = useTranslation(["product"]);
-  const { product } = useSelector((state) => state.product);
+  const { productDetails, isLoading } = useSelector((state) => state.product);
+  const { product, reviews } = productDetails;
   const { isLogged } = useSelector((state) => state.auth);
 
   // 1 star

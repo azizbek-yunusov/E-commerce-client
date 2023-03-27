@@ -9,11 +9,9 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import {
-  AiFillStar,
-  AiOutlineStar,
-} from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { IoMdClose } from "react-icons/io";
 import { MdAddAPhoto, MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,12 +38,19 @@ export const Review = ({ productId }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [pictures, setPictures] = useState([]);
+
   const reviewsHandle = async (e) => {
     try {
       e.preventDefault();
-      dispatch(
-        addReview({ access_token, productId, rating, comment, pictures })
-      );
+      if (rating === 0) {
+        toast.error(t("rating-feild"));
+      } else {
+        dispatch(
+          addReview({ access_token, productId, rating, comment, pictures })
+        );
+        handleClose();
+        toast.success(t("review-sent-success"));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -123,6 +128,7 @@ export const Review = ({ productId }) => {
                 minRows={4}
                 color="secondary"
                 value={comment}
+                required
                 onChange={(e) => setComment(e.target.value)}
               />
               <div className="md:mt-5 mt-3 flex min-w-full bg-gray-50 dark:bg-gray-700/50 justify-center items-center rounded-md border-2 border-dashed border-gray-300 p-3 py-8 cursor-pointer">
@@ -170,7 +176,6 @@ export const Review = ({ productId }) => {
 
               <div className="flex items-center justify-end mt-5">
                 <Button
-                  onClick={handleClose}
                   variant="contained"
                   size="medium"
                   color="secondary"

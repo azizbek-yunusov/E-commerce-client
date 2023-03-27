@@ -12,6 +12,7 @@ import PaymentTypeText from "../Helpers/PaymentTypeText";
 import { HelmetTitle } from "../../utils";
 import moment from "moment";
 import OrderStatusText from "../Helpers/OrderStatusText";
+import { Review } from "../ProductItems/Review";
 
 const MyOrders = () => {
   let { t } = useTranslation();
@@ -49,11 +50,6 @@ const MyOrders = () => {
                           {"#"}
                           {item.orderId}
                         </span>
-                        {/* {", "}
-                        <span className="">
-                           {moment(item.createdAt).format("lll")}
-                          {datePicker(item.createdAt)}
-                        </span>{" "} */}
                       </p>
                     </div>
                     <div className="flex items-center">
@@ -75,34 +71,45 @@ const MyOrders = () => {
                     </div>
                   </div>
                   <div className="grid lg:grid-cols-12 grid-cols-1 gap-2">
-                    <div className="mt-3 lg:col-span-5">
+                    <div className="mt-3 lg:col-span-5 flex_col justify-between ">
                       {item.orderItems.map((ord) => (
-                        <div key={ord._id} className="flex justify-between">
-                          <div className="my-2 flex">
-                            <img
-                              className={
-                                item.orderItems.length >= 2 ? "h-20" : "h-40"
-                              }
-                              src={ord.productId.images[0].url}
-                              alt=""
-                            />
-                            <div className="ml-1">
-                              <Link
-                                to={`/product/view/${ord.productId._id}`}
-                                className="md:text-lg text-gray-700"
-                              >
-                                {ord.productId.name}
-                              </Link>
-                              <Price
-                                price={ord.productId.price}
-                                className="mt-3 md:text-lg font-semibold text-gray-700"
+                        <div key={ord._id} className="">
+                          <div className="flex justify-between">
+                            <div className="my-2 flex">
+                              <img
+                                className={
+                                  item.orderItems.length >= 2 ? "h-20" : "h-40"
+                                }
+                                src={ord.productId.images[0].url}
+                                alt=""
                               />
+                              <div className="ml-1">
+                                <Link
+                                  to={`/product/view/${ord.productId._id}`}
+                                  className="md:text-lg text-gray-700"
+                                >
+                                  {ord.productId.name}
+                                </Link>
+                                <Price
+                                  price={ord.productId.price}
+                                  className="mt-3 md:text-lg font-semibold text-gray-700"
+                                />
+                              </div>
                             </div>
+                          </div>
+                          <div className="text-right cursor-pointer md:mr-3">
+                            {(item.orderStatus === "Delivered" || "Done") && (
+                              <p className="hover:underline transition_normal text-blue-500">
+                                {t("product:add-review")}
+                              </p>
+                            )}
                           </div>
                         </div>
                       ))}
+
+                      {/* <Review productId={"15"} /> */}
                     </div>
-                    <div className="mt-3 lg:col-span-7 lg:text-base text-sm">
+                    <div className="mt-3 lg:col-span-7 lg:text-base text-sm border-l border-l-gray-200">
                       <table className="w-full">
                         <tbody>
                           <tr className="flex text-sm w-full">

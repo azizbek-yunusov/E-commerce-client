@@ -6,7 +6,7 @@ export const getBrands = createAsyncThunk(
   "brand/get-brands",
   async (thunkAPI) => {
     try {
-      const response = await axios.get(`${brandUrl}brands`);
+      const response = await axios.get(brandUrl);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
