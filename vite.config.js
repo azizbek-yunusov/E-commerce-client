@@ -10,6 +10,7 @@ export default defineConfig({
         target: "https://e-commerce-first-api-qeof.onrender.com",
         changeOrigin: true,
         secure: false,
+        ws: true,
       },
     },
   },
