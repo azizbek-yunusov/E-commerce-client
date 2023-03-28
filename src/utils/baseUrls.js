@@ -1,4 +1,4 @@
-const api = "http://localhost:5000/api";
+const api = "/api";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const reviewUrl = `${api}/review/`;

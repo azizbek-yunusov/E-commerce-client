@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { BannerCarousel } from "../components/Banner";
 import BrandsList from "../components/Brand/BrandList";
 import { CategoryList } from "../components/Categories";
@@ -20,7 +19,6 @@ import { getProducts } from "../redux/product";
 import { HelmetTitle } from "../utils";
 
 const Home = () => {
-  const { auth } = useSelector((state) => state);
   let { t } = useTranslation(["home"]);
   const dispatch = useDispatch();
 
@@ -35,7 +33,6 @@ const Home = () => {
   return (
     <main>
       <HelmetTitle title={t("home")} />
-      {auth.isAdmin && <Navigate to={"/dashboard"} />}
       <BannerCarousel />
       <CategoryList />
       <BestProductsList />

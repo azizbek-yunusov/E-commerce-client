@@ -60,13 +60,13 @@ const UserButton = () => {
   };
   return (
     <>
-      <div className="mx-2 md:block hidden">
+      <div className="mx-2 md:mx-0 md:block hidden">
         <div
           onClick={handleClick}
           className="flex justify-between cursor-pointer text-gray-500 active:text-orange-400 transition_normal flex-col items-center"
         >
-          <AiOutlineUser className="text-2xl" />
-          <p className="text-xs md:pt-1 lg:pt-2 sm:text-sm">{t("sign-in-b")}</p>
+          <AiOutlineUser className="md:text-2xl" />
+          <p className="text-xs pt-1 sm:text-sm">{t("sign-in-b")}</p>
         </div>
         <StyledMenu
           id="demo-customized-menu"
@@ -92,7 +92,7 @@ const UserButton = () => {
         to={"/signin"}
         className="md:hidden flex justify-between text-gray-500 active:text-orange-400 transition_normal flex-col items-center"
       >
-        <AiOutlineUser className="text-2xl" />
+        <AiOutlineUser className="md:text-xl xl:text-2xl text-2xl" />
         <p className="text-xs pt-0 sm:text-sm">{t("sign-in-b")}</p>
       </Link>
     </>

@@ -48,6 +48,7 @@ export const refreshToken = () => async (dispatch) => {
     dispatch({ type: "REFRESH_PENDING" });
     try {
       const { data } = await axios.post(`${authUrl}refreshtoken`, null);
+
       dispatch({
         type: "REFRESH_FULFILLED",
         payload: {

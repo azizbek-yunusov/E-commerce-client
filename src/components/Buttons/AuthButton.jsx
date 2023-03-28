@@ -84,9 +84,9 @@ const AuthButton = () => {
               "https://www.ihp.ie/wp-content/uploads/profile-img.jpg"
             }
             alt={user.name}
-            className="bg-orange-500 w-[30px] h-[30px] object-cover rounded-full"
+            className="bg-orange-500 w-7 h-7 xl:w-8 xl:h-8 object-cover rounded-full"
           />
-          <p className="text-xs pt-1 sm:text-sm">{t("profile")}</p>
+          <p className="text-xs pt-[2px] sm:text-sm">{t("profile")}</p>
         </div>
         <StyledMenu
           id="demo-customized-menu"
