@@ -12,7 +12,7 @@ const CurrentCategory = () => {
   );
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-  let { t } = useTranslation(["category"]);
+  let { t } = useTranslation(["dashboard"]);
 
   useEffect(() => {
     dispatch(getCategory({ id }));

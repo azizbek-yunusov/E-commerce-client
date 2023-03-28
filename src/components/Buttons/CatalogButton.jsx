@@ -57,7 +57,7 @@ const StyledMenu = styled((props) => (
 }));
 
 const CatalogButton = () => {
-  let { t } = useTranslation(["category"]);
+  let { t } = useTranslation(["dashboard"]);
   // const { isLoading, categories } = useSelector((state) => state.category);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);

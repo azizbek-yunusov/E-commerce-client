@@ -43,7 +43,7 @@ const Navbar = () => {
             </Link>
             <CatalogButton />
           </div>
-          <div className="lg:col-span-6 col-span-8 flex items-center">
+          <div className="lg:col-span-6 col-span-8 xl:justify-end flex items-center">
             <SearchBox />
           </div>
           <div className="hidden lg:col-span-2 xl:col-span-3 lg:flex justify-end items-center">
