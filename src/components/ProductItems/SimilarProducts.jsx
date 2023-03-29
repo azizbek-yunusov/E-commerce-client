@@ -27,7 +27,7 @@ const SimilarProducts = () => {
                 spaceBetween: 20,
               },
               1440: {
-                slidesPerView: 6,
+                slidesPerView: 5,
                 spaceBetween: 20,
               },
             }}

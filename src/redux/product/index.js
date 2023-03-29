@@ -82,12 +82,29 @@ export const unLikeReview = createAsyncThunk(
   }
 );
 
+export const replyComment = createAsyncThunk(
+  "product/reply-review",
+  async ({ access_token, id, text }, thunkApi) => {
+    try {
+      const response = await axios.put(
+        `${reviewUrl}reply/${id}`,
+        { text },
+        {
+          headers: {
+            Authorization: access_token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return console.log(error);
+    }
+  }
+);
+
 const initialState = {
   products: [],
-  productDetails: {
-    product: null,
-    reviews: [],
-  },
+  product: null,
   reviews: [],
   isLoading: false,
   isError: false,
@@ -123,7 +140,7 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.productDetails = action.payload;
+        state.product = action.payload.product;
         state.reviews = action.payload.reviews;
       })
       .addCase(getProduct.rejected, (state, action) => {
@@ -149,12 +166,19 @@ export const productSlice = createSlice({
       })
       .addCase(likeReview.pending, (state) => {
         state.isSuccess = false;
+        // state.isLoading = true;
       })
       .addCase(likeReview.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        // state.reviews = action.payload;
+        const likedReview = action.payload;
+        const reviewIndex = state.reviews.findIndex(
+          (rev) => rev._id === likedReview._id
+        );
+        if (reviewIndex !== -1) {
+          state.reviews[reviewIndex] = likedReview;
+        }
       })
       .addCase(likeReview.rejected, (state, action) => {
         state.isLoading = false;
@@ -164,14 +188,42 @@ export const productSlice = createSlice({
       })
       .addCase(unLikeReview.pending, (state) => {
         state.isSuccess = false;
+        // state.isLoading = true;
       })
       .addCase(unLikeReview.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        // state.reviews = action.payload;
+        const unLikedReview = action.payload;
+        const reviewIndex = state.reviews.findIndex(
+          (rev) => rev._id === unLikedReview._id
+        );
+        if (reviewIndex !== -1) {
+          state.reviews[reviewIndex] = unLikedReview;
+        }
       })
       .addCase(unLikeReview.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(replyComment.pending, (state) => {
+        state.isSuccess = false;
+      })
+      .addCase(replyComment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        const replyComment = action.payload;
+        const reviewIndex = state.reviews.findIndex(
+          (rev) => rev._id === replyComment._id
+        );
+        if (reviewIndex !== -1) {
+          state.reviews[reviewIndex] = replyComment;
+        }
+      })
+      .addCase(replyComment.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

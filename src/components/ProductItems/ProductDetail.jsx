@@ -20,8 +20,7 @@ import { features } from "../../data/features";
 
 const ProductDetail = () => {
   let { t } = useTranslation(["product"]);
-  const { productDetails, isLoading } = useSelector((state) => state.product);
-  const { product, reviews } = productDetails;
+  const { product, reviews, isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(1);
   const { id } = useParams();
@@ -44,6 +43,7 @@ const ProductDetail = () => {
     dispatch(getProduct(id));
     window.scrollTo(0, 0);
   }, [dispatch, id]);
+  console.log(product);
   return (
     <main>
       {!isLoading && product ? (
@@ -153,11 +153,9 @@ const ProductDetail = () => {
                       {reviews && reviews[0] ? (
                         <div className="reviews">
                           {reviews &&
-                            reviews
-                              .map((review) => (
-                                <Comments key={review._id} review={review} />
-                              ))
-                              .reverse()}
+                            reviews?.map((review, index) => (
+                              <Comments key={index} review={review} />
+                            ))}
                         </div>
                       ) : (
                         <NoReviews />

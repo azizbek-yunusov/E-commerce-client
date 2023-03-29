@@ -1,4 +1,4 @@
-const api = "/api";
+const api =  process.env.NODE_ENV === "development" ? "/api" : "https://e-commerce-first-api-qeof.onrender.com/api";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const reviewUrl = `${api}/review/`;

@@ -8,29 +8,28 @@ import { useTranslation } from "react-i18next";
 
 export const ReviewsBox = () => {
   let { t } = useTranslation(["product"]);
-  const { productDetails, isLoading } = useSelector((state) => state.product);
-  const { product, reviews } = productDetails;
+  const { product, reviews, isLoading } = useSelector((state) => state.product);
   const { isLogged } = useSelector((state) => state.auth);
 
   // 1 star
-  const findOne = product?.reviews?.filter((item) => item.rating === 1);
+  const findOne = reviews?.filter((item) => item.rating === 1);
 
   const onePercentage =
     findOne?.length > 0 ? (findOne?.length * 100) / product?.numOfReviews : 0;
   // 2 star
-  const findTwo = product?.reviews?.filter((item) => item.rating === 2);
+  const findTwo = reviews?.filter((item) => item.rating === 2);
   const twoPercentage =
     findTwo?.length > 0 ? (findTwo?.length * 100) / product?.numOfReviews : 0;
   // 3 star
-  const finThree = product?.reviews?.filter((item) => item.rating === 3);
+  const finThree = reviews?.filter((item) => item.rating === 3);
   const threePercentage =
     finThree?.length > 0 ? (finThree?.length * 100) / product?.numOfReviews : 0;
   // 4 star
-  const findFour = product?.reviews?.filter((item) => item.rating === 4);
+  const findFour = reviews?.filter((item) => item.rating === 4);
   const fourPercentage =
     findFour?.length > 0 ? (findFour?.length * 100) / product?.numOfReviews : 0;
   // 5 star
-  const findFive = product?.reviews?.filter((item) => item.rating === 5);
+  const findFive = reviews?.filter((item) => item.rating === 5);
   const fivePercentage =
     findFive?.length > 0 ? (findFive?.length * 100) / product?.numOfReviews : 0;
 

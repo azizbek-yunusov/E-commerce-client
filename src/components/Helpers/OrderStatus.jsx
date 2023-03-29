@@ -6,7 +6,6 @@ import { orderStatusData } from "../../data/OrderTypeData";
 const OrderStatus = ({ status }) => {
   let { t } = useTranslation(["order"]);
   const orderStatus = orderStatusData.find((item) => item.value === status);
-  console.log(orderStatus);
   return (
     <div className={`${orderStatus.color} rounded-md px-2`}>
       <p className="">{t(orderStatus.name)}</p>

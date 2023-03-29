@@ -105,5 +105,9 @@
   "memory": "Tezkor xotira",
   "permanent-memory": "Doimiy xotira",
   "simillar-products": "O'xshash mahsulotlar",
-  "discounted-products": "Chegirmalar"
+  "discounted-products": "Chegirmalar",
+  "reply": "Javob berish",
+  "cancellation": "Bekor qilish",
+  "reply-title": "Sharhga javob qaytarish",
+  "send": "Jo'natish"
 }
