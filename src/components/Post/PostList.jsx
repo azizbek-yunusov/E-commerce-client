@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const PostList = () => {
   const { posts } = useSelector((state) => state.post);
-  let { t } = useTranslation(["dashboard"]);
+  let { t } = useTranslation(["home"]);
 
   return (
     <div className="md:my-5 my-3 container-full">

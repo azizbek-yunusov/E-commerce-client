@@ -97,7 +97,7 @@ const AuthButton = () => {
           open={open}
           onClose={handleClose}
         >
-          <Link onClick={handleClose} to={"/myprofile"}>
+          <Link onClick={handleClose} to={"/profile"}>
             <MenuItem>{t("profile")}</MenuItem>
           </Link>
           <Divider sx={{ my: 0.5 }} />
@@ -107,7 +107,7 @@ const AuthButton = () => {
         </StyledMenu>
       </div>
       <Link
-        to={"/myprofile"}
+        to={"/profile"}
         className="md:hidden flex justify-between text-gray-500 active:text-orange-400 transition_normal flex-col items-center"
       >
         <div className="flex_center text-xl">

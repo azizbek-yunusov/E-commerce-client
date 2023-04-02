@@ -94,7 +94,7 @@ const EditMyProfile = () => {
       }
       if (!isLoading) {
         toast.success(t("success-edited"));
-        navigate("/myprofile");
+        navigate("/profile");
       }
     } catch (err) {
       console.log(err);
@@ -148,10 +148,10 @@ const EditMyProfile = () => {
               <Link to={"/"} className="">
                 {t("home")}
               </Link>
-              <Link to={"/myprofile"} className="">
+              <Link to={"/profile"} className="">
                 {t("overview")}
               </Link>
-              <Link to={"/myprofile/update"} className="">
+              <Link to={"/profile/update"} className="">
                 {t("edit-profile")}
               </Link>
             </Breadcrumbs>

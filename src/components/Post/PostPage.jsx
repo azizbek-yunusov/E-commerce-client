@@ -10,7 +10,7 @@ import { getPost } from "../../redux/post";
 import { HelmetTitle } from "../../utils";
 
 const PostPage = () => {
-  let { t } = useTranslation(["dashboard"]);
+  let { t } = useTranslation(["home"]);
   const { isLoading, post } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const { id } = useParams();

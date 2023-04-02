@@ -38,7 +38,7 @@
   "order": "Buyurtma",
   "order-type": "To'lov turi",
   "order-date": "Buyurtma sanasi",
-  "contact": "Telofon raqam",
+  "contact": "Telefon raqam",
   "address": "Manzil",
   "empty-order": "Buyurtma berilmagan",
   "all-orders": "Barcha buyurtmalar",
@@ -81,5 +81,9 @@
   "delivered": "Yetkazilgan",
   "new-order-added": "Buyutmangiz qabul qilindi",
   "enter-address": "Yetkazib berish manzilini kiriting",
-  "updated": "Yangilangan"
+  "updated": "Yangilangan",
+  "rejected": "Bekor qilindi",
+  "sorting": "Saralash",
+  "un-paid": "To'lanmagan",
+  "active": "Faol"
 }

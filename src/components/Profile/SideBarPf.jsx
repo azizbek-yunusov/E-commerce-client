@@ -61,7 +61,7 @@ const SideBarPf = () => {
           </div>
         </div>
         <div className="flex md:my-2">
-          <Link to="/myprofile/update">
+          <Link to="/profile/update">
             <Button
               variant="contained"
               color="secondary"

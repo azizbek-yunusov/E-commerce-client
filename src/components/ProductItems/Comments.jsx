@@ -82,7 +82,7 @@ const Comments = ({ review }) => {
               <img
                 key={index}
                 src={img.url}
-                className="object-cover h-28 bg-gray-200 rounded-md"
+                className="object-cover h-28 bg-gray-100 rounded-md"
                 alt="Order"
               />
             ))}

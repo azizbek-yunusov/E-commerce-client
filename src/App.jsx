@@ -71,12 +71,12 @@ function App() {
           <Route path="/post/view/:id" element={<PostPage />} />
           {auth.isLogged && (
             <>
-              <Route path="/myprofile" element={<OverView />} />
-              <Route path="/myprofile/orders" element={<MyOrders />} />
-              <Route path="/myprofile/addresses" element={<Addresses />} />
-              <Route path="/myprofile/settings" element={<Settings />} />
-              <Route path="/myprofile/update" element={<EditMyProfile />} />
-              <Route path="/myprofile/favorites" element={<Favorites />} />
+              <Route path="/profile" element={<OverView />} />
+              <Route path="/profile/orders" element={<MyOrders />} />
+              <Route path="/profile/addresses" element={<Addresses />} />
+              <Route path="/profile/settings" element={<Settings />} />
+              <Route path="/profile/update" element={<EditMyProfile />} />
+              <Route path="/profile/favorites" element={<Favorites />} />
               <Route path="/check-out" element={<CheckOut />} />
             </>
           )}
