@@ -20,7 +20,7 @@
   "new-platform": "Bizning do'konda yangimisz?",
   "have-account": "Hisobingiz bormi?",
   "sign-in-ins": "Hisobga kirish",
-  "sign-in-succ": "Profilga kirildi",
+  "sign-in-succ": "Xush kelibsiz!!! kirildi",
   "create-a": "Hisob ochish.",
   "or": "yoki",
   "google-up": "Google bilan ro'yxatdan o'ting",
@@ -51,5 +51,16 @@
   "app-dowload-descr": "Haridlarni uydan chiqmagan holda mobil ilova orqali amalga oshiring!",
   "page-not-found": "Kecharasiz, ushbu sahifa topilmadi",
   "page-not-found-title": "Kechirasiz, siz qidirayotgan sahifani topa olmadik. Ehtimol, sizda URLni noto'g'ri kiritdingizmi? Imloni tekshirishga ishonch hosil qiling.",
-  "go-to-home": "Bosh sahifaga"
+  "go-to-home": "Bosh sahifaga",
+  "news": "Yangiliklar",
+  "contact-center": "Qo'llab-quvvatlash raqami",
+  "about-info": "Ma`lumot",
+  "about-me": "Biz haqimizda",
+  "vacancies": "Bo'sh ish o'rinlari",
+  "return-and-exange": "To'lovni qaytarish va tovarlarni almashtirish",
+  "term-payment-terms": "Muddatli to'lov shartlari",
+  "help": "Yordam",
+  "bonus-program": "Bonus va aksiyalar",
+  "paymen-and-delivery": "To'lov va yetkazib berish",
+  "service-centers": "Servis markazlari"
 }

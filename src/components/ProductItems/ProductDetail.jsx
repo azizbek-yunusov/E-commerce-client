@@ -138,9 +138,10 @@ const ProductDetail = () => {
                   <h1 className="text-lg text-center font-semibold text-gray-700 md:mb-3 mb-2">
                     {product.name}
                   </h1>
-                  <p className="md:text-base text-sm leading-6 md:text-zinc-600 text-gray-500">
+                  <div dangerouslySetInnerHTML={{ __html: product.descr }}></div>
+                  {/* <p className="md:text-base text-sm leading-6 md:text-zinc-600 text-gray-500">
                     {product.descr}
-                  </p>
+                  </p> */}
                 </div>
               )}
               {activeTab === 1 && (

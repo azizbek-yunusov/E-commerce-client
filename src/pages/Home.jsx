@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { BannerCarousel } from "../components/Banner";
@@ -21,7 +21,6 @@ import { HelmetTitle } from "../utils";
 const Home = () => {
   let { t } = useTranslation(["home"]);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getBanners());
     dispatch(getCategories());
@@ -31,17 +30,19 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <main>
-      <HelmetTitle title={t("home")} />
-      <BannerCarousel />
-      <CategoryList />
-      <BestProductsList />
-      <DiscountedProducts />
-      <BrandsList />
-      <ListBox />
-      <PostList />
-      <MobileApp />
-    </main>
+    <>
+      <main>
+        <HelmetTitle title={t("home")} />
+        <BannerCarousel />
+        <CategoryList />
+        <BestProductsList />
+        <DiscountedProducts />
+        <BrandsList />
+        <ListBox />
+        <PostList />
+        <MobileApp />
+      </main>
+    </>
   );
 };
 

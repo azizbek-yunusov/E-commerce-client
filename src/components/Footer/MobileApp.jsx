@@ -5,7 +5,7 @@ const MobileApp = () => {
   let { t } = useTranslation(["home"]);
   return (
     <div className="bg-slate-50 hidden lg:block">
-      {/* <div className="container-full md:py-8 flex justify-evenly">
+      <div className="container-full md:py-8 flex justify-evenly">
         <div className="flex">
           <img
             src="/images/mobile.png"
@@ -220,7 +220,7 @@ const MobileApp = () => {
             </a>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

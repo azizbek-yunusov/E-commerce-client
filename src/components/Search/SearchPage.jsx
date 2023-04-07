@@ -19,6 +19,7 @@ import ListProductCard from "../ProductItems/ListProductCard";
 import ProductCard from "../ProductItems/ProductCard";
 import { SearchPageLoader } from "../SkeletonLoaders";
 import Filter from "./Filter";
+import { productUrl } from "../../utils/baseUrls";
 
 const SearchPage = () => {
   const { categories } = useSelector((state) => state.category);
@@ -52,27 +53,30 @@ const SearchPage = () => {
       skipPathname ? "" : "/search?"
     }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&brand=${filterBrand}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
-
+  console.log(query);
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get(
+        `${productUrl}products/search?page=${page}&query=${query}&category=${category}&price=${price}&brand=${brand}&rating=${rating}&order=${order}`
+      );
+      console.log(data);
+      setResult(data.products);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `/api/product/search?page=${page}&query=${query}&category=${category}&price=${price}&brand=${brand}&rating=${rating}&order=${order}`
-        );
-        setResult(data.products);
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchData();
-  }, [category, brand, order, page, price, query, rating]);
+  }, []);
 
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getBrands());
     window.scrollTo(0, 0);
   }, [dispatch]);
+  console.log(result);
+
   return (
     <>
       <HelmetTitle title={`${query} - ${t("search-filter")}`} />

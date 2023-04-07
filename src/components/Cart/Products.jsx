@@ -21,11 +21,11 @@ const Products = ({ cart }) => {
   const { favorites } = useSelector((state) => state.favorite);
   const dispatch = useDispatch();
   let { t } = useTranslation(["product"]);
+  
   const addToCartHandle = async (id) => {
     if (isLogged) {
       const { data } = await axios.get(`${productUrl}${id}`);
-      const existItem = cart?.find((x) => x.productId?._id === data._id);
-
+      const existItem = cart?.find((x) => x.productId?._id === data.product._id);
       if (data.inStock <= existItem.quantity) {
         toast.error(t("product-not"));
       } else {

@@ -24,12 +24,11 @@ const store = configureStore({
     address,
     product,
     authv,
-    customer,
-    order,
     brand,
     category,
     banner,
     post,
+    order
   },
   devTools: process.env.NODE_ENV !== "production",
 });
