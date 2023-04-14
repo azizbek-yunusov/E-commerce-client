@@ -37,7 +37,7 @@ export const deliveryTypeData = [
   },
   {
     id: "2",
-    name: "store-pickup",
+    name: "point-pickup",
     value: "Store pickup",
   },
 ];

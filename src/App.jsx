@@ -22,6 +22,7 @@ import { EditMyProfile, Favorites, Settings } from "./components/Profile";
 import CheckOut from "./components/CheckOut";
 import { refreshToken } from "./redux/actions/authAction";
 import { FetchLoader } from "./components/SkeletonLoaders";
+import { token } from "./utils/baseUrls";
 
 function App() {
   const { pathname } = useLocation();
@@ -69,7 +70,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/post/view/:id" element={<PostPage />} />
-          {auth.isLogged && (
+          {token && (
             <>
               <Route path="/profile" element={<OverView />} />
               <Route path="/profile/orders" element={<MyOrders />} />

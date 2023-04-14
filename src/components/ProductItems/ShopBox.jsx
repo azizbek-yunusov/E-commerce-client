@@ -31,7 +31,7 @@ const ShopBox = ({ product }) => {
   const addToCartHandle = async (id) => {
     if (isLogged) {
       const existItem = cart?.find((x) => x.productId?._id === _id);
-      if (inStock <= existItem.quantity) {
+      if (inStock <= existItem?.quantity) {
         toast.error(t("product-not"));
       } else {
         await dispatch(addToCart(id, access_token));

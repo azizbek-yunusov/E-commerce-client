@@ -4,7 +4,7 @@ const ProductList = () => {
   const products = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
   return (
-    <div className="col-span-12 grid lg:grid-cols-5 md:grid-cols-3 lg:gap-4 grid-cols-2 gap-3 animate-pulse">
+    <div className="container-full col-span-12 grid lg:grid-cols-5 md:grid-cols-3 lg:gap-4 grid-cols-2 gap-3 animate-pulse">
       {products.map((item, index) => (
         <div key={index} className="border-2 flex flex-col justify-between p-3 border-[#dadada] rounded-2xl min-h-[400px] max-h-[400px]">
           <div className="bg-[#dadada] w-full animate-pulse h-[200px] rounded-xl"></div>

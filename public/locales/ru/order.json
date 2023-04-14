@@ -28,7 +28,7 @@
   "method-reception": "Способ получения",
   "delivery-address": "Доставка",
   "shoppingstore": "Самовывоз из магазина",
-  "store-pickup": "Введите адрес доставки",
+  "point-pickup": "Пункт доставки",
   "region": "Регион / Область",
   "district": "Город / Район",
   "street": "Адрес",
