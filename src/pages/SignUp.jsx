@@ -163,6 +163,35 @@ const SignUp = () => {
                         }}
                       />
                     </div>
+                    <div className="mt-6">
+                      <TextField
+                        id="outlined-basic"
+                        fullWidth
+                        variant="outlined"
+                        label={t("password")}
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        color="secondary"
+                        onChange={(e) => setPassword(e.target.value)}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <AiOutlineEye />
+                                ) : (
+                                  <AiOutlineEyeInvisible />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    </div>
                     <div className="mt-1 flex justify-between items-center text-sm">
                       <FormControlLabel
                         label={t("remember")}
