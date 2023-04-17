@@ -32,12 +32,12 @@ const SideBarPf = () => {
           <div className="z-10 overflow-hidden md:rounded-2xl max-w-max bg-white">
             <img
               className="md:rounded-2xl h-40 w-40 object-cover bg-orange-500"
-              src={user.avatar?.url}
+              src={user?.avatar?.url}
               alt=""
             />
           </div>
           <h1 className="md:my-3 md:text-2xl text-gray-800 font-semibold my-3 ">
-            {user.lastName ? `${user.name} ${user.lastName}` : user.name}
+            {user?.lastName ? `${user?.name} ${user?.lastName}` : user?.name}
           </h1>
           {standart ? (
             <div className="flex items-center bg-light-green-100 rounded-md p-1 px-2">

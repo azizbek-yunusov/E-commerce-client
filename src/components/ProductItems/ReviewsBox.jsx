@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 export const ReviewsBox = () => {
   let { t } = useTranslation(["product"]);
   const { product, reviews, isLoading } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.auth);
   const { isLogged } = useSelector((state) => state.auth);
 
   // 1 star
@@ -196,7 +197,7 @@ export const ReviewsBox = () => {
         </div>
         <div className="w-full">
           {isLogged ? (
-            <Review productId={product._id} />
+            <Review productId={product._id} reviews={reviews} />
           ) : (
             <Link to={"/signin"}>
               <Button

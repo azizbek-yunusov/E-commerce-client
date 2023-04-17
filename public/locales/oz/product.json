@@ -109,5 +109,8 @@
   "reply": "Javob berish",
   "cancellation": "Bekor qilish",
   "reply-title": "Sharhga javob qaytarish",
-  "send": "Jo'natish"
+  "send": "Jo'natish",
+  "edit-review": "Sharhni tahrirlash",
+  "rating-feild": "Iltimos baholang",
+  "review-sent-success": "Sizning sharhingiz muvaffiqiyatli yuborildi"
 }

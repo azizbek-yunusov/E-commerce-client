@@ -25,7 +25,7 @@ const LayoutP = ({ children }) => {
       <div className="container-full min-h-[560px] md:mb-3 md:mt-2 xl:flex flex-col hidden text-gray-800">
         <div className="relative">
           <img
-            src="/images/profilebg.png"
+            src="/images/profilebg.jpg"
             className="lg:h-[200px] object-cover w-full rounded-2xl"
             alt=""
           />
@@ -49,7 +49,7 @@ const LayoutP = ({ children }) => {
       <div className="container-full min-h-[460px] my-5 flex flex-col xl:hidden text-gray-800">
         <div className="rounded-xl border_primary relative pb-3">
           <img
-            src="/images/profilebg.png"
+            src="/images/profilebg.jpg"
             className="h-[150px] w-full object-cover rounded-t-xl"
             alt="Bg"
           />

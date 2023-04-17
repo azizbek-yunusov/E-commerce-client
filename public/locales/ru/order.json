@@ -78,5 +78,6 @@
   "cancelled": "Отменено",
   "delivered": "Доставленный",
   "new-order-added": "Ваш заказ принят",
-  "enter-address": "Укажите адрес доставки"
+  "enter-address": "Укажите адрес доставки",
+  "you-review": "Ваш комментарий"
 }

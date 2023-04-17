@@ -180,8 +180,8 @@ export const theme = createTheme({
     },
     divider: "#E6E8F0",
     primary: {
-      light: "#9E69FD",
-      main: "#9155FD",
+      light: "#ff8800",
+      main: "#ff8800",
       dark: "#804BDF",
       contrastText: "#FFF",
     },

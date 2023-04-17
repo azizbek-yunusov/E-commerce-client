@@ -33,31 +33,6 @@ export const newOrder = createAsyncThunk(
   }
 );
 
-export const addReview = createAsyncThunk(
-  "order/add-review",
-  async ({ access_token, productId, rating, comment, pictures }, thunkApi) => {
-    try {
-      const { data } = await axios.put(
-        `${orderUrl}review`,
-        {
-          productId,
-          rating,
-          comment,
-          pictures,
-        },
-        {
-          headers: {
-            Authorization: access_token,
-          },
-        }
-      );
-      return data.order;
-    } catch (error) {
-      return console.log(error);
-    }
-  }
-);
-
 const initialState = {
   orders: [],
   myOrders: [],
@@ -100,21 +75,6 @@ export const orderSlice = createSlice({
         state.myOrders = action.payload;
       })
       .addCase(getMyOrders.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.isSuccess = false;
-        state.message = action.error;
-      })
-      .addCase(addReview.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(addReview.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = false;
-        state.isSuccess = true;
-        state.order = action.payload;
-      })
-      .addCase(addReview.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

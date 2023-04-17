@@ -24,7 +24,7 @@ const OverView = () => {
                 <span className="text-zinc-500 font-semibold dark:text-zinc-100 mr-2">
                   {t("full-name")}:
                 </span>
-                {user.lastName ? `${user.name} ${user.lastName}` : user.name}
+                {user?.lastName ? `${user.name} ${user?.lastName}` : user.name}
               </li>
               <li className="text-zinc-500 dark:text-zinc-400 my-3 flex items-center">
                 <GoMail className="mr-1 text-lg" />

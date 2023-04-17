@@ -27,18 +27,24 @@ const style = {
   p: 3,
 };
 
-export const Review = ({ productId }) => {
+export const Review = ({ productId, reviews }) => {
   let { t } = useTranslation(["product"]);
-  const { access_token } = useSelector((state) => state.auth);
+  const { access_token, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  
+  const isReviewClient = reviews.filter((rev) => {
+    return rev.user._id === user._id
+  })
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const [pictures, setPictures] = useState([]);
-
+  const [rating, setRating] = useState(isReviewClient[0]?.rating || 0);
+  const [comment, setComment] = useState(isReviewClient[0]?.comment ||  "");
+  const [pictures, setPictures] = useState(isReviewClient[0]?.pictures || []);
+  
+  console.log(isReviewClient);
   const reviewsHandle = async (e) => {
     try {
       e.preventDefault();
@@ -80,7 +86,7 @@ export const Review = ({ productId }) => {
         fullWidth
         onClick={handleOpen}
       >
-        {t("add-review")}
+        {isReviewClient.length ? t("edit-review") : t("add-review") }
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -97,7 +103,7 @@ export const Review = ({ productId }) => {
           <Box sx={style} className="rounded-xl bg-white">
             <div className="flex_betwen">
               <h1 className="text-primary text-gray-800 md:mb-3 mb-2">
-                {t("new-review")}
+                {isReviewClient.length ? t("edit-review") : t("new-review") }
               </h1>
               <IconButton
                 onClick={handleClose}
@@ -178,10 +184,9 @@ export const Review = ({ productId }) => {
                 <Button
                   variant="contained"
                   size="medium"
-                  color="secondary"
                   type="submit"
                 >
-                  {t("add-review")}
+                  {isReviewClient.length ? t("edit-review") : t("add-review") }
                 </Button>
               </div>
             </form>

@@ -70,7 +70,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/wishlist" element={<WishList />} />
           <Route path="/post/view/:id" element={<PostPage />} />
-          {token && (
+          {(token || auth.isLogged) && (
             <>
               <Route path="/profile" element={<OverView />} />
               <Route path="/profile/orders" element={<MyOrders />} />

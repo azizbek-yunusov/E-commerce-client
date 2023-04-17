@@ -125,6 +125,7 @@ const CheckOut = () => {
       console.log(err);
     }
   };
+  console.log(findStandartRegionId, "id");
   return (
     <>
       <HelmetTitle title={t("check-out")} />
@@ -301,7 +302,7 @@ const CheckOut = () => {
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={findStandartRegionId[0]?.id || "11"}
+                        value={findStandartRegionId?.id || "11"}
                         color="secondary"
                         label={t("region")}
                         onChange={(e) => handleRegion(e)}
