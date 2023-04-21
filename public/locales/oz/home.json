@@ -6,7 +6,7 @@
   "sign-in-p": "Iltimos, hisobingizga kiring va xaridni boshlang!",
   "sign-in": "Tizimga Kirish",
   "sign-in-b": "Kirish",
-  "sign-up-t": "Xaridlar shu yerda boshlanadi ",
+  "sign-up-t": "Ro'yhatdan o'tish",
   "sign-up-p": "Ilovangizni boshqarishni oson va qiziqarli qiling!",
   "sign-up": "Ro'yhatdan o'tish",
   "email": "Email",
@@ -62,5 +62,13 @@
   "help": "Yordam",
   "bonus-program": "Bonus va aksiyalar",
   "paymen-and-delivery": "To'lov va yetkazib berish",
-  "service-centers": "Servis markazlari"
+  "service-centers": "Servis markazlari",
+  "confirm-password": "Parolni tasdiqlang",
+  "sent-email-otp-descr": "Siznging elektron pochtangizga kod yubordik iltimos uni kiriting",
+  "verify": "tasdiqlash",
+  "otp-verification": "OTP tekshiruvi",
+  "loading": "kuting",
+  "email-otp-verify": "Kirish uchun emailingizni tasdiqlang!!!",
+  "didnt-receive-code": "Kodni olmadingizmi?",
+  "resent": "Qayta yuborish"
 }

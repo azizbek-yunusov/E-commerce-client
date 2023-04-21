@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BannerCarousel } from "../components/Banner";
 import BrandsList from "../components/Brand/BrandList";
 import { CategoryList } from "../components/Categories";
@@ -20,14 +20,25 @@ import { HelmetTitle } from "../utils";
 
 const Home = () => {
   let { t } = useTranslation(["home"]);
+  const { products } = useSelector((state) => state.product);
+  const { banners } = useSelector((state) => state.banner);
+  const { categories } = useSelector((state) => state.category);
+  const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getBanners());
-    dispatch(getCategories());
-    dispatch(getProducts());
-    dispatch(getBrands());
-    dispatch(getPosts());
-  }, [dispatch]);
+    if (!products.length) {
+      dispatch(getProducts());
+    }
+    if (!banners.length) {
+      dispatch(getBanners());
+    }
+    if (!posts.length) {
+      dispatch(getPosts());
+    }
+    if (!categories.length) {
+      dispatch(getCategories());
+    }
+  }, [dispatch, products, posts, categories, products]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
   Backdrop,
@@ -21,6 +21,7 @@ import { authUrl } from "../utils/baseUrls";
 import OTPInput from "../components/Verify/OTPInput";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp, verifyOtp } from "../redux/actions/authAction";
+import { useEffect } from "react";
 
 const style = {
   position: "absolute",
@@ -35,15 +36,17 @@ const style = {
 const SignUp = () => {
   let { t } = useTranslation(["home"]);
   const dispatch = useDispatch();
-  const { user, isLogged } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const { user, isLogged, isError, message } = useSelector(
+    (state) => state.auth
+  );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
   const [openOTP, setOpenOTP] = useState(false);
-
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
@@ -53,14 +56,12 @@ const SignUp = () => {
       name,
       email,
       password,
+      confirmPass,
     };
     await dispatch(signUp(formState));
     if (user) {
       toast.success(t("email-otp-verify"));
       setOpenOTP(true);
-    }
-    if (isLogged) {
-      navigate("/");
     }
   };
   const handleClickShowPassword = () => {
@@ -72,6 +73,16 @@ const SignUp = () => {
   const handleVerifyOtp = async (otp) => {
     await dispatch(verifyOtp({ otp }));
   };
+  useEffect(() => {
+    if (isLogged) {
+      toast.success(t("sign-in-succ"));
+      navigate("/");
+    }
+    if (isError) {
+      toast.error(message);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, isError, isLogged, message]);
   return (
     <main>
       <HelmetTitle title={t("sign-up")} />
@@ -96,23 +107,24 @@ const SignUp = () => {
           </div>
           <div className="xl:col-span-4 lg:col-span-5 col-span-12 border-l border-l-gray-300 flex items-center justify-center xl:px-16 md:px-10 px-8 w-full mx-auto">
             {openOTP ? (
-              <OTPInput onSubmit={handleVerifyOtp} />
+              <OTPInput onSubmit={handleVerifyOtp} user={user} />
             ) : (
               <div className="">
                 <div className="">
                   <h2 className="text-2xl font-bold text-gray-700 ">
-                    Logo {t("sign-up-t")} 👋🏻
+                    {t("sign-up-t")}
                   </h2>
 
                   <p className="mt-3 text-gray-500">{t("sign-up-p")}</p>
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-7">
                   <form onSubmit={signUpHandler}>
                     <div className="mt-6">
                       <TextField
                         id="outlined-basic"
                         fullWidth
+                        required
                         color="secondary"
                         variant="outlined"
                         label={t("name")}
@@ -124,6 +136,7 @@ const SignUp = () => {
                       <TextField
                         id="outlined-basic"
                         fullWidth
+                        required
                         color="secondary"
                         variant="outlined"
                         label={t("email")}
@@ -138,6 +151,7 @@ const SignUp = () => {
                       <TextField
                         id="outlined-basic"
                         fullWidth
+                        required
                         variant="outlined"
                         label={t("password")}
                         type={showPassword ? "text" : "password"}
@@ -167,12 +181,13 @@ const SignUp = () => {
                       <TextField
                         id="outlined-basic"
                         fullWidth
+                        required
                         variant="outlined"
-                        label={t("password")}
+                        label={t("confirm-password")}
                         type={showPassword ? "text" : "password"}
-                        value={password}
+                        value={confirmPass}
                         color="secondary"
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setConfirmPass(e.target.value)}
                         InputProps={{
                           endAdornment: (
                             <InputAdornment position="end">
@@ -198,9 +213,9 @@ const SignUp = () => {
                         className="text-gray-500"
                         control={<Checkbox color="secondary" />}
                       />
-                      <Link className="text-purple-400" to={"/signin"}>
+                      {/* <Link className="text-purple-400" to={"/signin"}>
                         {t("forgot-pass")}
-                      </Link>
+                      </Link> */}
                     </div>
                     <div className="mt-3">
                       <Button
