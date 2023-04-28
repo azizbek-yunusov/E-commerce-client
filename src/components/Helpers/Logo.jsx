@@ -5,10 +5,10 @@ const Logo = ({ className }) => {
     <div className="flex items-center">
       <img
         src="/images/Xurmo_logo.png"
-        className="h-8 object-cover"
+        className="md:h-8 h-7 object-cover"
         alt="logo"
       />
-      <h1 className={`${className} text-orange-500 md:ml-1 text-3xl font-semibold`}>Xurmo</h1>
+      <h1 className={`${className} text-orange-500 ml-1 md:text-3xl text-2xl font-semibold`}>Xurmo</h1>
     </div>
   );
 };

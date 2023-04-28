@@ -12,24 +12,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { likeReview, unLikeReview } from "../../redux/product";
 import ReplyForm from "./ReplyForm";
 import ReplyComments from "./ReplyComments";
+import { handeleLoginShow } from "../../redux/actions/authAction";
 
 const Comments = ({ review }) => {
   let { t } = useTranslation(["product"]);
   const dispatch = useDispatch();
   const [isReply, setIsReply] = useState(false);
 
-  const { access_token, user } = useSelector((state) => state.auth);
+  const { access_token, user, isLogged, isLoginShow } = useSelector(
+    (state) => state.auth
+  );
 
   const likeReviewHandle = async (id) => {
     try {
-      dispatch(likeReview({ access_token, id }));
+      if (!isLogged) {
+        dispatch(handeleLoginShow());
+      } else {
+        dispatch(likeReview({ access_token, id }));
+      }
     } catch (err) {
       console.log(err);
     }
   };
   const unLikeReviewHandle = async (id) => {
     try {
-      dispatch(unLikeReview({ access_token, id }));
+      if (!isLogged) {
+        dispatch(handeleLoginShow());
+      } else {
+        dispatch(unLikeReview({ access_token, id }));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -96,8 +107,8 @@ const Comments = ({ review }) => {
                 {t("reply")}
               </p>
             </div>
-            <div className="flex_betwen w-1/6">
-              <div className="flex items-center">
+            <div className="flex_betwen md:w-1/6">
+              <div className="flex items-center mr-3">
                 <IconButton
                   onClick={() => likeReviewHandle(review._id)}
                   size="small"

@@ -33,7 +33,7 @@ export const Review = ({ productId, reviews }) => {
   const dispatch = useDispatch();
   
   const isReviewClient = reviews.filter((rev) => {
-    return rev.user._id === user._id
+    return rev.user?._id === user?._id
   })
 
   const [open, setOpen] = useState(false);
@@ -44,7 +44,6 @@ export const Review = ({ productId, reviews }) => {
   const [comment, setComment] = useState(isReviewClient[0]?.comment ||  "");
   const [pictures, setPictures] = useState(isReviewClient[0]?.pictures || []);
   
-  console.log(isReviewClient);
   const reviewsHandle = async (e) => {
     try {
       e.preventDefault();

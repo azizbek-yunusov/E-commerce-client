@@ -144,7 +144,7 @@ const Filter = ({ categories, brands, getFilterUrl, category }) => {
                     <p className="my-[6px] w-full text-gray-600">
                       {i18n.language === "oz"
                         ? item.nameOz
-                        : i18n.language === "en"
+                        : i18n.language === "uz"
                         ? item.nameUz
                         : i18n.language === "ru"
                         ? item.nameRu

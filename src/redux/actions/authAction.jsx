@@ -148,3 +148,9 @@ export const signOut = () => async (dispatch) => {
   localStorage.removeItem("refresh_token");
   dispatch({ type: "SIGN_OUT" });
 };
+
+export const handeleLoginShow = () => {
+  return {
+    type: "TOGGLE_LOGIN_SHOW",
+  }
+}

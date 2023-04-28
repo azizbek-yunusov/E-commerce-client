@@ -16,8 +16,8 @@ const NotFound = () => {
     <>
     <HelmetTitle title={t("page-not-found")} />
     <section className="overflow-hidden">
-      <div className="container-full pt-7  min-h-[600px] flex items-center flex-col justify-start">
-        <h1 className="md:text-gray-800 my-4 font-semibold text-3xl ">
+      <div className="container-full pt-7 min-h-[600px] flex items-center flex-col">
+        <h1 className="text-gray-800 my-4 text-center font-semibold text-3xl ">
           {t("page-not-found")}
         </h1>
         <p className="text-gray-400 text-base md:my-3 md:px-[250px] xl:px-[450px] text-center">

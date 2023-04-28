@@ -24,7 +24,7 @@ const CurrentCategory = () => {
         `${
           i18n.language === "oz"
             ? currentCategory?.nameOz
-            : i18n.language === "en"
+            : i18n.language === "uz"
             ? currentCategory?.nameUz
             : i18n.language === "ru"
             ? currentCategory?.nameRu
@@ -39,7 +39,7 @@ const CurrentCategory = () => {
           <h1 className="text-3xl font-semibold text_color mb-8">
             {i18n.language === "oz"
               ? currentCategory?.nameOz
-              : i18n.language === "en"
+              : i18n.language === "uz"
               ? currentCategory?.nameUz
               : i18n.language === "ru"
               ? currentCategory?.nameRu
@@ -52,7 +52,7 @@ const CurrentCategory = () => {
                   <p className="font-semibold mt-2 text_color text-lg">
                     {i18n.language === "oz"
                       ? elem.titleOz
-                      : i18n.language === "en"
+                      : i18n.language === "uz"
                       ? elem.titleEn
                       : i18n.language === "ru"
                       ? elem.titleRu
@@ -74,7 +74,7 @@ const CurrentCategory = () => {
                   <p className="text-center mt-2 text-lg text_color">
                     {i18n.language === "oz"
                       ? elem.titleOz
-                      : i18n.language === "en"
+                      : i18n.language === "uz"
                       ? elem.titleEn
                       : i18n.language === "ru"
                       ? elem.titleRu

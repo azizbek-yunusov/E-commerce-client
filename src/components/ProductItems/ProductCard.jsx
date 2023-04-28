@@ -12,11 +12,11 @@ import {
 import Price from "../Helpers/Price";
 import AddCartForCard from "./AddCartForCard";
 import AddWishForCard from "./AddWishForCard";
+import { handeleLoginShow } from "../../redux/actions/authAction";
 
-const ProductCard = (props) => {
+const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
   const dispatch = useDispatch();
-  const { _id, name, images, price, ratings, discount } = props;
-  const { access_token } = useSelector((state) => state.auth);
+  const { access_token, isLogged } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { favorites } = useSelector((state) => state.favorite);
 
@@ -24,29 +24,50 @@ const ProductCard = (props) => {
   const isCart = existItem === undefined ? false : true;
   const existItemWish = favorites?.find((x) => x.productId._id === _id);
   const isFavorite = existItemWish === undefined ? false : true;
+  console.log(isLogged);
+  const handleAddToWishList = (id) => {
+    try {
+      dispatch(addToFavorite(id, access_token));
+      if (isLogged) {
+        console.log("add");
+      } else {
+        dispatch(handeleLoginShow());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRemoveToWishItem = (id) => {
+    if (!isLogged) {
+      dispatch(handeleLoginShow());
+    } else {
+      dispatch(deleteFavoriteItem(id, access_token));
+    }
+  };
   return (
     <>
-      <div className="overflow-hidden bg-white relative flex tranistion_normal hover:shadow-xl flex-col justify-between md:h-[400px] h-[330px] md:border border-gray-200 hover:border-gray-50 md:rounded-xl rounded-md md:p-3 p-2 md:px-4">
+      <div className="overflow-hidden bg-white relative flex tranistion_normal md:hover:shadow-xl flex-col justify-between md:h-[400px] h-[330px] md:border border-gray-200 md:hover:border-gray-50 md:rounded-xl rounded-md md:p-3 p-2 md:px-4">
         {discount > 0 && (
           <div className="md:px-2 p-[2px] px-1 md:py-1 absolute top-2 left-2 md:text-sm text-xs font-semibold md:rounded-lg rounded bg-red-600 text-white">
             -{discount}
             {"%"}
           </div>
         )}
-        <div className="md:hidden absolute top-1 right-1">
+        <div className="md:hidden absolute top-1 right-1 z-50 rounded-full">
           {isFavorite ? (
             <button
-              onClick={() => dispatch(deleteFavoriteItem(_id, access_token))}
+              onClick={() => handleRemoveToWishItem(_id)}
               className="rounded-full border-none border-gray-400 p-1 flex_center"
             >
-              <BsFillHeartFill className="text-2xl text-red-500" />
+              <BsFillHeartFill className="text-3xl text-red-500" />
             </button>
           ) : (
             <button
-              onClick={() => dispatch(addToFavorite(_id, access_token))}
+              onClick={() => handleAddToWishList(id)}
               className="p-1 rounded-full border-none border-gray-400"
             >
-              <BsHeart className="text-2xl heart text-gray-400" />
+              <BsHeart className="text-3xl heart text-gray-400" />
             </button>
           )}
         </div>

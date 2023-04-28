@@ -9,7 +9,7 @@ export const Footer = () => {
 
   return (
     <div className="border-t border-t-gray-300">
-      <div className="container-full md:py-12 py-0">
+      <div className="container-full md:py-12 py-8">
         <div className="grid lg:grid-cols-4 grid-cols-1 lg:gap-x-10">
           <div className="">
             <div className="block">
@@ -17,14 +17,14 @@ export const Footer = () => {
                 <Logo className="text-2xl" />
               </Link>
               <div className="block w-full ">
-                <p className="md:mt-5 md:mb-3">{t("contact-center")}</p>
+                <p className="md:mt-5 mb-3">{t("contact-center")}</p>
                 <a
                   href="tel:+998945545594"
-                  className="text-lg font-semibold md:mb-6 text-gray-700"
+                  className="text-lg font-semibold mb-6 text-zinc-800"
                 >
                   +998 (94) 554 55 94
                 </a>
-                <div className="flex items-center mt-5">
+                <div className="flex items-center my-5">
                   {socials.map((item, index) => (
                     <a
                       key={index}
@@ -42,7 +42,7 @@ export const Footer = () => {
             <h1 className="text-xl mb-2">{t("about-info")}</h1>
             <ul>
               {about.slice(0, 4).map((item, index) => (
-                <li key={index} className="md:my-2">
+                <li key={index} className="my-2">
                   <Link to={`/${item.name}`}>{t(item.name)}</Link>
                 </li>
               ))}
@@ -51,7 +51,7 @@ export const Footer = () => {
           <div className="block mt-5">
             <ul>
               {about.slice(4, 8).map((item, index) => (
-                <li key={index} className="md:my-2">
+                <li key={index} className="my-2">
                   <Link to={`/${item.name}`}>{t(item.name)}</Link>
                 </li>
               ))}

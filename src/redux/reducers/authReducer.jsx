@@ -6,6 +6,7 @@ const initialState = {
   isAdmin: false,
   isError: false,
   message: "",
+  isLoginShow: false
 };
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -43,6 +44,12 @@ const authReducer = (state = initialState, action) => {
         isLogged: false,
         isError: true,
         message: action.payload,
+      };
+
+    case "TOGGLE_LOGIN_SHOW":
+      return {
+        ...state,
+        isLoginShow: !state.isLoginShow,
       };
     case "CLEAR_ERRORS":
       return {

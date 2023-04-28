@@ -23,6 +23,7 @@ import CheckOut from "./components/CheckOut";
 import { refreshToken } from "./redux/actions/authAction";
 import { FetchLoader } from "./components/SkeletonLoaders";
 import { token } from "./utils/baseUrls";
+import LoginModal from "./components/Helpers/LoginModal";
 
 function App() {
   const { pathname } = useLocation();
@@ -48,6 +49,7 @@ function App() {
       <>
         <Toaster position="top-left" reverseOrder={true} />
         <NetworkStatus />
+        {auth.isLoginShow && <LoginModal />}
 
         {pathname === "/signup" ||
         pathname === "/signin" ||

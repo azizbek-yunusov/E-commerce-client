@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addToCart, decrQtyItemCart } from "../../redux/actions/cartAction";
 import { productUrl } from "../../utils/baseUrls";
+import { handeleLoginShow } from "../../redux/actions/authAction";
 
 const AddCartForCard = ({ isCart, existId, id, quantity, access_token }) => {
   const dispatch = useDispatch();
@@ -21,10 +22,12 @@ const AddCartForCard = ({ isCart, existId, id, quantity, access_token }) => {
         toast.error(t("product-not"));
       } else {
         await dispatch(addToCart(id, access_token));
-        toast.success(t("added-cart"));
+        if (!isCart) {
+          toast.success(t("added-cart"));
+        }
       }
     } else {
-      toast.error(t("error-register"));
+      dispatch(handeleLoginShow());
     }
   };
   return (

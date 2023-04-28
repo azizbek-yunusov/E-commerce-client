@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, LinearProgress, Rating } from "@mui/material";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Review } from "./Review";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import LoginModal from "../Helpers/LoginModal";
+import { handeleLoginShow } from "../../redux/actions/authAction";
 
 export const ReviewsBox = () => {
   let { t } = useTranslation(["product"]);
   const { product, reviews, isLoading } = useSelector((state) => state.product);
-  const { user } = useSelector((state) => state.auth);
-  const { isLogged } = useSelector((state) => state.auth);
-
+  const { isLogged, isLoginShow } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   // 1 star
   const findOne = reviews?.filter((item) => item.rating === 1);
 
@@ -64,7 +65,7 @@ export const ReviewsBox = () => {
   return (
     <>
       <div className="md:max-w-[400px] max-h-[440px] md:p-6 p-5 md:px-8 md:rounded-lg rounded-xl flex justify-between flex-col w-full border_primary">
-        <div className="flex md:mt-1 items-center flex-col md:flex-row">
+        <div className="flex md:mt-1 flex-col md:flex-row justify-between">
           <div className="md:text-left text-center">
             <h1 className="text-5xl font-semibold">
               {product?.ratings?.toFixed(1)}
@@ -77,8 +78,8 @@ export const ReviewsBox = () => {
           </div>
           <Rating
             sx={{ marginY: "10px" }}
-            icon={<AiFillStar fontSize="20px" />}
-            emptyIcon={<AiOutlineStar fontSize="20px" />}
+            icon={<AiFillStar fontSize="26px" />}
+            emptyIcon={<AiOutlineStar fontSize="26px" />}
             readOnly
             value={product?.ratings || 0}
           />
@@ -199,17 +200,15 @@ export const ReviewsBox = () => {
           {isLogged ? (
             <Review productId={product._id} reviews={reviews} />
           ) : (
-            <Link to={"/signin"}>
-              <Button
-                variant="contained"
-                size="large"
-                color="secondary"
-                fullWidth
-                // onClick={handleOpen}
-              >
-                {t("add-review")}
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              size="large"
+              color="secondary"
+              fullWidth
+              onClick={() => dispatch(handeleLoginShow())}
+            >
+              {t("add-review")}
+            </Button>
           )}
         </div>
       </div>

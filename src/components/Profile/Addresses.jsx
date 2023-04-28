@@ -38,7 +38,7 @@ const Addresses = () => {
     <LayoutP>
       <HelmetTitle title={`${t("addresses")} - ${t("personal")}`} />
       <div className="flex justify-between items-center md:my-0 my-4">
-        <h1 className="md:text-2xl font-semibold">{t("addresses")}</h1>
+        <h1 className="text-2xl font-semibold text-gray-700">{t("addresses")}</h1>
         <Button
           size="large"
           variant="contained"
@@ -50,7 +50,7 @@ const Addresses = () => {
         <NewAddress open={open} setOpen={setOpen} />
       </div>
       {!isLoading ? (
-        <div className="">
+        <div className="min-h-[200px]">
           {addresses.length ? (
             <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
               {addresses.map((item) => (
@@ -124,8 +124,9 @@ const Addresses = () => {
               ))}
             </div>
           ) : (
-            <div className="flex_center mt-12">
-              <h1 className="md:text-2xl text-xl text-gray-700">
+            <div className="flex items-center justify-center flex-col mt-12">
+              <img src="/images/location.png" className="h-32" alt="Location" />
+              <h1 className="md:text-2xl text-xl font-semibold text-gray-700">
                 {t("not-address")}
               </h1>
             </div>

@@ -61,12 +61,12 @@ const ProductDetail = () => {
               <Typography className="text-xs">{product?.name}</Typography>
             </Breadcrumbs>
             <div className="md:grid grid-cols-1 lg:grid-cols-3 xl:gap-x-5 border-t border-r-gray-400 lg:py-5 py-3">
-              <div className="md:bg-transparent  bg-gray-200 rounded-2xl">
+              <div className="md:bg-transparent bg-fuchsia-200 rounded-2xl">
                 <ImageThumbs images={product.images} />
               </div>
               <div className="block md:my-0 md:px-3 px-0 my-3">
                 <div className="flex_betwen">
-                  <h1 className="xl:text-3xl md:text-2xl text-2xl  font-semibold text-zinc-700">
+                  <h1 className="xl:text-3xl md:text-2xl text-xl  font-semibold text-zinc-700">
                     {product.name}
                   </h1>
                   <div className="is_desktop">
@@ -134,14 +134,10 @@ const ProductDetail = () => {
             </Tabs>
             <div>
               {activeTab === 0 && (
-                <div ref={descrRef} className="md:my-5 my-4 w-10/12">
-                  <h1 className="text-lg text-center font-semibold text-gray-700 md:mb-3 mb-2">
-                    {product.name}
-                  </h1>
-                  <div dangerouslySetInnerHTML={{ __html: product.descr }}></div>
-                  {/* <p className="md:text-base text-sm leading-6 md:text-zinc-600 text-gray-500">
-                    {product.descr}
-                  </p> */}
+                <div ref={descrRef} className="md:my-5 my-4 md:w-10/12">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: product.descr }}
+                  ></div>
                 </div>
               )}
               {activeTab === 1 && (

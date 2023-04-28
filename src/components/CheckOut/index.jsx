@@ -55,45 +55,33 @@ const CheckOut = () => {
       toast.error("delivery-not-status");
     }
   };
-  useEffect(() => {
-    if (user) {
-      setName(user.name || "");
-      setLastName(user.lastName || "");
-      setEmail(user.email || "");
-      setContact(user.phoneNumber || "");
-    }
-    if (standart) {
-      setRegion(standart.region || "");
-      setDistrict(standart.district || "");
-      setStreet(standart.street || "");
-      setHouse(standart.house || "");
-    }
-    window.scrollTo(0, 0);
-  }, [user, standart]);
+
   // address
-  const findStandartRegionId = address.regions.filter((rg) => {
+  const findStandartRegionId = address.regions.find((rg) => {
     return rg.name === region;
   });
   const defaultDistricts = address.districts.filter((value) => {
-    return value.region_id === findStandartRegionId[0]?.id || 11;
+    return value.region_id === 11;
   });
   const handleRegion = (e) => {
     const getRegionId = e.target.value;
     const getRegionData = address?.regions.find(
       (reg) => reg.id === getRegionId
     );
-    console.log(getRegionId);
     const getDistrictsdata = address.districts.filter(
       (item) => item.region_id === getRegionId
     );
     setRegion(getRegionData.name);
     setSelectDistricts(getDistrictsdata);
   };
+
+  // New Order Placed
   const totalPrice =
     cart.length &&
     cart?.reduce((a, c) => a + c.productId.price * c.quantity, 0);
   const totalQuantity =
     cart.length && cart?.reduce((a, c) => a + c.quantity, 0);
+
   const newOrderHandle = async (e) => {
     try {
       e.preventDefault();
@@ -125,7 +113,23 @@ const CheckOut = () => {
       console.log(err);
     }
   };
-  console.log(findStandartRegionId, "id");
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name || "");
+      setLastName(user.lastName || "");
+      setEmail(user.email || "");
+      setContact(user.phoneNumber || "");
+    }
+    if (standart) {
+      setRegion(standart.region || "");
+      setDistrict(standart.district || "");
+      setStreet(standart.street || "");
+      setHouse(standart.house || "");
+    }
+    window.scrollTo(0, 0);
+  }, [user, standart]);
+  console.log("Vil:", region, "Tum:", district);
   return (
     <>
       <HelmetTitle title={t("check-out")} />
@@ -136,7 +140,7 @@ const CheckOut = () => {
             <h1 className="md:text-2xl text-xl font-semibold text-gray-800">
               {t("check-out")}
             </h1>
-            <Breadcrumbs>
+            <Breadcrumbs className="md:flex hidden">
               <Link to={"/"} className="">
                 {t("home")}
               </Link>
@@ -163,8 +167,8 @@ const CheckOut = () => {
                     <TextField
                       id="outlined-basic"
                       fullWidth
+                      required
                       variant="outlined"
-                      color="secondary"
                       className="rounded-xl"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
@@ -173,8 +177,8 @@ const CheckOut = () => {
                     <TextField
                       id="outlined-basic"
                       fullWidth
+                      required
                       variant="outlined"
-                      color="secondary"
                       className="rounded-xl"
                       value={lastname}
                       onChange={(e) => setLastName(e.target.value)}
@@ -183,10 +187,10 @@ const CheckOut = () => {
                     <TextField
                       id="outlined-basic"
                       fullWidth
+                      required
                       variant="outlined"
                       label={t("email")}
                       type="email"
-                      color="secondary"
                       value={email}
                       className="rounded-xl"
                       onChange={(e) => setEmail(e.target.value)}
@@ -200,9 +204,9 @@ const CheckOut = () => {
                     >
                       {(inputProps) => (
                         <TextField
-                          color="secondary"
                           {...inputProps}
                           fullWidth
+                          required
                           variant="outlined"
                           label={t("number")}
                           placeholder={t("contact-p")}
@@ -238,7 +242,6 @@ const CheckOut = () => {
                               id={item.id}
                               name="type"
                               onChange={handlePaymentChange}
-                              color="secondary"
                             />
                             <p className="grow text-gray-800 mx-2">
                               {t(`${item.name}`)}
@@ -281,7 +284,6 @@ const CheckOut = () => {
                               id={item.id}
                               name="type"
                               onChange={handleDeliveryChange}
-                              color="secondary"
                             />
                             <p className="grow text-gray-800 mx-2">
                               {t(`${item.name}`)}
@@ -295,7 +297,7 @@ const CheckOut = () => {
                     {t("enter-address")}
                   </h1>
                   <div className="my-6 grid md:grid-cols-2 grid-cols-1 gap-5">
-                    <FormControl color="secondary" fullWidth>
+                    <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
                         {t("region")}
                       </InputLabel>
@@ -303,7 +305,6 @@ const CheckOut = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={findStandartRegionId?.id || "11"}
-                        color="secondary"
                         label={t("region")}
                         onChange={(e) => handleRegion(e)}
                       >
@@ -315,7 +316,7 @@ const CheckOut = () => {
                       </Select>
                     </FormControl>
 
-                    <FormControl color="secondary" fullWidth>
+                    <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
                         {t("district")}
                       </InputLabel>
@@ -323,7 +324,6 @@ const CheckOut = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         placeholder="select"
-                        color="secondary"
                         label={t("district")}
                         value={district || ""}
                         onChange={(e) => setDistrict(e.target.value)}
@@ -341,7 +341,7 @@ const CheckOut = () => {
                     <TextField
                       id="outlined-basic"
                       fullWidth
-                      color="secondary"
+                      required
                       variant="outlined"
                       type="text"
                       className="rounded-xl"
@@ -352,9 +352,9 @@ const CheckOut = () => {
                     <TextField
                       id="outlined-basic"
                       fullWidth
+                      required
                       variant="outlined"
                       type="text"
-                      color="secondary"
                       className="rounded-xl"
                       value={house}
                       onChange={(e) => setHouse(e.target.value)}
@@ -367,8 +367,8 @@ const CheckOut = () => {
                     type="submit"
                     className="w-full md:block hidden"
                     variant="contained"
-                    color="secondary"
                     size="large"
+                    color="secondary"
                   >
                     {t("check-out")}
                   </Button>
@@ -445,7 +445,6 @@ const CheckOut = () => {
                   type="submit"
                   className="w-full"
                   variant="contained"
-                  color="secondary"
                   size="large"
                 >
                   {isLoading ? (

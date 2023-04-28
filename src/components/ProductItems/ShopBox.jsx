@@ -15,6 +15,7 @@ import AddToWish from "../Helpers/AddToWish";
 import Price from "../Helpers/Price";
 import { toast } from "react-hot-toast";
 import { addToCart, decrQtyItemCart } from "../../redux/actions/cartAction";
+import { handeleLoginShow } from "../../redux/actions/authAction";
 
 const ShopBox = ({ product }) => {
   const { t } = useTranslation(["product"]);
@@ -35,9 +36,12 @@ const ShopBox = ({ product }) => {
         toast.error(t("product-not"));
       } else {
         await dispatch(addToCart(id, access_token));
-        toast.success(t("added-cart"));
+        if (!isCart) {
+          toast.success(t("added-cart"));
+        }
       }
     } else {
+      dispatch(handeleLoginShow());
       toast.error(t("error-register"));
     }
   };

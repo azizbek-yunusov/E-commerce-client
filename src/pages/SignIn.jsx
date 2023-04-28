@@ -116,8 +116,8 @@ const SignIn = () => {
           <div className="xl:col-span-4 lg:col-span-5 col-span-12 border-l border-l-gray-300 flex items-center justify-center xl:px-16 md:px-10 px-8 w-full mx-auto">
             <div>
               <div>
-                <div className="text-2xl font-bold text-gray-700 ">
-                  <Logo /> {t("sign-in-t")} 👋🏻
+                <div className="flex_center text-2xl font-bold text-gray-700 ">
+                  <Logo />
                 </div>
                 <p className="mt-3 text-gray-500">{t("sign-in-p")}</p>
               </div>

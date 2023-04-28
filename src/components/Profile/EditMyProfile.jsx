@@ -29,19 +29,11 @@ import {
 } from "react-icons/ai";
 import { BiCamera, BiLockAlt, BiRefresh } from "react-icons/bi";
 
-// ** Icons Imports
-const ImgStyled = styled("img")(({ theme }) => ({
-  width: 120,
-  height: 120,
-  marginRight: "25px",
-  borderRadius: theme.shape.borderRadius,
-  objectFit: "cover",
-}));
-
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     textAlign: "center",
+    marginBottom: theme.spacing(4),
   },
 }));
 
@@ -51,7 +43,6 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
     width: "100%",
     marginLeft: 0,
     textAlign: "center",
-    marginTop: theme.spacing(4),
   },
 }));
 
@@ -128,6 +119,7 @@ const EditMyProfile = () => {
       setPhoneNumber(user?.phoneNumber || "");
       setAvatarPreview(user?.avatar?.url || "/images/profile.png");
     }
+    window.scrollTo(0, 300);
   }, [user]);
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -144,12 +136,12 @@ const EditMyProfile = () => {
             <h1 className="md:text-2xl text-xl font-semibold">
               {t("edit-profile")}
             </h1>
-            <Breadcrumbs>
+            <Breadcrumbs className="md:flex hidden">
               <Link to={"/"} className="">
                 {t("home")}
               </Link>
               <Link to={"/profile"} className="">
-                {t("overview")}
+                {t("profile")}
               </Link>
               <Link to={"/profile/update"} className="">
                 {t("edit-profile")}
@@ -160,8 +152,8 @@ const EditMyProfile = () => {
           <form onSubmit={editProfileHandle}>
             <div className="grid grid-cols-12 gap-x-8">
               <div className="col-span-12 mb-4">
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <ImgStyled src={avatarPreview} alt="Profile Pic" />
+                <div className="flex items-center">
+                  <img src={avatarPreview} alt="avatar" className="md:mr-6 object-cover rounded-xl mb-2 md:h-32 md:w-32 h-28 w-2h-28 bg-purple-700" />
                   <Box>
                     <ButtonStyled
                       color="secondary"
@@ -191,9 +183,9 @@ const EditMyProfile = () => {
                       {t("upload-avatar-t")}
                     </p>
                   </Box>
-                </Box>
+                </div>
               </div>
-              <div className="col-span-6">
+              <div className="md:col-span-6 col-span-12">
                 <div className="flex items-center text-gray-700">
                   <AiOutlineUser className="text-xl mr-1" />
                   <p className="text-xl">{t("profile-data")}</p>
@@ -252,7 +244,7 @@ const EditMyProfile = () => {
                   )}
                 </InputMask>
               </div>
-              <div className="col-span-6">
+              <div className="md:col-span-6 col-span-12">
                 <label htmlFor="disabled">
                   <div className="flex items-center text-gray-700">
                     <BiLockAlt className="text-xl mr-1" />
@@ -372,12 +364,14 @@ const EditMyProfile = () => {
                 color="info"
                 onClick={() => navigate(-1)}
                 sx={{ marginRight: 2 }}
+                className="w-40"
               >
                 {t("cancel")}
               </Button>
               <Button
                 color="secondary"
                 type="submit"
+                className="w-40"
                 variant="contained"
                 onClick={() => uploadAvatarHandle()}
               >

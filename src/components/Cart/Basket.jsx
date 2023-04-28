@@ -33,7 +33,7 @@ const Basket = () => {
           <div className="md:min-h-[630px] min-h-[450px] flex justify-center items-start">
             <div className="flex justify-start items-center relative flex-col">
               <img
-                src="/images/cart.png"
+                src="/images/shopping-basket.png"
                 alt="Shopping bag"
                 className="md:h-96 h-64"
               />

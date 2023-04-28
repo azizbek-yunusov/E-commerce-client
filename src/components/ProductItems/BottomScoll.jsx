@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { addToCart, decrQtyItemCart } from "../../redux/actions/cartAction";
 import { productUrl } from "../../utils/baseUrls";
 import Price from "../Helpers/Price";
+import { handeleLoginShow } from "../../redux/actions/authAction";
 
 const BottomScoll = ({ product }) => {
   const { t } = useTranslation(["product"]);
@@ -19,19 +20,22 @@ const BottomScoll = ({ product }) => {
   const { cart } = useSelector((state) => state.cart);
   const { isLogged, access_token } = useSelector((state) => state.auth);
   const { _id } = product;
-
   const existItem = cart?.find((x) => x.productId?._id === _id);
   const isCart = existItem === undefined ? false : true;
-  const addToCartHandle = async (id, access_token) => {
+  const addToCartHandle = async (id) => {
     if (isLogged) {
       const { data } = await axios.get(`${productUrl}${id}`);
-      if (data.inStock <= existItem.quantity) {
+      const existItem = cart?.find((x) => x.productId?._id === _id);
+      if (data.inStock <= existItem?.quantity) {
         toast.error(t("product-not"));
       } else {
         await dispatch(addToCart(id, access_token));
-        toast.success(t("added-cart"));
+        if (!isCart) {
+          toast.success(t("added-cart"));
+        }
       }
     } else {
+      dispatch(handeleLoginShow());
       toast.error(t("error-register"));
     }
   };

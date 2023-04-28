@@ -71,7 +71,7 @@
   "discount-pl": "15%",
   "descr": "Mahsulot haqida",
   "descr-pl": "Smart HDR 4 endi kadrdagi to‘rttagacha odamni taniydi va kontrast, yorug‘lik va hatto teri rangini alohida optimallashtiradi. Bu har bir kishini eng yaxshi ko'rinishga olib keladi. Deep Fusion texnologiyasi o'rta va past yorug'lik darajalariga yordam beradi.",
-  "in-stock": "Nechta",
+  "in-stock": "Necha dona",
   "in-stock-pl": "2",
   "upload-images": "Rasmlarni yuklang",
   "category": "Kategoriya",
@@ -112,5 +112,6 @@
   "send": "Jo'natish",
   "edit-review": "Sharhni tahrirlash",
   "rating-feild": "Iltimos baholang",
-  "review-sent-success": "Sizning sharhingiz muvaffiqiyatli yuborildi"
+  "review-sent-success": "Sizning sharhingiz muvaffiqiyatli yuborildi",
+  "deleted-user": "O'chirilgan hisob"
 }

@@ -15,7 +15,7 @@ const SimilarProducts = () => {
           <Swiper
             breakpoints={{
               300: {
-                slidesPerView: 3,
+                slidesPerView: 1.9,
                 spaceBetween: 5,
               },
               768: {

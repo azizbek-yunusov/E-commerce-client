@@ -9,7 +9,7 @@ const ImageThumbs = ({ images }) => {
   const [activeThumb, setActiveThumb] = useState();
   return (
     <>
-      <main className="md:block product_detail">
+      <main className="md:block hidden product_detail">
         {images && images[0] && (
           <>
             <Swiper
@@ -78,7 +78,7 @@ const ImageThumbs = ({ images }) => {
                   <img
                     src={item.url}
                     className="h-80 w-80 object-cover"
-                    alt=""
+                    alt="product-image"
                   />
                 </div>
               </SwiperSlide>

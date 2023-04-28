@@ -20,7 +20,7 @@ const CategoryItem = ({ nameOz, nameUz, nameRu, slug, image }) => {
       <p className="text-zinc-800 lg:text-base text-center text-xs tranistion_normal hover:text-red-600">
         {i18n.language === "oz"
           ? nameOz
-          : i18n.language === "en"
+          : i18n.language === "uz"
           ? nameUz
           : i18n.language === "ru"
           ? nameRu
