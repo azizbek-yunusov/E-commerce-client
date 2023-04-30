@@ -79,7 +79,7 @@
   "password-required": "Sizning yangi parolingiz ushu talablarga javob berish kerak",
   "password-req-first": "Kamida 8 ta belgi bo'lishi shart!",
   "password-req-two": "Kamida bitta raqam va bitta maxsus belgi boʻlishi kerak!",
-  "delete-address": "Manzil o'chirildi",
   "house-number": "Uy raqami",
-  "loading": "Kuting"
+  "loading": "Kuting",
+  "delete-address": "Ushbu Manzil O'chirildi"
 }

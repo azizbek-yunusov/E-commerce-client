@@ -23,6 +23,7 @@ const Home = () => {
   const { products } = useSelector((state) => state.product);
   const { banners } = useSelector((state) => state.banner);
   const { categories } = useSelector((state) => state.category);
+  const { brands } = useSelector((state) => state.brand);
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,13 +33,16 @@ const Home = () => {
     if (!banners.length) {
       dispatch(getBanners());
     }
-    if (!posts.length) {
-      dispatch(getPosts());
-    }
     if (!categories.length) {
       dispatch(getCategories());
     }
-  }, [dispatch, products, posts, categories, products]);
+    if (!brands.length) {
+      dispatch(getBrands());
+    }
+    if (!posts.length) {
+      dispatch(getPosts());
+    }
+  }, [dispatch, products, posts, categories, brands]);
 
   return (
     <>

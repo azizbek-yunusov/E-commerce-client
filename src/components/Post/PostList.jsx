@@ -25,8 +25,12 @@ const PostList = () => {
             slidesPerView: 1.08,
             spaceBetween: 10,
           },
+          425: {
+            slidesPerView: 1.5,
+            spaceBetween: 10,
+          },
           768: {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 10,
           },
           1024: {

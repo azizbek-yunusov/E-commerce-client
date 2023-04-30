@@ -104,7 +104,11 @@ const Translate = ({ color }) => {
         onClose={handleClose}
       >
         {languages.map((item, index) => (
-          <MenuItem key={index} onClick={() => handleLangChange(item.lng)}>
+          <MenuItem
+            key={index}
+            onClick={() => handleLangChange(item.lng)}
+            selected={item.lng === localStorage.getItem("i18nextLng")}
+          >
             <div className="flex items-center justify-between">{item.name}</div>
           </MenuItem>
         ))}

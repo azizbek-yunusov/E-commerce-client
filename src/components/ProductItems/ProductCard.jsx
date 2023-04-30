@@ -24,7 +24,6 @@ const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
   const isCart = existItem === undefined ? false : true;
   const existItemWish = favorites?.find((x) => x.productId._id === _id);
   const isFavorite = existItemWish === undefined ? false : true;
-  console.log(isLogged);
   const handleAddToWishList = (id) => {
     try {
       dispatch(addToFavorite(id, access_token));

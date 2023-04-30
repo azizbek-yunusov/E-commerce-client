@@ -7,7 +7,6 @@ import CategoryItem from "./CategoryItem";
 
 const CategoryList = () => {
   const { isLoading, categories } = useSelector((state) => state.category);
-
   return (
     <>
       {isLoading ? (

@@ -7,7 +7,7 @@ import category from "./category";
 import banner from "./banner";
 import post from "./post";
 import auth from "./reducers/authReducer";
-import address from "./reducers/addressReducer";
+import address from "./address";
 import authv from "./auth";
 import me from "./reducers/userReducer";
 import cart from "./reducers/cartReducer";

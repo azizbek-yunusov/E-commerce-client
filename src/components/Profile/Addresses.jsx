@@ -7,8 +7,14 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Button, CircularProgress } from "@mui/material";
 import NewAddress from "./NewAddress";
-import { deleteAddress } from "../../redux/actions/addressAction";
 import { HelmetTitle } from "../../utils";
+import axios from "axios";
+import { userUrl } from "../../utils/baseUrls";
+import {
+  deleteAddress,
+  getMyAddresses,
+  standardizationAddress,
+} from "../../redux/address";
 
 const Addresses = () => {
   let { t } = useTranslation(["user"]);
@@ -21,24 +27,35 @@ const Addresses = () => {
 
   const deleteAddressHandle = async (id) => {
     try {
-      dispatch(deleteAddress(id, access_token));
-      toast.success("delete-address");
+      dispatch(deleteAddress({ id, access_token }));
+      toast.success(t("delete-address"));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const standardizationAddressHandle = async (id) => {
+    try {
+      dispatch(standardizationAddress({ id, access_token }));
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
     if (access_token) {
-      // fetchAdresses();
+      dispatch(getMyAddresses(access_token));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [access_token]);
+
+  console.log(addresses);
   return (
     <LayoutP>
       <HelmetTitle title={`${t("addresses")} - ${t("personal")}`} />
       <div className="flex justify-between items-center md:my-0 my-4">
-        <h1 className="text-2xl font-semibold text-gray-700">{t("addresses")}</h1>
+        <h1 className="text-2xl font-semibold text-gray-700">
+          {t("addresses")}
+        </h1>
         <Button
           size="large"
           variant="contained"
@@ -50,7 +67,7 @@ const Addresses = () => {
         <NewAddress open={open} setOpen={setOpen} />
       </div>
       {!isLoading ? (
-        <div className="min-h-[200px]">
+        <div className="min-h-[200px] md:my-5">
           {addresses.length ? (
             <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
               {addresses.map((item) => (
@@ -98,12 +115,13 @@ const Addresses = () => {
                     >
                       {t("delete")}
                     </Button>
-                    {item.isActive ? (
+                    {item.standart ? (
                       <Button
                         size="medium"
                         variant="contained"
                         className="ml-2"
                         color="secondary"
+                        onClick={() => standardizationAddressHandle(item._id)}
                         startIcon={<BsCheckCircle />}
                       >
                         {t("default")}
@@ -113,6 +131,7 @@ const Addresses = () => {
                         variant="contained"
                         size="medium"
                         color="inherit"
+                        onClick={() => standardizationAddressHandle(item._id)}
                         startIcon={<BsCheckCircle />}
                         className="ml-2"
                       >

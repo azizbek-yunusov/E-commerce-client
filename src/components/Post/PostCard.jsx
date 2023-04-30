@@ -23,21 +23,21 @@ const PostCard = ({
           alt={title}
         />
       </Link>
-      <div className="flex_betwen my-3 text-gray-500">
+      <div className="flex_betwen my-2 text-gray-500">
         <div className="flex_center">
           <BsCalendarDate className="mr-1" />
           <span>{moment(createdAt).format("lll")}</span>
         </div>
         <div className="flex_center">
-          <AiOutlineEye className="mr-1 text-xl" />
+          <AiOutlineEye className="mr-1 md:text-xl" />
           <span>{viewsCount}</span>
         </div>
       </div>
       <Link
         to={`/post/view/${_id}`}
-        className=" to-zinc-700 font-semibold md:text-lg hover:text-orange-500 tranistion_normal"
+        className=" to-zinc-700 font-semibold lg:text-lg hover:text-orange-500 tranistion_normal"
       >
-        <p className="mb-2">{title}</p>
+        <p className="mb-1">{title}</p>
       </Link>
       <p className="text-zinc-500 mb-2 md:text-base text-sm">{excerpt.slice(0, 120)}...</p>
     </div>

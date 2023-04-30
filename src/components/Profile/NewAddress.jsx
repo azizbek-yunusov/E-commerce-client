@@ -14,12 +14,12 @@ import address from "../../data/address.json";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { newAddress } from "../../redux/actions/addressAction";
+import { addAddress } from "../../redux/address";
 
 const NewAddress = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const { access_token } = useSelector((state) => state.auth);
-  const { isLoading, addresses } = useSelector((state) => state.address);
+  const { isSuccess, addresses } = useSelector((state) => state.address);
   const matches = useMediaQuery("(min-width:600px)");
   const { t } = useTranslation(["user"]);
   const [region, setRegion] = useState("Toshkent Viloyati");
@@ -27,6 +27,8 @@ const NewAddress = ({ open, setOpen }) => {
   const [street, setStreet] = useState("");
   const [house, setHouse] = useState("");
   const [selectDistricts, setSelectDistricts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const handleClose = () => setOpen(false);
   const defaultDistricts = address.districts.filter((value) => {
     return value.region_id === 11;
@@ -54,6 +56,7 @@ const NewAddress = ({ open, setOpen }) => {
 
   const newAddressHandle = (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       let addressData = {
         region,
@@ -61,9 +64,10 @@ const NewAddress = ({ open, setOpen }) => {
         street,
         house,
       };
-      dispatch(newAddress(addressData, access_token));
-      if (!isLoading) {
+      dispatch(addAddress({ addressData, access_token }));
+      if (isSuccess) {
         setOpen(false);
+        setLoading(false);
       }
     } catch (err) {
       console.log(err);
@@ -168,7 +172,7 @@ const NewAddress = ({ open, setOpen }) => {
                 color="secondary"
                 size="large"
               >
-                {isLoading ? (
+                {loading ? (
                   <div className="flex items-center justify-center">
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
