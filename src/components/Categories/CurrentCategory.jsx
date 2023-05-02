@@ -56,7 +56,7 @@ const CurrentCategory = () => {
                     {i18n.language === "oz"
                       ? elem.titleOz
                       : i18n.language === "uz"
-                      ? elem.titleEn
+                      ? elem.titleUz
                       : i18n.language === "ru"
                       ? elem.titleRu
                       : null}
@@ -78,7 +78,7 @@ const CurrentCategory = () => {
                     {i18n.language === "oz"
                       ? elem.titleOz
                       : i18n.language === "uz"
-                      ? elem.titleEn
+                      ? elem.titleUz
                       : i18n.language === "ru"
                       ? elem.titleRu
                       : null}
