@@ -9,5 +9,5 @@ export const categoryUrl = `${api}/category/`;
 export const orderUrl = `${api}/order/`;
 export const postUrl = `${api}/post/`;
 
-export const token = localStorage.getItem("refresh_token")
-
+export const token = localStorage.getItem("refresh_token") || false
+console.log(token);

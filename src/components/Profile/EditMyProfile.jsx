@@ -50,7 +50,7 @@ const EditMyProfile = () => {
   const { t } = useTranslation(["user"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, user } = useSelector((state) => state.me);
+  const { isLoading, user } = useSelector((state) => state.auth);
   const { access_token } = useSelector((state) => state.auth);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");

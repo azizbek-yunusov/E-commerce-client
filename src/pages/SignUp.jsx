@@ -22,6 +22,8 @@ import OTPInput from "../components/Verify/OTPInput";
 import { useDispatch, useSelector } from "react-redux";
 import { signUp, verifyOtp } from "../redux/actions/authAction";
 import { useEffect } from "react";
+import { googleOauth } from "../redux/auth";
+import { useGoogleLogin } from "@react-oauth/google";
 
 const style = {
   position: "absolute",
@@ -67,6 +69,20 @@ const SignUp = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const responseGoogleOAuth = async (response) => {
+    try {
+      const { access_token } = response;
+      dispatch(googleOauth({ access_token }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const googleOAuthHandle = useGoogleLogin({
+    onSuccess: (response) => responseGoogleOAuth(response),
+  });
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -80,7 +96,6 @@ const SignUp = () => {
     }
     if (isError) {
       toast.error(message);
-      dispatch(clearErrors());
     }
   }, [dispatch, isError, isLogged, message]);
   return (
@@ -274,41 +289,39 @@ const SignUp = () => {
                     <div className="w-full h-[1px] bg-gray-300"></div>
                   </div>
 
-                  <div className="text-base">
-                    <a
-                      href="/"
-                      className="flex items-center justify-center space-x-2 text-gray-600 my-3 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
+                  <button
+                    onClick={() => googleOAuthHandle()}
+                    className="flex items-center w-full justify-center space-x-2 text-gray-600 my-3 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 326667 333333"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                     >
-                      <svg
-                        className="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 326667 333333"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                      >
-                        <path
-                          d="M326667 170370c0-13704-1112-23704-3518-34074H166667v61851h91851c-1851 15371-11851 38519-34074 54074l-311 2071 49476 38329 3428 342c31481-29074 49630-71852 49630-122593m0 0z"
-                          fill="#4285f4"
-                        ></path>
-                        <path
-                          d="M166667 333333c44999 0 82776-14815 110370-40370l-52593-40742c-14074 9815-32963 16667-57777 16667-44074 0-81481-29073-94816-69258l-1954 166-51447 39815-673 1870c27407 54444 83704 91852 148890 91852z"
-                          fill="#34a853"
-                        ></path>
-                        <path
-                          d="M71851 199630c-3518-10370-5555-21482-5555-32963 0-11482 2036-22593 5370-32963l-93-2209-52091-40455-1704 811C6482 114444 1 139814 1 166666s6482 52221 17777 74814l54074-41851m0 0z"
-                          fill="#fbbc04"
-                        ></path>
-                        <path
-                          d="M166667 64444c31296 0 52406 13519 64444 24816l47037-45926C249260 16482 211666 1 166667 1 101481 1 45185 37408 17777 91852l53889 41853c13520-40185 50927-69260 95001-69260m0 0z"
-                          fill="#ea4335"
-                        ></path>
-                      </svg>
-                      <span>{t("google-up")}</span>
-                    </a>{" "}
-                  </div>
+                      <path
+                        d="M326667 170370c0-13704-1112-23704-3518-34074H166667v61851h91851c-1851 15371-11851 38519-34074 54074l-311 2071 49476 38329 3428 342c31481-29074 49630-71852 49630-122593m0 0z"
+                        fill="#4285f4"
+                      ></path>
+                      <path
+                        d="M166667 333333c44999 0 82776-14815 110370-40370l-52593-40742c-14074 9815-32963 16667-57777 16667-44074 0-81481-29073-94816-69258l-1954 166-51447 39815-673 1870c27407 54444 83704 91852 148890 91852z"
+                        fill="#34a853"
+                      ></path>
+                      <path
+                        d="M71851 199630c-3518-10370-5555-21482-5555-32963 0-11482 2036-22593 5370-32963l-93-2209-52091-40455-1704 811C6482 114444 1 139814 1 166666s6482 52221 17777 74814l54074-41851m0 0z"
+                        fill="#fbbc04"
+                      ></path>
+                      <path
+                        d="M166667 64444c31296 0 52406 13519 64444 24816l47037-45926C249260 16482 211666 1 166667 1 101481 1 45185 37408 17777 91852l53889 41853c13520-40185 50927-69260 95001-69260m0 0z"
+                        fill="#ea4335"
+                      ></path>
+                    </svg>
+                    <span>{t("google-in")}</span>
+                  </button>
                 </div>
               </div>
             )}

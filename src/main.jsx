@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <HelmetProvider>
       <GoogleOAuthProvider
         clientId={
-          "1062466711644-41poj89urjls6ip16t1f3irv1hmhteoo.apps.googleusercontent.com"
+          "532347017019-c21cgrptkv5qc4baibh3ub2uud60684v.apps.googleusercontent.com"
         }
       >
         <UserProvider>

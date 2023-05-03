@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
-import { signOut } from "../../redux/actions/authAction";
 import { useTranslation } from "react-i18next";
+import { signOut } from "../../redux/auth";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -60,7 +60,7 @@ const AuthButton = () => {
     if (isLogged) {
       navigate("/signin");
     }
-    toast.success("Sign out ");
+    toast.success(t("sign-out"));
   };
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

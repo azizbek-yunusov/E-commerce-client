@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
-import { clearErrors, signIn } from "../redux/actions/authAction";
 import toast from "react-hot-toast";
+import axios from "axios";
 import {
   Button,
   Checkbox,
@@ -17,6 +17,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../components/Helpers/Logo";
 import { HelmetTitle } from "../utils";
+import { authUrl } from "../utils/baseUrls";
+import { googleOauth, signIn } from "../redux/auth";
 
 const SignIn = () => {
   const [loader, setLoader] = useState(false);
@@ -65,15 +67,24 @@ const SignIn = () => {
     if (Object.keys(errors).length === 0) {
       try {
         setLoader(true);
-        await dispatch(signIn(formState));
+        await dispatch(signIn({ formState }));
       } catch (err) {
         console.log(err);
       }
     }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
+  const responseGoogleOAuth = async (response) => {
+    try {
+      const { access_token } = response;
+      dispatch(googleOauth({ access_token }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const googleOAuthHandle = useGoogleLogin({
+    onSuccess: (response) => responseGoogleOAuth(response),
   });
 
   useEffect(() => {
@@ -84,7 +95,7 @@ const SignIn = () => {
     }
     if (isError) {
       toast.error(message);
-      dispatch(clearErrors());
+      // dispatch(clearErrors());
       setLoader(false);
     }
   }, [dispatch, isError, isLogged, message]);
@@ -244,7 +255,7 @@ const SignIn = () => {
                   <div className="w-full h-[1px] bg-gray-300"></div>
                 </div>
                 <button
-                  onClick={() => login()}
+                  onClick={() => googleOAuthHandle()}
                   className="flex items-center w-full justify-center space-x-2 text-gray-600 my-3 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
                 >
                   <svg

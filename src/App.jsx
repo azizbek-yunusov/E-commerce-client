@@ -20,10 +20,10 @@ import MyOrders from "./components/Profile/MyOrders";
 import Addresses from "./components/Profile/Addresses";
 import { EditMyProfile, Favorites, Settings } from "./components/Profile";
 import CheckOut from "./components/CheckOut";
-import { refreshToken } from "./redux/actions/authAction";
 import { FetchLoader } from "./components/SkeletonLoaders";
 import { token } from "./utils/baseUrls";
 import LoginModal from "./components/Helpers/LoginModal";
+import { refreshToken } from "./redux/auth";
 
 function App() {
   const { pathname } = useLocation();
@@ -31,7 +31,9 @@ function App() {
   const navigete = useNavigate();
   const { auth } = useSelector((state) => state);
   useEffect(() => {
-    dispatch(refreshToken());
+    if (token) {
+      dispatch(refreshToken());
+    }
   }, [dispatch]);
 
   useEffect(() => {

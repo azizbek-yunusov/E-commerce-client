@@ -16,7 +16,7 @@ const SideBarPf = () => {
   const navigate = useNavigate();
   const { isLogged } = useSelector((state) => state.auth);
   const { standart } = useSelector((state) => state.address);
-  const { user } = useSelector((state) => state.me);
+  const { user } = useSelector((state) => state.auth);
 
   const signOutHandle = async () => {
     await dispatch(signOut());

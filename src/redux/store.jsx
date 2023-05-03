@@ -6,29 +6,25 @@ import brand from "./brand/brandSlice";
 import category from "./category";
 import banner from "./banner";
 import post from "./post";
-import auth from "./reducers/authReducer";
+// import auth from "./reducers/authReducer";
 import address from "./address";
-import authv from "./auth";
-import me from "./reducers/userReducer";
+import auth from "./auth";
 import cart from "./reducers/cartReducer";
-import customer from "./customer";
 import favorite from "./reducers/favoriteReducer";
 import { Provider } from "react-redux";
 
 const store = configureStore({
   reducer: {
     auth,
-    me,
     cart,
     favorite,
     address,
     product,
-    authv,
     brand,
     category,
     banner,
     post,
-    order
+    order,
   },
   devTools: process.env.NODE_ENV !== "production",
 });

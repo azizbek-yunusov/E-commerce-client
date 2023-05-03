@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 const OverView = () => {
-  const { user } = useSelector((state) => state.me);
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const { standart } = useSelector((state) => state.address);
   let { t } = useTranslation(["user"]);
   return (
@@ -24,14 +25,16 @@ const OverView = () => {
                 <span className="text-zinc-500 font-semibold dark:text-zinc-100 mr-2">
                   {t("full-name")}:
                 </span>
-                {user?.lastName ? `${user.name} ${user?.lastName}` : user.name}
+                {user?.lastName
+                  ? `${user?.name} ${user?.lastName}`
+                  : user?.name}
               </li>
               <li className="text-zinc-500 dark:text-zinc-400 my-3 flex items-center">
                 <GoMail className="mr-1 text-lg" />
                 <span className="text-zinc-500 font-semibold dark:text-zinc-100 mr-2">
                   {t("email")}:
                 </span>
-                {user.email}
+                {user?.email}
               </li>
               <li className="text-zinc-500 dark:text-green-400 my-3 flex items-center">
                 <BiCheck className="mr-1 text-lg" />
@@ -78,14 +81,14 @@ const OverView = () => {
                 <span className="text-zinc-500 font-semibold dark:text-zinc-100 mr-2">
                   {t("full-name")}:
                 </span>
-                {user.lastName ? `${user.name} ${user.lastName}` : user.name}
+                {user?.lastName ? `${user.name} ${user.lastName}` : user.name}
               </li>
               <li className="text-zinc-500 dark:text-zinc-400 my-3 flex items-center">
                 <GoMail className="mr-1 text-lg" />
                 <span className="text-zinc-500 font-semibold dark:text-zinc-100 mr-2">
                   {t("email")}:
                 </span>
-                {user.email}
+                {user?.email}
               </li>
               <li className="text-zinc-500 dark:text-green-400 my-3 flex items-center">
                 <BiCheck className="mr-1 text-lg" />

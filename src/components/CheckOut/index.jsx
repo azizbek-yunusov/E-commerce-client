@@ -26,7 +26,7 @@ const CheckOut = () => {
   const { t } = useTranslation(["order"]);
   const disptach = useDispatch();
   const { isLoading, isSuccess, isError } = useSelector((state) => state.order);
-  const { user } = useSelector((state) => state.me);
+  const { user } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { access_token } = useSelector((state) => state.auth);
   const { standart } = useSelector((state) => state.address);

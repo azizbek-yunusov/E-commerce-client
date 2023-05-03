@@ -12,7 +12,7 @@ import { HelmetTitle } from "../../utils";
 const LayoutP = ({ children }) => {
   let { t } = useTranslation(["user"]);
   const { access_token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.me);
+  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     window.scrollTo(0, 0);
 
