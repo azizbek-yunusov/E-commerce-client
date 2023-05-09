@@ -1,4 +1,4 @@
-const api =  process.env.NODE_ENV === "development" ? "/api" : "https://xurmo-api.vercel.app/";
+const api =  process.env.NODE_ENV === "development" ? "/api" : "https://xurmo-api.vercel.app/api";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const reviewUrl = `${api}/review/`;
