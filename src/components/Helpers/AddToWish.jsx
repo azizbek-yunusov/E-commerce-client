@@ -2,11 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { BsFillHeartFill, BsHeart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToFavorite,
-  deleteFavoriteItem,
-} from "../../redux/actions/favoriteAction";
-import { handeleLoginShow } from "../../redux/actions/authAction";
+import { toggleLoginModal } from "../../redux/auth";
+import { addToFavorite, deleteFromFavorite } from "../../redux/favorite";
 
 const AddToWish = ({ productId }) => {
   const { t } = useTranslation(["product"]);
@@ -15,17 +12,17 @@ const AddToWish = ({ productId }) => {
   const { access_token, isLogged } = useSelector((state) => state.auth);
   const handleAddToWishList = (id) => {
     if (!isLogged) {
-      dispatch(handeleLoginShow());
+      dispatch(toggleLoginModal());
     } else {
-      dispatch(deleteFavoriteItem(id, access_token));
+      dispatch(addToFavorite({ id, access_token }));
     }
   };
 
   const handleRemoveToWishItem = (id) => {
     if (!isLogged) {
-      dispatch(handeleLoginShow());
+      dispatch(toggleLoginModal());
     } else {
-      dispatch(deleteFavoriteItem(id, access_token));
+      dispatch(deleteFromFavorite({ id, access_token }));
     }
   };
 

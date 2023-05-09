@@ -20,9 +20,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { authUrl } from "../utils/baseUrls";
 import OTPInput from "../components/Verify/OTPInput";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp, verifyOtp } from "../redux/actions/authAction";
 import { useEffect } from "react";
-import { googleOauth } from "../redux/auth";
+import { googleOauth, signUp, verifyOtp } from "../redux/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const style = {

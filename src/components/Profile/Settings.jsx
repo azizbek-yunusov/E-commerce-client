@@ -5,9 +5,9 @@ import { BiEdit } from "react-icons/bi";
 import { MdLogout } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "../../redux/actions/authAction";
 import { HelmetTitle } from "../../utils";
 import LayoutP from "./LayoutP";
+import { signOut } from "../../redux/auth";
 
 const Settings = () => {
   let { t } = useTranslation(["user"]);

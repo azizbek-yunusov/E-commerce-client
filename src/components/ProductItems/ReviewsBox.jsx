@@ -6,7 +6,7 @@ import { Review } from "./Review";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LoginModal from "../Helpers/LoginModal";
-import { handeleLoginShow } from "../../redux/actions/authAction";
+import { toggleLoginModal } from "../../redux/auth";
 
 export const ReviewsBox = () => {
   let { t } = useTranslation(["product"]);
@@ -205,7 +205,7 @@ export const ReviewsBox = () => {
               size="large"
               color="secondary"
               fullWidth
-              onClick={() => dispatch(handeleLoginShow())}
+              onClick={() => dispatch(toggleLoginModal())}
             >
               {t("add-review")}
             </Button>

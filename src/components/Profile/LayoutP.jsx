@@ -11,8 +11,7 @@ import { HelmetTitle } from "../../utils";
 
 const LayoutP = ({ children }) => {
   let { t } = useTranslation(["user"]);
-  const { access_token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.auth);
+  const { access_token, user } = useSelector((state) => state.auth);
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -56,7 +55,7 @@ const LayoutP = ({ children }) => {
           <div className="flex_col md:flex md:flex-row justify-start md:items-start items-center xl:px-0 px-6">
             <div className="z-40 bg-white dark:bg-purple-800/30 dark:backdrop-blur-sm p-[6px] max-w-max rounded-2xl -mt-14">
               <img
-                src={user.avatar?.url || "/images/profile.png"}
+                src={user?.avatar?.url || "/images/profile.png"}
                 className="h-32 w-32 z-40 object-cover rounded-xl bg-orange-500"
                 alt=""
               />
@@ -69,7 +68,7 @@ const LayoutP = ({ children }) => {
             </div>
             <div className="md:hidden text-center">
               <h1 className="text-2xl mt-1 mb-2 text-gray-600 dark:text-gray-200 font-semibold">
-                {user.name}
+                {user?.name}
               </h1>
               <p className="flex_center text-gray-400 mb-1">
                 <MdLocationOn className="text-xl" />
@@ -77,12 +76,12 @@ const LayoutP = ({ children }) => {
               </p>
               <p className="flex text-gray-400 ">
                 <AiFillCalendar className="text-xl" />
-                {moment(user.createdAt).locale("uz-latn").format("LL")}
+                {moment(user?.createdAt).locale("uz-latn").format("LL")}
               </p>
             </div>
             <div className="md:flex flex-col hidden lg:ml-2">
               <h1 className="text-2xl mt-2 mb-3 text-gray-600 dark:text-gray-200 font-semibold">
-                {user.name}
+                {user?.name}
               </h1>
               <div className="flex">
                 <p className="flex text-gray-400 mb-1">
@@ -91,7 +90,7 @@ const LayoutP = ({ children }) => {
                 </p>
                 <p className="flex text-gray-400 lg:ml-4">
                   <AiFillCalendar className="text-xl" />
-                  {moment(user.createdAt).locale("uz-latn").format("LL")}
+                  {moment(user?.createdAt).locale("uz-latn").format("LL")}
                 </p>
               </div>
             </div>

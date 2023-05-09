@@ -5,14 +5,11 @@ import { BsFillHeartFill, BsHeart } from "react-icons/bs";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  addToFavorite,
-  deleteFavoriteItem,
-} from "../../redux/actions/favoriteAction";
 import Price from "../Helpers/Price";
 import AddCartForCard from "./AddCartForCard";
 import AddWishForCard from "./AddWishForCard";
-import { handeleLoginShow } from "../../redux/actions/authAction";
+import { toggleLoginModal } from "../../redux/auth";
+import { addToFavorite, deleteFromFavorite } from "../../redux/favorite";
 
 const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
   const dispatch = useDispatch();
@@ -20,17 +17,17 @@ const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
   const { cart } = useSelector((state) => state.cart);
   const { favorites } = useSelector((state) => state.favorite);
 
-  const existItem = cart?.find((x) => x.productId?._id === _id);
+  const existItem = cart?.find((x) => x.productId?._id.toString() === _id.toString());
   const isCart = existItem === undefined ? false : true;
-  const existItemWish = favorites?.find((x) => x.productId._id === _id);
+  const existItemWish = favorites?.find((x) => x._id === _id);
   const isFavorite = existItemWish === undefined ? false : true;
   const handleAddToWishList = (id) => {
     try {
-      dispatch(addToFavorite(id, access_token));
+      dispatch(addToFavorite({ access_token, id }));
       if (isLogged) {
         console.log("add");
       } else {
-        dispatch(handeleLoginShow());
+        dispatch(toggleLoginModal());
       }
     } catch (err) {
       console.log(err);
@@ -39,9 +36,9 @@ const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
 
   const handleRemoveToWishItem = (id) => {
     if (!isLogged) {
-      dispatch(handeleLoginShow());
+      dispatch(toggleLoginModal());
     } else {
-      dispatch(deleteFavoriteItem(id, access_token));
+      dispatch(deleteFromFavorite({ access_token, id }));
     }
   };
   return (

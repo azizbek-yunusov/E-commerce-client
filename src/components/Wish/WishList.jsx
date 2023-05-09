@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import MobileTop from "../Helpers/MobileTop";
 import { MdClose } from "react-icons/md";
 import { HelmetTitle } from "../../utils";
+import { clearFavorite } from "../../redux/favorite";
 
 const WishList = () => {
   let { t } = useTranslation(["product"]);
@@ -17,7 +18,7 @@ const WishList = () => {
 
   const cleanWishListHandle = () => {
     try {
-      dispatch(cleanWishList(access_token));
+      dispatch(clearFavorite(access_token));
     } catch (err) {
       console.log(err);
     }
@@ -35,7 +36,9 @@ const WishList = () => {
           {favorites.length ? (
             <div>
               <div className="w-full md:flex hidden justify-between items-center text-lg md:mt-5 border-b pb-3 border-b-gray-200">
-                <h1 className="md:text-2xl font-semibold text-gray-700">{t("wish-list")}</h1>
+                <h1 className="md:text-2xl font-semibold text-gray-700">
+                  {t("wish-list")}
+                </h1>
                 <div
                   onClick={() => cleanWishListHandle()}
                   className="text-sm cursor-pointer text-gray-500 flex_center"

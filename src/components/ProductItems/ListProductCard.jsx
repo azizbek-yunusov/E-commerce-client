@@ -8,13 +8,11 @@ import { BsFillHeartFill, BsHeart } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart, decrQtyItemCart } from "../../redux/actions/cartAction";
-import {
-  addToFavorite,
-  deleteFavoriteItem,
-} from "../../redux/actions/favoriteAction";
 import { productUrl } from "../../utils/baseUrls";
 import Price from "../Helpers/Price";
+import { addToCart } from "../../redux/cart";
+import { deleteFromFavorite } from "../../redux/favorite";
+import { toggleLoginModal } from "../../redux/auth";
 
 const ListProductCard = (props) => {
   const { _id, name, images, price, ratings, discount } = props;
@@ -26,7 +24,7 @@ const ListProductCard = (props) => {
 
   const existItem = cart?.find((x) => x.productId?._id === _id);
   const isCart = existItem === undefined ? false : true;
-  const existItemWish = favorites?.find((x) => x.productId._id === _id);
+  const existItemWish = favorites?.find((x) => x._id === _id);
   const isFavorite = existItemWish === undefined ? false : true;
 
   const addToCartHandle = async (id) => {
@@ -42,6 +40,22 @@ const ListProductCard = (props) => {
       toast.error(t("error-register"));
     }
   };
+
+  const addFavoriteHandle = (id) => {
+    if (!isLogged) {
+      dispatch(toggleLoginModal());
+    } else {
+      dispatch(addToFavorite({ id, access_token }));
+    }
+  };
+
+  const deleteFromFavoriteHandle = (id) => {
+    if (!isLogged) {
+      dispatch(toggleLoginModal());
+    } else {
+      dispatch(deleteFromFavorite({ id, access_token }));
+    }
+  };
   return (
     <>
       <div className="grid grid-cols-3 overflow-hidden w-full relative tranistion_normal md:my-2 hover:shadow-xl md:h-[200px] h-[200px] md:border border-gray-200 hover:border-gray-50 md:rounded-xl rounded-md md:p-5 p-3 md:px-4">
@@ -54,14 +68,14 @@ const ListProductCard = (props) => {
         <div className="md:hidden absolute top-1 right-1">
           {isFavorite ? (
             <button
-              onClick={() => discount(deleteFavoriteItem(_id, access_token))}
+              onClick={() => deleteFromFavoriteHandle(_id)}
               className="rounded-full border-none border-gray-400 p-1 flex_center"
             >
               <BsFillHeartFill className="text-2xl text-red-500" />
             </button>
           ) : (
             <button
-              onClick={() => dispatch(addToFavorite(_id, access_token))}
+              onClick={() => addFavoriteHandle(_id)}
               className="p-1 rounded-full border-none border-gray-400"
             >
               <BsHeart className="text-2xl text-gray-400" />

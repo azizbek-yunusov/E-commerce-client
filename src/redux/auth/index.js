@@ -50,6 +50,7 @@ export const refreshToken = createAsyncThunk("auth/refresh-token", async () => {
       const { data } = await axios.post(`${authUrl}refreshtoken`, {
         refresh_token: token,
       });
+      console.log(data);
       return data;
     }
   } catch (error) {
@@ -97,7 +98,11 @@ const initialState = {
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleLoginModal: (state) => {
+      !state.isLoginShow;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(signUp.pending, (state) => {})
@@ -193,5 +198,6 @@ export const authSlice = createSlice({
       .addCase(() => {});
   },
 });
+export const { toggleLoginModal } = authSlice.actions;
 
 export default authSlice.reducer;

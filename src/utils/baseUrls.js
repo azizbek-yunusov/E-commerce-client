@@ -1,4 +1,4 @@
-const api =  process.env.NODE_ENV === "development" ? "/api" : "https://e-commerce-first-api-qeof.onrender.com/api";
+const api =  process.env.NODE_ENV === "development" ? "/api" : "https://xurmo-api.vercel.app/";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const reviewUrl = `${api}/review/`;
@@ -10,4 +10,3 @@ export const orderUrl = `${api}/order/`;
 export const postUrl = `${api}/post/`;
 
 export const token = localStorage.getItem("refresh_token") || false
-console.log(token);

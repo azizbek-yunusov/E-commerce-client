@@ -6,9 +6,9 @@ import { MdEmail, MdLocationOn } from "react-icons/md";
 import { Button } from "@mui/material";
 import { BsFillCalendarFill } from "react-icons/bs";
 import moment from "moment";
-import { signOut } from "../../redux/actions/authAction";
 import { useTranslation } from "react-i18next";
 import { BiEdit, BiLogIn } from "react-icons/bi";
+import { signOut } from "../../redux/auth";
 
 const SideBarPf = () => {
   let { t } = useTranslation(["user"]);
@@ -53,11 +53,11 @@ const SideBarPf = () => {
           ) : null}
           <div className="flex items-center text-base font-semibold text-gray-600 my-2">
             <MdEmail className="text-base mx-1" />
-            <span>{user.email}</span>
+            <span>{user?.email}</span>
           </div>
           <div className="flex items-center text-base font-semibold text-gray-600 my-1">
             <BsFillCalendarFill className="text-sm mx-1" />
-            <span>{moment(user.createdAt).format("LL")}</span>
+            <span>{moment(user?.createdAt).format("LL")}</span>
           </div>
         </div>
         <div className="flex md:my-2">

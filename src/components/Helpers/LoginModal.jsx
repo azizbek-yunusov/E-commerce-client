@@ -13,10 +13,10 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { handeleLoginShow, signIn } from "../../redux/actions/authAction";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { signIn, toggleLoginModal } from "../../redux/auth";
 
 const LoginModal = () => {
   const [loader, setLoader] = useState(false);
@@ -49,7 +49,7 @@ const LoginModal = () => {
     event.preventDefault();
   };
   const handleClose = () => {
-    dispatch(handeleLoginShow());
+    dispatch(toggleLoginModal());
   };
   const signInSubmit = async (e) => {
     e.preventDefault();

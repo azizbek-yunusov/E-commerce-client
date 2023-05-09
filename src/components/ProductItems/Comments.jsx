@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { likeReview, unLikeReview } from "../../redux/product";
 import ReplyForm from "./ReplyForm";
 import ReplyComments from "./ReplyComments";
-import { handeleLoginShow } from "../../redux/actions/authAction";
+import { toggleLoginModal } from "../../redux/auth";
 
 const Comments = ({ review }) => {
   let { t } = useTranslation(["product"]);
@@ -26,7 +26,7 @@ const Comments = ({ review }) => {
   const likeReviewHandle = async (id) => {
     try {
       if (!isLogged) {
-        dispatch(handeleLoginShow());
+        dispatch(toggleLoginModal());
       } else {
         dispatch(likeReview({ access_token, id }));
       }
@@ -37,7 +37,7 @@ const Comments = ({ review }) => {
   const unLikeReviewHandle = async (id) => {
     try {
       if (!isLogged) {
-        dispatch(handeleLoginShow());
+        dispatch(toggleLoginModal());
       } else {
         dispatch(unLikeReview({ access_token, id }));
       }

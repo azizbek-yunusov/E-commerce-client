@@ -8,29 +8,26 @@ import { BsHeart } from "react-icons/bs";
 import { HiOutlineTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  addToCart,
-  decrQtyItemCart,
-  deleteFromCart,
-} from "../../redux/actions/cartAction";
-import { deleteFavoriteItem } from "../../redux/actions/favoriteAction";
 import { productUrl } from "../../utils/baseUrls";
 import Price from "../Helpers/Price";
+import { addToCart, decrementQtyItem, deleteFromCart } from "../../redux/cart";
+import { deleteFromFavorite } from "../../redux/favorite";
 const Products = ({ cart }) => {
   const { access_token, isLogged } = useSelector((state) => state.auth);
   const { favorites } = useSelector((state) => state.favorite);
   const dispatch = useDispatch();
   let { t } = useTranslation(["product"]);
-  
+
   const addToCartHandle = async (id) => {
     if (isLogged) {
-      const { data } = await axios.get(`${productUrl}${id}`);
-      const existItem = cart?.find((x) => x.productId?._id === data.product._id);
-      if (data.inStock <= existItem.quantity) {
-        toast.error(t("product-not"));
-      } else {
-        dispatch(addToCart(id, access_token));
-      }
+      dispatch(addToCart({ id, access_token }));
+    } else {
+      toast.error(t("error-register"));
+    }
+  };
+  const deleteFromCartHandle = async (id) => {
+    if (isLogged) {
+      dispatch(deleteFromCart({ id, access_token }));
     } else {
       toast.error(t("error-register"));
     }
@@ -45,7 +42,7 @@ const Products = ({ cart }) => {
             <div className="md:flex hidden md:p-4 xl:p-0 justify-between items-center font-semibold text-gray-700">
               <h1 className="md:text-2xl">{t("cart")}</h1>
               <h1 className="md:text-xl text-gray-500">
-                 {cart.length}{" "}{t("product")}
+                {cart.length} {t("product")}
               </h1>
             </div>
             <div>
@@ -81,12 +78,7 @@ const Products = ({ cart }) => {
                             <div className="md:flex hidden">
                               <button
                                 onClick={() =>
-                                  dispatch(
-                                    deleteFromCart(
-                                      item.productId?._id,
-                                      access_token
-                                    )
-                                  )
+                                  deleteFromCartHandle(item.productId?._id)
                                 }
                                 className="flex items-center text-base text-red-500"
                               >
@@ -98,7 +90,7 @@ const Products = ({ cart }) => {
                               <button
                                 onClick={() =>
                                   dispatch(
-                                    deleteFavoriteItem(
+                                    deleteFromFavorite(
                                       item.productId?._id,
                                       access_token
                                     )
@@ -120,7 +112,7 @@ const Products = ({ cart }) => {
                                 <button
                                   onClick={() =>
                                     dispatch(
-                                      decrQtyItemCart(
+                                      decrementQtyItem(
                                         item.productId?._id,
                                         access_token
                                       )
@@ -152,7 +144,7 @@ const Products = ({ cart }) => {
                                 <button
                                   onClick={() =>
                                     dispatch(
-                                      decrQtyItemCart(
+                                      decrementQtyItem(
                                         item.productId?._id,
                                         access_token
                                       )
@@ -192,7 +184,7 @@ const Products = ({ cart }) => {
                               <button
                                 onClick={() =>
                                   dispatch(
-                                    deleteFavoriteItem(
+                                    deleteFromFavorite(
                                       item.productId?._id,
                                       access_token
                                     )

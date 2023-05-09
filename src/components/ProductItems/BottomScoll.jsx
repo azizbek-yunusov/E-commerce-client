@@ -8,10 +8,10 @@ import { BsCartCheck } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart, decrQtyItemCart } from "../../redux/actions/cartAction";
 import { productUrl } from "../../utils/baseUrls";
 import Price from "../Helpers/Price";
-import { handeleLoginShow } from "../../redux/actions/authAction";
+import { toggleLoginModal } from "../../redux/auth";
+import { addToCart, decrementQtyItem } from "../../redux/cart";
 
 const BottomScoll = ({ product }) => {
   const { t } = useTranslation(["product"]);
@@ -35,7 +35,7 @@ const BottomScoll = ({ product }) => {
         }
       }
     } else {
-      dispatch(handeleLoginShow());
+      dispatch(toggleLoginModal());
       toast.error(t("error-register"));
     }
   };
@@ -57,7 +57,7 @@ const BottomScoll = ({ product }) => {
                     <button
                       onClick={() =>
                         dispatch(
-                          decrQtyItemCart(existItem.productId._id, access_token)
+                          decrementQtyItem(existItem.productId._id, access_token)
                         )
                       }
                       className="text-gray-800 md:px-1 pl-3 py-1"

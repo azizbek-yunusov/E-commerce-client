@@ -57,7 +57,7 @@ export const Footer = () => {
               ))}
             </ul>
           </div>
-          <ul className="grid grid-cols-3 gap-x-6 gap-y-4 h-min mt-9">
+          {/* <ul className="grid grid-cols-3 gap-x-6 gap-y-4 h-min mt-9">
             <li className="bg-white px-4 h-16 rounded-md flex justify-center ites cursor-pointer">
               <a
                 className=""
@@ -154,7 +154,7 @@ export const Footer = () => {
                 />
               </a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
       <div className="border-t border-t-zinc-300 lg:py-5 pb-10 py-3 mt-4 flex justify-center items-center">

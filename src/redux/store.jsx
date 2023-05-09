@@ -9,8 +9,8 @@ import post from "./post";
 // import auth from "./reducers/authReducer";
 import address from "./address";
 import auth from "./auth";
-import cart from "./reducers/cartReducer";
-import favorite from "./reducers/favoriteReducer";
+import favorite from "./favorite";
+import cart from "./cart";
 import { Provider } from "react-redux";
 
 const store = configureStore({

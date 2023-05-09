@@ -13,7 +13,7 @@ const AdaptableCard = (props) => {
 
   const existItem = cart?.find((x) => x.productId?._id === _id);
   const isCart = existItem === undefined ? false : true;
-  const existItemWish = favorites?.find((x) => x.productId._id === _id);
+  const existItemWish = favorites?.find((x) => x._id === _id);
   const isFavorite = existItemWish === undefined ? false : true;
   return (
     <>
