@@ -15,9 +15,9 @@ export const getProducts = createAsyncThunk(
 );
 export const getProduct = createAsyncThunk(
   "product/get-product",
-  async (id) => {
+  async (slug) => {
     try {
-      const { data } = await axios.get(`${productUrl}${id}`);
+      const { data } = await axios.get(`${productUrl}view/${slug}`);
       return data;
     } catch (error) {
       return console.log(error);

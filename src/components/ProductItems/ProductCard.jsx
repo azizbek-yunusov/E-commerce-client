@@ -11,13 +11,15 @@ import AddWishForCard from "./AddWishForCard";
 import { toggleLoginModal } from "../../redux/auth";
 import { addToFavorite, deleteFromFavorite } from "../../redux/favorite";
 
-const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
+const ProductCard = ({ _id, name, slug, images, price, ratings, discount }) => {
   const dispatch = useDispatch();
   const { access_token, isLogged } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { favorites } = useSelector((state) => state.favorite);
 
-  const existItem = cart?.find((x) => x.productId?._id.toString() === _id.toString());
+  const existItem = cart?.find(
+    (x) => x.productId?._id.toString() === _id.toString()
+  );
   const isCart = existItem === undefined ? false : true;
   const existItemWish = favorites?.find((x) => x._id === _id);
   const isFavorite = existItemWish === undefined ? false : true;
@@ -69,13 +71,12 @@ const ProductCard = ({ _id, name, images, price, ratings, discount }) => {
         </div>
         <div className="">
           <Link
-            to={`/product/view/${_id}`}
+            to={`/product/view/${slug}`}
             className="flex justify-center items-center"
           >
-            <LazyLoadImage
+            <img
               src={images[0].url}
               alt={name}
-              effect="blur"
               className="md:h-44 h-[140px] object-cover"
             />
           </Link>

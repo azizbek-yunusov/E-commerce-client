@@ -23,7 +23,7 @@ const ProductDetail = () => {
   const { product, reviews, isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState(1);
-  const { id } = useParams();
+  const { slug } = useParams();
   const descrRef = useRef(null);
 
   const handleTabsChange = (event, newValue) => {
@@ -40,9 +40,9 @@ const ProductDetail = () => {
     descrRef.current.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
-    dispatch(getProduct(id));
+    dispatch(getProduct(slug));
     window.scrollTo(0, 0);
-  }, [dispatch, id]);
+  }, [dispatch, slug]);
   console.log(product);
   return (
     <main>
@@ -57,8 +57,12 @@ const ProductDetail = () => {
               sx={{ marginY: "8px" }}
             >
               <Link to={"/"}>{t("home-title")}</Link>
-              <Link to={"/category"}>{product?.category}</Link>
-              <Typography className="text-xs">{product?.name}</Typography>
+              <Link to={`/category/${product?.category.slug}`}>{product?.category.nameOz}</Link>
+              <Link
+                to={`/category/${product?.category.slug}/${product?.subCategory.slug}`}
+              >
+                {product?.subCategory.titleOz}
+              </Link>
             </Breadcrumbs>
             <div className="md:grid grid-cols-1 lg:grid-cols-3 xl:gap-x-5 border-t border-r-gray-400 lg:py-5 py-3">
               <div className="md:bg-transparent bg-fuchsia-200 rounded-2xl">
@@ -96,7 +100,9 @@ const ProductDetail = () => {
                     <ul className="leaders w-full">
                       <li className="text-gray-400 mb-3">
                         <span>{t("brand")}</span>
-                        <span className="text-gray-700">{product.brand}</span>
+                        <span className="text-gray-700">
+                          {product.brand.name}
+                        </span>
                       </li>
                       {features.slice(0, 6).map((item, index) => (
                         <li key={index} className="text-gray-400 mb-3">

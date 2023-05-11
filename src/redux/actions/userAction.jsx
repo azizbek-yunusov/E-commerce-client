@@ -21,21 +21,23 @@ export const getUserInfor = (access_token) => async (dispatch) => {
   }
 };
 
-export const editProfile = (userData, access_token) => async (dispatch) => {
-  try {
-    const { data } = await axios.put(`${userUrl}update`, userData, {
-      headers: {
-        Authorization: access_token,
-      },
-    });
-    dispatch({
-      type: "USER_FULFILLED",
-      payload: data,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+export const editProfile =
+  ({ userData, access_token }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await axios.put(`${userUrl}update`, userData, {
+        headers: {
+          Authorization: access_token,
+        },
+      });
+      dispatch({
+        type: "USER_FULFILLED",
+        payload: data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 export const changePassword = (passwords, access_token) => async (dispatch) => {
   try {
@@ -69,4 +71,3 @@ export const uploadAvatar = (avatar, access_token) => async (dispatch) => {
     console.log(err);
   }
 };
-

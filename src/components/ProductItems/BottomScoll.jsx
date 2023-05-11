@@ -24,15 +24,10 @@ const BottomScoll = ({ product }) => {
   const isCart = existItem === undefined ? false : true;
   const addToCartHandle = async (id) => {
     if (isLogged) {
-      const { data } = await axios.get(`${productUrl}${id}`);
-      const existItem = cart?.find((x) => x.productId?._id === _id);
-      if (data.inStock <= existItem?.quantity) {
-        toast.error(t("product-not"));
-      } else {
-        await dispatch(addToCart(id, access_token));
-        if (!isCart) {
-          toast.success(t("added-cart"));
-        }
+      toast.error(t("product-not"));
+      await dispatch(addToCart({ id, access_token }));
+      if (!isCart) {
+        toast.success(t("added-cart"));
       }
     } else {
       dispatch(toggleLoginModal());
@@ -57,7 +52,10 @@ const BottomScoll = ({ product }) => {
                     <button
                       onClick={() =>
                         dispatch(
-                          decrementQtyItem(existItem.productId._id, access_token)
+                          decrementQtyItem(
+                            existItem.productId._id,
+                            access_token
+                          )
                         )
                       }
                       className="text-gray-800 md:px-1 pl-3 py-1"

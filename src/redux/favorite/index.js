@@ -76,8 +76,6 @@ export const favoriteSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.favorites = action.payload.favorites;
-
-        console.log(action.payload);
       })
       .addCase(refreshToken.rejected, (state, action) => {
         state.isLoading = false;
@@ -101,7 +99,6 @@ export const favoriteSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-
       .addCase(deleteFromFavorite.pending, (state) => {
         state.isLoading = true;
         state.isSuccess = false;

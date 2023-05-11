@@ -28,7 +28,6 @@ import { refreshToken } from "./redux/auth";
 function App() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const navigete = useNavigate();
   const { auth } = useSelector((state) => state);
   useEffect(() => {
     if (token) {
@@ -66,7 +65,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product/view/:id" element={<ProductDetail />} />
+          <Route path="/product/view/:slug" element={<ProductDetail />} />
           <Route path="/products" element={<ProductsList />} />
           <Route path="/category/:slug" element={<CurrentCategory />} />
           <Route path="/brand/:slug" element={<CurrentBrand />} />

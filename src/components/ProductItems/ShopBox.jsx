@@ -45,7 +45,7 @@ const ShopBox = ({ product }) => {
       toast.error(t("error-register"));
     }
   };
-  let id = existItem.productId._id;
+  let id = existItem?.productId._id;
   return (
     <div className="flex justify-center md:px-4 col-span-1">
       <div className="md:w-auto w-full">

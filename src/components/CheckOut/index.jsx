@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Payme from "../../assets/svg/payme.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import Top from "./Top";
 import address from "../../data/address.json";
@@ -126,6 +126,9 @@ const CheckOut = () => {
       setDistrict(standart.district || "");
       setStreet(standart.street || "");
       setHouse(standart.house || "");
+    }
+    if(!cart.length) {
+      navigate(-1)
     }
     window.scrollTo(0, 0);
   }, [user, standart]);

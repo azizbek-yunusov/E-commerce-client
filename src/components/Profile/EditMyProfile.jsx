@@ -17,17 +17,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { HelmetTitle } from "../../utils";
 import LayoutP from "./LayoutP";
 import InputMask from "react-input-mask";
-import {
-  changePassword,
-  editProfile,
-  uploadAvatar,
-} from "../../redux/actions/userAction";
+import { changePassword, uploadAvatar } from "../../redux/actions/userAction";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineUser,
 } from "react-icons/ai";
 import { BiCamera, BiLockAlt, BiRefresh } from "react-icons/bi";
+import { editProfile } from "../../redux/auth";
 
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
@@ -69,7 +66,7 @@ const EditMyProfile = () => {
     e.preventDefault();
     try {
       let userData = { name, lastName, email, phoneNumber };
-      dispatch(editProfile(userData, access_token));
+      dispatch(editProfile({ userData, access_token }));
       if (oldPassword && newPassword && conNewPassword) {
         if (newPassword.length < 8) {
           setPasswordError("Password must be at least 8 characters long");
@@ -80,7 +77,7 @@ const EditMyProfile = () => {
         } else {
           setPasswordError("");
           let passwords = { oldPassword, newPassword, conNewPassword };
-          dispatch(changePassword(passwords, access_token));
+          dispatch(changePassword({ passwords, access_token }));
         }
       }
       if (!isLoading) {
@@ -93,7 +90,7 @@ const EditMyProfile = () => {
   };
   const uploadAvatarHandle = async () => {
     try {
-      dispatch(uploadAvatar(avatar, access_token));
+      dispatch(uploadAvatar({ avatar, access_token }));
     } catch (err) {
       console.log(err);
     }
@@ -153,7 +150,11 @@ const EditMyProfile = () => {
             <div className="grid grid-cols-12 gap-x-8">
               <div className="col-span-12 mb-4">
                 <div className="flex items-center">
-                  <img src={avatarPreview} alt="avatar" className="md:mr-6 object-cover rounded-xl mb-2 md:h-32 md:w-32 h-28 w-2h-28 bg-purple-700" />
+                  <img
+                    src={avatarPreview}
+                    alt="avatar"
+                    className="md:mr-6 object-cover rounded-xl mb-2 md:h-32 md:w-32 h-28 w-2h-28 bg-purple-700"
+                  />
                   <Box>
                     <ButtonStyled
                       color="secondary"

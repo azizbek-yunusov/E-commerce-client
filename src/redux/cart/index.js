@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { userUrl } from "../../utils/baseUrls";
-import { refreshToken } from "../auth";
+import { refreshToken, signIn } from "../auth";
 
 export const addToCart = createAsyncThunk(
   "cart/add-to-cart",
@@ -57,8 +57,7 @@ export const clearCart = createAsyncThunk(
   "cart/clear-cart",
   async (access_token) => {
     try {
-      console.log(access_token);
-      const { data } = await axios.put(`${userUrl}cart`, null, {
+      const { data } = await axios.delete(`${userUrl}cart`, null, {
         headers: {
           Authorization: access_token,
         },
@@ -83,6 +82,22 @@ export const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(signIn.pending, (state) => {
+      state.isLoading = true;
+      state.isSuccess = false;
+    })
+    .addCase(signIn.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = true;
+      state.cart = action.payload.cart;
+    })
+    .addCase(signIn.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.isSuccess = false;
+      state.message = action.error;
+    })
       .addCase(refreshToken.pending, (state) => {
         state.isLoading = true;
         state.isSuccess = false;
