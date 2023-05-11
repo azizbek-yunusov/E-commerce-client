@@ -17,27 +17,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { HelmetTitle } from "../../utils";
 import LayoutP from "./LayoutP";
 import InputMask from "react-input-mask";
-import { changePassword, uploadAvatar } from "../../redux/actions/userAction";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineUser,
 } from "react-icons/ai";
 import { BiCamera, BiLockAlt, BiRefresh } from "react-icons/bi";
-import { editProfile } from "../../redux/auth";
+import { changePassword, editProfile } from "../../redux/auth";
+import { uploadAvatar } from "../../redux/auth";
 
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
-    width: "100%",
     textAlign: "center",
-    marginBottom: theme.spacing(4),
   },
 }));
 
 const ResetButtonStyled = styled(Button)(({ theme }) => ({
   marginLeft: "18px",
   [theme.breakpoints.down("sm")]: {
-    width: "100%",
     marginLeft: 0,
     textAlign: "center",
   },
@@ -108,6 +105,14 @@ const EditMyProfile = () => {
 
     reader.readAsDataURL(e.target.files[0]);
   };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     if (user) {
       setName(user?.name || "");
@@ -118,12 +123,7 @@ const EditMyProfile = () => {
     }
     window.scrollTo(0, 300);
   }, [user]);
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+
   return (
     <>
       <HelmetTitle title={`${t("edit-profile")} - ${t("personal")}`} />
@@ -149,19 +149,22 @@ const EditMyProfile = () => {
           <form onSubmit={editProfileHandle}>
             <div className="grid grid-cols-12 gap-x-8">
               <div className="col-span-12 mb-4">
-                <div className="flex items-center">
-                  <img
-                    src={avatarPreview}
-                    alt="avatar"
-                    className="md:mr-6 object-cover rounded-xl mb-2 md:h-32 md:w-32 h-28 w-2h-28 bg-purple-700"
-                  />
-                  <Box>
+                <div className="flex md:justify-start justify-between items-center">
+                  <div className="">
+                    <img
+                      src={avatarPreview}
+                      alt="avatar"
+                      className="mr-6 object-cover rounded-xl mb-2 md:h-32 md:w-32 h-28 w-28 bg-purple-700"
+                    />
+                  </div>
+                  <div className="ml-3">
                     <ButtonStyled
                       color="secondary"
                       component="label"
                       variant="contained"
                       htmlFor="account-settings-upload-image"
                       startIcon={<BiCamera />}
+                      className="mb-5"
                     >
                       {t("upload-avatar")}
                       <input
@@ -180,10 +183,10 @@ const EditMyProfile = () => {
                     >
                       {t("reset")}
                     </ResetButtonStyled>
-                    <p className="text-gray-500 text-sm mt-5">
+                    <p className="text-gray-500 text-sm md:mt-5">
                       {t("upload-avatar-t")}
                     </p>
-                  </Box>
+                  </div>
                 </div>
               </div>
               <div className="md:col-span-6 col-span-12">

@@ -8,20 +8,18 @@ import { getCategory } from "../../redux/category";
 
 const CurrentCategory = () => {
   const { slug } = useParams();
-  let { t } = useTranslation(["dashboard"]);
+  let { t } = useTranslation(["home"]);
   const { isLoading, category, subCategories } = useSelector(
     (state) => state.category
   );
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
-
   useEffect(() => {
     dispatch(getCategory({ slug }));
   }, [dispatch, slug]);
   console.log(slug);
-  console.log(subCategories);
   return (
-    <main>
+    <main className="container-full min-h-screen">
       <HelmetTitle
         title={t(
           `${
@@ -38,7 +36,7 @@ const CurrentCategory = () => {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <section>
+        <section >
           <h1 className="text-3xl font-semibold text_color mb-8">
             {i18n.language === "oz"
               ? category?.nameOz

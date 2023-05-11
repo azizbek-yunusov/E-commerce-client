@@ -101,7 +101,7 @@ const AuthButton = () => {
             <MenuItem>{t("profile")}</MenuItem>
           </Link>
           <Divider sx={{ my: 0.5 }} />
-          <MenuItem onClick={signOutHandle} disableRipple>
+          <MenuItem onClick={signOutHandle} sx={{color: "red"}} disableRipple>
             {t("sign-out")}
           </MenuItem>
         </StyledMenu>

@@ -82,22 +82,22 @@ export const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase(signIn.pending, (state) => {
-      state.isLoading = true;
-      state.isSuccess = false;
-    })
-    .addCase(signIn.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.isError = false;
-      state.isSuccess = true;
-      state.cart = action.payload.cart;
-    })
-    .addCase(signIn.rejected, (state, action) => {
-      state.isLoading = false;
-      state.isError = true;
-      state.isSuccess = false;
-      state.message = action.error;
-    })
+      .addCase(signIn.pending, (state) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+      })
+      .addCase(signIn.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.cart = action.payload.cart;
+      })
+      .addCase(signIn.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
       .addCase(refreshToken.pending, (state) => {
         state.isLoading = true;
         state.isSuccess = false;

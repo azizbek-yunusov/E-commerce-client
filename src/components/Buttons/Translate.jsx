@@ -91,7 +91,7 @@ const Translate = ({ color }) => {
               ? "Русский"
               : null}
           </p>
-          <MdOutlineKeyboardArrowDown className="text-xl" />
+          <MdOutlineKeyboardArrowDown className={`${color} text-xl`} />
         </div>
       </div>
       <StyledMenu

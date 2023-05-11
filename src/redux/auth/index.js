@@ -114,24 +114,19 @@ export const uploadAvatar = createAsyncThunk(
 
 export const changePassword = createAsyncThunk(
   "auth/change-password",
-  async ({ avatar, access_token }) => {
+  async ({ passwords, access_token }) => {
     try {
-      const { data } = await axios.put(
-        `${userUrl}avatar`,
-        { avatar },
-        {
-          headers: {
-            Authorization: access_token,
-          },
-        }
-      );
+      const { data } = await axios.put(`${userUrl}change-password`, passwords, {
+        headers: {
+          Authorization: access_token,
+        },
+      });
       return data;
     } catch (error) {
       return console.log(error);
     }
   }
 );
-
 
 export const signOut = createAsyncThunk("auth/sign-out", async () => {
   try {
@@ -245,6 +240,19 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
       })
       .addCase(editProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isLogged = false;
+        // state.message = action.error;
+      })
+      .addCase(uploadAvatar.pending, (state) => {})
+      .addCase(uploadAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isLogged = true;
+        state.user = action.payload.user;
+      })
+      .addCase(uploadAvatar.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;

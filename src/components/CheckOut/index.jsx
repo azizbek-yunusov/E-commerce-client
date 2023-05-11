@@ -127,8 +127,8 @@ const CheckOut = () => {
       setStreet(standart.street || "");
       setHouse(standart.house || "");
     }
-    if(!cart.length) {
-      navigate(-1)
+    if (!cart.length) {
+      navigate(-1);
     }
     window.scrollTo(0, 0);
   }, [user, standart]);
@@ -146,6 +146,9 @@ const CheckOut = () => {
             <Breadcrumbs className="md:flex hidden">
               <Link to={"/"} className="">
                 {t("home")}
+              </Link>
+              <Link to={"/cart"} className="">
+                {t("cart")}
               </Link>
               <Link to={"/check-out"} className="">
                 {t("check-out")}
