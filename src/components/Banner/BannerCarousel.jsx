@@ -14,7 +14,7 @@ const BannerCarousel = () => {
   const { isLoading, banners } = useSelector((state) => state.banner);
   const { products } = useSelector((state) => state.product);
   return (
-    <>
+    <section>
       {!isLoading ? (
         <div className="container-full lg:grid lg:grid-cols-12 block overflow-hidden md:my-4 my-2 gap-0 pb-2">
           <div className="xl:col-span-9 col-span-8 rounded-xl overflow-hidden">
@@ -63,7 +63,7 @@ const BannerCarousel = () => {
       ) : (
         <BannerLoader />
       )}
-    </>
+    </section>
   );
 };
 

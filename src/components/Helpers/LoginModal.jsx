@@ -110,7 +110,7 @@ const LoginModal = () => {
     transform: "translate(-50%, -50%)",
     width: matches ? 400 : 320,
     boxShadow: 24,
-    p: matches ? 4 : 2,
+    p: matches ? 4 : 2.5,
   };
   return (
     <Modal
@@ -127,7 +127,7 @@ const LoginModal = () => {
             {t("sign-in")}
           </h1>
           <form onSubmit={signInSubmit}>
-            <div className="mt-6">
+            <div className="mt-5">
               <TextField
                 id="outlined-basic"
                 name="email"
@@ -144,7 +144,7 @@ const LoginModal = () => {
                 helperText={formErrors.email}
               />
             </div>
-            <div className="mt-6">
+            <div className="mt-5">
               <TextField
                 id="outlined-basic"
                 fullWidth

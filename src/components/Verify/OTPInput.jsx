@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
-function OTPInput({ onSubmit, user }) {
+function OTPInput({ onSubmit, user, isError }) {
   let { t } = useTranslation(["home"]);
   const [otp, setOTP] = useState(["", "", "", ""]);
   const [error, setError] = useState(false);
@@ -37,8 +37,8 @@ function OTPInput({ onSubmit, user }) {
   return (
     <section>
       <div className="flex_col items-center">
-        <h1 className="md:text-4xl text-xl md:mb-7">{t("otp-verification")}</h1>
-        <p className=" md:mb-5">
+        <h1 className="text-4xl md:mb-7 mb-5">{t("otp-verification")}</h1>
+        <p className=" md:mb-5 mb-3">
           {t("sent-email-otp-descr")}
           <span className="text-orange-500 ml-1">
             {initial}.........{last}@gmail.com
@@ -47,19 +47,19 @@ function OTPInput({ onSubmit, user }) {
 
         <div className="flex">
           {otp.map((value, index) => (
-            <div key={index} className="w-16 h-16 md:mx-2">
+            <div key={index} className="w-16 h-16 md:mx-2 mx-1">
               <input
                 type="text"
                 maxLength={1}
                 value={value}
                 onChange={(event) => handleChange(event, index)}
-                className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-2xl border-2 border-gray-300 text-lg bg-white focus:bg-gray-50 focus:border-none focus:ring-2 ring-orange-400"
+                className={ `w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-2xl border-2 ${(error || isError) ? "border-red-500" : "border-gray-300" } text-lg bg-white focus:bg-gray-50 focus:border-none focus:ring-2 ring-orange-400`}
                 ref={(el) => (inputs.current[index] = el)}
               />
             </div>
           ))}
         </div>
-        <p className="md:my-3">
+        <p className="my-3">
           {t("didnt-receive-code")}{" "}
           <span className="text-orange-500">{t("resent")}</span>
         </p>

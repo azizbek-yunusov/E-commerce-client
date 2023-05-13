@@ -80,10 +80,8 @@ const ShopBox = ({ product }) => {
                   <div className="border-2 border-[#ff8800] md:py-3 py-3 flex_betwen w-full rounded-lg text-lg text-gray-700 transition_normal">
                     <Tooltip title="remove from cart">
                       <button
-                        onClick={() =>
-                          decrementQtyItemHandle(id)
-                        }
-                        className="text-gray-700 md:px-4 pl-3 py-1 text-2xl"
+                        onClick={() => decrementQtyItemHandle(id)}
+                        className="text-gray-700 px-4 pl-3 py-1 text-2xl"
                       >
                         <AiOutlineMinus />
                       </button>
@@ -94,7 +92,7 @@ const ShopBox = ({ product }) => {
                     <Tooltip title="Increase by one">
                       <button
                         onClick={() => addToCartHandle(_id)}
-                        className=" tranistion_normal text-gray-700 md:px-4 pl-3 py-1 text-2xl"
+                        className=" tranistion_normal text-gray-700 px-4 pl-3 py-1 text-2xl"
                       >
                         <AiOutlinePlus />
                       </button>
@@ -102,7 +100,7 @@ const ShopBox = ({ product }) => {
                   </div>
                   <Link
                     to={"/cart"}
-                    className="md:py-[18px] py-3 px-5 ml-3 hover:border-gray-400 rounded-md text-white bg_secondary"
+                    className="py-[18px] px-5 ml-3 hover:border-gray-400 rounded-md text-white bg_secondary"
                   >
                     <BsCartCheck className="md:text-xl text-white" />
                   </Link>

@@ -1,6 +1,7 @@
 import React from "react";
 import { BsFillHeartFill, BsHeart } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { IconButton } from "@mui/material";
 import { addToFavorite, deleteFromFavorite } from "../../redux/favorite";
 import { toggleLoginModal } from "../../redux/auth";
 
@@ -26,19 +27,19 @@ const AddWishForCard = ({ id, isFavorite }) => {
   return (
     <div className="hidden md:block z-50">
       {isFavorite ? (
-        <button
+        <IconButton
           onClick={() => handleRemoveToWishItem(id)}
           className="p-1 rounded-full border-none md:mr-4 border-gray-400"
         >
           <BsFillHeartFill className="md:text-[32px] text-2xl text-red-500" />
-        </button>
+        </IconButton>
       ) : (
-        <button
+        <IconButton
           onClick={() => handleAddToWishList(id)}
           className="p-1 rounded-full border-none md:mr-4 border-gray-400"
         >
           <BsHeart className="md:text-[32px] text-gray-400" />
-        </button>
+        </IconButton>
       )}
     </div>
   );

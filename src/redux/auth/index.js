@@ -4,19 +4,19 @@ import { authUrl, token, userUrl } from "../../utils/baseUrls";
 
 export const signUp = createAsyncThunk(
   "auth/sign-up",
-  async ({ formState }) => {
+  async ({ formState }, thunkAPI) => {
     try {
       const { data } = await axios.post(`${authUrl}signup`, formState);
       return data;
     } catch (error) {
-      return console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data.err);
     }
   }
 );
 
 export const verifyOtp = createAsyncThunk(
   "auth/verify-otp",
-  async ({ otp }) => {
+  async ({ otp }, thunkAPI) => {
     try {
       const { data } = await axios.post(`${authUrl}verify`, { otp });
       if (data.refresh_token) {
@@ -24,14 +24,15 @@ export const verifyOtp = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return console.log(error);
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data.err);
     }
   }
 );
 
 export const signIn = createAsyncThunk(
   "auth/sign-in",
-  async ({ formState }) => {
+  async ({ formState }, thunkAPI) => {
     try {
       const { data } = await axios.post(`${authUrl}signin`, formState);
       if (data.refresh_token) {
@@ -39,7 +40,7 @@ export const signIn = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      return console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data.err);
     }
   }
 );
@@ -151,6 +152,10 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    clearErrors: (state) => {
+      state.isError = false;
+      state.message = "";
+    },
     toggleLoginModal: (state) => {
       state.isLoginShow = !state.isLoginShow;
     },
@@ -160,16 +165,13 @@ export const authSlice = createSlice({
       .addCase(signUp.pending, (state) => {})
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isLogged = true;
         state.user = action.payload.user;
-        // state.access_token = action.payload.access_token;
-        // state.isAdmin = action.payload.user.admin ? true : false;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        state.message = action.error;
+        state.message = action.payload;
       })
       .addCase(verifyOtp.pending, (state) => {})
       .addCase(verifyOtp.fulfilled, (state, action) => {
@@ -183,7 +185,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        state.message = action.error;
+        state.message = action.payload;
       })
       .addCase(signIn.pending, (state) => {})
       .addCase(signIn.fulfilled, (state, action) => {
@@ -198,7 +200,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        state.message = action.error;
+        state.message = action.payload;
       })
       .addCase(refreshToken.pending, (state) => {
         state.isLoading = true;
@@ -215,7 +217,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        state.message = action.error;
+        state.message = action.payload;
       })
       .addCase(googleOauth.pending, (state) => {})
       .addCase(googleOauth.fulfilled, (state, action) => {
@@ -230,7 +232,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        // state.message = action.error;
+        //         state.message = action.payload;
       })
       .addCase(editProfile.pending, (state) => {})
       .addCase(editProfile.fulfilled, (state, action) => {
@@ -243,7 +245,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        // state.message = action.error;
+        //         state.message = action.payload;
       })
       .addCase(uploadAvatar.pending, (state) => {})
       .addCase(uploadAvatar.fulfilled, (state, action) => {
@@ -256,7 +258,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        // state.message = action.error;
+        //         state.message = action.payload;
       })
       .addCase(signOut.pending, (state) => {})
       .addCase(signOut.fulfilled, (state, action) => {
@@ -271,11 +273,11 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        state.message = action.error;
+        state.message = action.payload;
       })
       .addCase(() => {});
   },
 });
-export const { toggleLoginModal } = authSlice.actions;
+export const { toggleLoginModal, clearErrors } = authSlice.actions;
 
 export default authSlice.reducer;

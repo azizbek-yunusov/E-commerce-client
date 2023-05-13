@@ -17,8 +17,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../components/Helpers/Logo";
 import { HelmetTitle } from "../utils";
-import { authUrl } from "../utils/baseUrls";
-import { googleOauth, signIn } from "../redux/auth";
+import { clearErrors, googleOauth, signIn } from "../redux/auth";
 
 const SignIn = () => {
   const [loader, setLoader] = useState(false);
@@ -50,9 +49,10 @@ const SignIn = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const errors = {};
   const signInSubmit = async (e) => {
     e.preventDefault();
-    const errors = {};
+
     if (!formState.email) {
       errors.email = t("email-valid");
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
@@ -61,6 +61,7 @@ const SignIn = () => {
     if (!formState.password) {
       errors.password = t("password-valid");
     }
+
     setFormErrors(errors);
 
     // submit form if no errors
@@ -94,9 +95,11 @@ const SignIn = () => {
       navigate("/");
     }
     if (isError) {
-      toast.error(message);
-      // dispatch(clearErrors());
+      errors.password = t(`${message}`);
+      dispatch(clearErrors());
       setLoader(false);
+    }
+    if (isError) {
     }
   }, [dispatch, isError, isLogged, message]);
   return (

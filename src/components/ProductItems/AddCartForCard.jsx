@@ -33,7 +33,7 @@ const AddCartForCard = ({ isCart, existId, id, quantity, access_token }) => {
   return (
     <div className="w-full">
       {isCart ? (
-        <div className="flex_betwen md:px-3 border-2 border-[#888888] md:py-[6px] py-[6px] w-full rounded-lg md:text-lg text-base transition_normal hover:border-blue-500">
+        <div className="flex_betwen md:px-3 border-2 border-[#888888] md:py-[6px] py-[6px] w-full rounded-lg md:text-lg text-base transition_normal md:hover:border-orange-500">
           <Tooltip title={t("decr-from-cart")}>
             <button
               onClick={() => dispatch(decrementQtyItem({ id, access_token }))}

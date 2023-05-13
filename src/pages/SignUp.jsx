@@ -21,7 +21,7 @@ import { authUrl } from "../utils/baseUrls";
 import OTPInput from "../components/Verify/OTPInput";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { googleOauth, signUp, verifyOtp } from "../redux/auth";
+import { clearErrors, googleOauth, signUp, verifyOtp } from "../redux/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 
 const style = {
@@ -51,16 +51,19 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  const signUpHandler = async (e) => {
+  const signUpHandle = async (e) => {
     e.preventDefault();
+    setLoading(true);
     let formState = {
       name,
       email,
       password,
       confirmPass,
     };
-    await dispatch(signUp(formState));
+    await dispatch(signUp({ formState }));
     if (user) {
+      setLoading(false);
+
       toast.success(t("email-otp-verify"));
       setOpenOTP(true);
     }
@@ -93,10 +96,15 @@ const SignUp = () => {
       toast.success(t("sign-in-succ"));
       navigate("/");
     }
+    if (user) {
+      toast.success(t("email-otp-verify"));
+      setOpenOTP(true);
+    }
     if (isError) {
       toast.error(message);
+      dispatch(clearErrors());
     }
-  }, [dispatch, isError, isLogged, message]);
+  }, [dispatch, isError, user, isLogged, message]);
   return (
     <main>
       <HelmetTitle title={t("sign-up")} />
@@ -121,20 +129,24 @@ const SignUp = () => {
           </div>
           <div className="xl:col-span-4 lg:col-span-5 col-span-12 border-l border-l-gray-300 flex items-center justify-center xl:px-16 md:px-10 px-8 w-full mx-auto">
             {openOTP ? (
-              <OTPInput onSubmit={handleVerifyOtp} user={user} />
+              <OTPInput
+                onSubmit={handleVerifyOtp}
+                user={user}
+                isError={isError}
+              />
             ) : (
               <div className="">
-                <div className="">
-                  <h2 className="text-2xl font-bold text-gray-700 ">
+                <div className="md:my-0 my-3">
+                  <h2 className="text-3xl font-bold text-gray-700 ">
                     {t("sign-up-t")}
                   </h2>
 
                   <p className="mt-3 text-gray-500">{t("sign-up-p")}</p>
                 </div>
 
-                <div className="mt-7">
-                  <form onSubmit={signUpHandler}>
-                    <div className="mt-6">
+                <div className="md:mt-7 mt-5">
+                  <form onSubmit={signUpHandle}>
+                    <div className="md:mt-6 mt-5">
                       <TextField
                         id="outlined-basic"
                         fullWidth
@@ -146,7 +158,7 @@ const SignUp = () => {
                         onChange={(e) => setName(e.target.value)}
                       />
                     </div>
-                    <div className="mt-6">
+                    <div className="md:mt-6 mt-5">
                       <TextField
                         id="outlined-basic"
                         fullWidth
@@ -161,7 +173,7 @@ const SignUp = () => {
                         helperText={emailError && "Emailni kiriting"}
                       />
                     </div>
-                    <div className="mt-6">
+                    <div className="md:mt-6 mt-5">
                       <TextField
                         id="outlined-basic"
                         fullWidth
@@ -191,7 +203,7 @@ const SignUp = () => {
                         }}
                       />
                     </div>
-                    <div className="mt-6">
+                    <div className="md:mt-6 mt-5">
                       <TextField
                         id="outlined-basic"
                         fullWidth
@@ -231,7 +243,7 @@ const SignUp = () => {
                         {t("forgot-pass")}
                       </Link> */}
                     </div>
-                    <div className="mt-3">
+                    <div className="md:mt-3 mt-1">
                       <Button
                         type="submit"
                         className="w-full tracking-wide font-normal"
@@ -270,7 +282,7 @@ const SignUp = () => {
                     </div>
                   </form>
 
-                  <p className="mt-5 text-base text-center text-gray-400">
+                  <p className="md:mt-5 mt-3 text-base text-center text-gray-400">
                     {t("have-account")}{" "}
                     <Link
                       to={"/signin"}
@@ -280,7 +292,7 @@ const SignUp = () => {
                     </Link>
                     .
                   </p>
-                  <div className="flex items-center justify-between mt-5">
+                  <div className="flex items-center justify-between md:mt-5 mt-3">
                     <div className="w-full h-[1px] bg-gray-300"></div>
                     <span className="text-sm mx-5 text-gray-400">
                       {t("or")}

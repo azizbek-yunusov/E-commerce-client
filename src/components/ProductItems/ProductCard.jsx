@@ -1,4 +1,4 @@
-import { Rating } from "@mui/material";
+import { IconButton, Rating } from "@mui/material";
 import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsFillHeartFill, BsHeart } from "react-icons/bs";
@@ -11,7 +11,7 @@ import AddWishForCard from "./AddWishForCard";
 import { toggleLoginModal } from "../../redux/auth";
 import { addToFavorite, deleteFromFavorite } from "../../redux/favorite";
 
-const ProductCard = ({ _id, name, slug, images, price, ratings, discount }) => {
+const ProductCard = ({ _id, name, slug, images, price, oldPrice, ratings, discount }) => {
   const dispatch = useDispatch();
   const { access_token, isLogged } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
@@ -45,28 +45,30 @@ const ProductCard = ({ _id, name, slug, images, price, ratings, discount }) => {
   };
   return (
     <>
-      <div className="overflow-hidden bg-white relative flex tranistion_normal md:hover:shadow-xl flex-col justify-between md:h-[400px] h-[330px] md:border border-gray-200 md:hover:border-gray-50 md:rounded-xl rounded-md md:p-3 p-2 md:px-4">
+      <div className="overflow-hidden relative flex tranistion_normal md:hover:shadow-xl flex-col justify-between md:h-[400px] h-[330px] md:border border-gray-200 md:hover:border-gray-50 md:rounded-xl rounded-md md:p-3 p-2 md:px-4">
         {discount > 0 && (
           <div className="md:px-2 p-[2px] px-1 md:py-1 absolute top-2 left-2 md:text-sm text-xs font-semibold md:rounded-lg rounded bg-red-600 text-white">
             -{discount}
             {"%"}
           </div>
         )}
-        <div className="md:hidden absolute top-1 right-1 z-50 rounded-full">
+        <div className="md:hidden absolute bg-white top-0 pt-0.5 right-0 z-10 rounded-full">
           {isFavorite ? (
-            <button
+            <IconButton
+              size="small"
               onClick={() => handleRemoveToWishItem(_id)}
-              className="rounded-full border-none border-gray-400 p-1 flex_center"
+              // className="rounded-full border-none border-gray-400 p-1 flex_center"
             >
-              <BsFillHeartFill className="text-3xl text-red-500" />
-            </button>
+              <BsFillHeartFill className="text-[26px] text-red-500" />
+            </IconButton>
           ) : (
-            <button
-              onClick={() => handleAddToWishList(id)}
-              className="p-1 rounded-full border-none border-gray-400"
+            <IconButton
+              size="small"
+              onClick={() => handleAddToWishList(_id)}
+              // className="p-1 rounded-full border-none border-gray-400"
             >
-              <BsHeart className="text-3xl heart text-gray-400" />
-            </button>
+              <BsHeart className="text-[26px] heart text-gray-400" />
+            </IconButton>
           )}
         </div>
         <div className="">
@@ -90,7 +92,7 @@ const ProductCard = ({ _id, name, slug, images, price, ratings, discount }) => {
           {discount > 0 ? (
             <div className="">
               <Price
-                price={price - (price * discount) / 100}
+                price={oldPrice || price}
                 className="md:text-lg font-semibold"
               />
               <Price

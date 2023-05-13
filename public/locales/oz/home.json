@@ -70,5 +70,6 @@
   "loading": "kuting",
   "email-otp-verify": "Kirish uchun emailingizni tasdiqlang!!!",
   "didnt-receive-code": "Kodni olmadingizmi?",
-  "resent": "Qayta yuborish"
+  "resent": "Qayta yuborish",
+  "Password is incorrect.": "Parolingiz xato"
 }
