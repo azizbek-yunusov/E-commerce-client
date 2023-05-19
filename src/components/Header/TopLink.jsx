@@ -1,11 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Translate from "../Buttons/Translate";
 import { HiOutlinePhone } from "react-icons/hi";
-// import TransleteD from "../../dashboard-components/Buttons/TransleteD";
-import { Link } from "@mui/material";
 import Logo from "../Helpers/Logo";
+import { ImLocation } from "react-icons/im";
 
 const TopLink = () => {
   const { t } = useTranslation(["order"]);
@@ -15,12 +13,16 @@ const TopLink = () => {
       <div className="lg:block hidden tranistion_normal w-full bg_secondary">
         <div className="container-full py-1 flex items-center justify-between">
           <div className="flex justify-between items-center">
-            <Link top={"/products"}>
+            {/* <Link top={"/products"}>
               <button className="rounded-lg px-3 font-semibold py-1 text bg-white text-red-500">
                 {"-% "}
                 {t("discount")}
               </button>
-            </Link>
+            </Link> */}
+            <div className="flex_center text-white">
+              <ImLocation className="text-xl mr-1" />
+              <h1 className="text-lg">Uzbekistan</h1>
+            </div>
           </div>
           <div className="flex justify-between items-center">
             <p className="text-base text-white font-semibold mr-2">

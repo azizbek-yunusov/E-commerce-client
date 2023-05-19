@@ -57,8 +57,7 @@ const StyledMenu = styled((props) => (
 }));
 
 const CatalogButton = () => {
-  let { t } = useTranslation();
-  // const { isLoading, categories } = useSelector((state) => state.category);
+  let { t } = useTranslation(["home"]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
@@ -101,7 +100,7 @@ const CatalogButton = () => {
         startIcon={<BiCategory />}
         onClick={handleOpenMenu}
       >
-        {t("category")}
+        {t("catalog")}
       </Button>
       <StyledMenu
         id="demo-customized-menu"

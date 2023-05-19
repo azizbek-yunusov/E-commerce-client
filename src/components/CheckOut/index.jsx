@@ -21,6 +21,7 @@ import Price from "../Helpers/Price";
 import { deliveryTypeData, paymentMethodData } from "../../data/OrderTypeData";
 import { newOrder } from "../../redux/order";
 import { HelmetTitle } from "../../utils";
+import { clearCart } from "../../redux/cart";
 
 const CheckOut = () => {
   const { t } = useTranslation(["order"]);
@@ -105,6 +106,7 @@ const CheckOut = () => {
       if (!isLoading) {
         toast.success(t("new-order-added"));
         navigate("/profile/orders");
+        clearCart(access_token);
       }
       if (isError) {
         toast.error("Something Went Wrong!");
