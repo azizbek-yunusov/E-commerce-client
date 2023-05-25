@@ -92,6 +92,9 @@ export const addressSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.addresses = action.payload.addresses;
+        state.standart = action.payload.addresses.find(
+          (item) => item.standart == true
+        );
       })
       .addCase(getMyAddresses.rejected, (state, action) => {
         state.isLoading = false;

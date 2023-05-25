@@ -44,7 +44,7 @@ const AdaptableCard = (props) => {
 
         <div className="col-span-2">
           <Link
-            to={`/product/view/${_id}`}
+            to={`/product/view/${slug}`}
             className="flex justify-center items-center"
           >
             <img className="md:h-44 h-40" src={images[0].url} alt="" />

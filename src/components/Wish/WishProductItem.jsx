@@ -71,7 +71,7 @@ const WishProductItem = (props) => {
 
         <div className="">
           <Link
-            to={`/product/view/${_id}`}
+            to={`/product/view/${slug}`}
             className="flex justify-center items-center"
           >
             <img

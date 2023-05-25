@@ -25,18 +25,16 @@ const AddWishForCard = ({ id, isFavorite }) => {
     }
   };
   return (
-    <div className="hidden md:block z-50">
+    <div className="hidden md:block md:mr-3">
       {isFavorite ? (
         <IconButton
           onClick={() => handleRemoveToWishItem(id)}
-          className="p-1 rounded-full border-none md:mr-4 border-gray-400"
         >
           <BsFillHeartFill className="md:text-[32px] text-2xl text-red-500" />
         </IconButton>
       ) : (
         <IconButton
           onClick={() => handleAddToWishList(id)}
-          className="p-1 rounded-full border-none md:mr-4 border-gray-400"
         >
           <BsHeart className="md:text-[32px] text-gray-400" />
         </IconButton>

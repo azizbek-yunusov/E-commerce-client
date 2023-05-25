@@ -15,7 +15,7 @@ import { deleteFromFavorite } from "../../redux/favorite";
 import { toggleLoginModal } from "../../redux/auth";
 
 const ListProductCard = (props) => {
-  const { _id, name, images, price, ratings, discount } = props;
+  const { _id, slug, name, images, price, ratings, discount } = props;
   let { t } = useTranslation(["product"]);
   const { isLogged, access_token } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
@@ -85,7 +85,7 @@ const ListProductCard = (props) => {
 
         <div className="col-span-1 ">
           <Link
-            to={`/product/view/${_id}`}
+            to={`/product/view/${slug}`}
             className="flex justify-center items-center"
           >
             <img

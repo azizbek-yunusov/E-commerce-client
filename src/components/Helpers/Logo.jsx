@@ -6,9 +6,9 @@ const Logo = ({ className }) => {
       <img
         src="/images/Xurmo_logo.png"
         className="md:h-8 h-7 object-cover"
-        alt="logo"
+        alt="Xurmo-market_logotip"
       />
-      <h1 className={`${className} text-orange-500 ml-1 md:text-3xl text-2xl font-semibold`}>Xurmo</h1>
+      <h1 className={`${className} text-orange-500 ml-1 xl:ml-2 md:text-3xl text-2xl font-extrabold noto-font`}>Xurmo</h1>
     </div>
   );
 };

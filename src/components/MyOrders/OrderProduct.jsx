@@ -26,7 +26,7 @@ const OrderProduct = ({ item }) => {
               />
               <div className="ml-1">
                 <Link
-                  to={`/product/view/${ord.productId._id}`}
+                  to={`/product/view/${ord.productId.slug}`}
                   className="text-gray-700"
                 >
                   {ord.productId.name}

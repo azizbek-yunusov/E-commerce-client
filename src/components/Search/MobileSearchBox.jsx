@@ -104,7 +104,7 @@ const MobileSearchBox = ({ products, toggleMobileSearchBar }) => {
             {filteredData.slice(0, 20).map((value, key) => {
               return (
                 <Link
-                  to={`/product/view/${value._id}`}
+                  to={`/product/view/${value.slug}`}
                   onClick={clearFilter}
                   className="cursor-pointer py-2 w-full px-5 hover:bg-gray-100 flex items-center"
                   key={key}

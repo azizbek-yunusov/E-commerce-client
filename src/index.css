@@ -33,6 +33,9 @@ html {
 .global-font {
   font-family: "Inter";
 }
+.noto-font {
+  font-family: "Noto Sans";
+}
 .flex_center {
   @apply flex items-center justify-center;
 }
