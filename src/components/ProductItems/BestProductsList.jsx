@@ -26,7 +26,7 @@ const BestProductsList = () => {
               </div>
               <div className="">
                 <div className="col-span-12 grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 lg:gap-4 grid-cols-2 gap-3 relative">
-                  {products.slice(0, 8).map((item) => (
+                  {products.map((item) => (
                     <ProductCard key={item._id} {...item} />
                   ))}
                 </div>

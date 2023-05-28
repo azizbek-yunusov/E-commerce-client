@@ -26,7 +26,7 @@ const AddToWish = ({ productId }) => {
     }
   };
 
-  const existItemWish = favorites?.find((x) => x.productId._id === productId);
+  const existItemWish = favorites?.find((x) => x.productId === productId);
   const isFavorite = existItemWish === undefined ? false : true;
   return (
     <div className="">

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import NetworkStatus from "./components/Helpers/NetworkStatus";
 import { ActivationEmail, Home, NotFound, SignIn, SignUp } from "./pages";
@@ -47,55 +46,53 @@ function App() {
   }, []);
   return (
     <main>
-      <>
-        <Toaster position="top-left" reverseOrder={true} />
-        <NetworkStatus />
-        {auth.isLoginShow && <LoginModal />}
+      <Toaster position="top-left" reverseOrder={true} />
+      <NetworkStatus />
+      {auth.isLoginShow && <LoginModal />}
 
-        {pathname === "/signup" ||
-        pathname === "/signin" ||
-        pathname === "/user/activate/:activationtoken" ||
-        pathname === "/check-out" ? null : (
+      {pathname === "/signup" ||
+      pathname === "/signin" ||
+      pathname === "/user/activate/:activationtoken" ||
+      pathname === "/check-out" ? null : (
+        <>
+          <TopLink />
+          <Navbar />
+          <BottomNavigation />
+        </>
+      )}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product/view/:slug" element={<ProductDetail />} />
+        <Route path="/products" element={<ProductsList />} />
+        <Route path="/category/:slug" element={<CurrentCategory />} />
+        <Route path="/brand/:slug" element={<CurrentBrand />} />
+        <Route path="/cart" element={<Basket />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/wishlist" element={<WishList />} />
+        <Route path="/post/view/:id" element={<PostPage />} />
+        {(token || auth.isLogged) && (
           <>
-            <TopLink />
-            <Navbar />
-            <BottomNavigation />
+            <Route path="/profile" element={<OverView />} />
+            <Route path="/profile/orders" element={<MyOrders />} />
+            <Route path="/profile/addresses" element={<Addresses />} />
+            <Route path="/profile/settings" element={<Settings />} />
+            <Route path="/profile/update" element={<EditMyProfile />} />
+            <Route path="/profile/favorites" element={<Favorites />} />
+            <Route path="/check-out" element={<CheckOut />} />
           </>
         )}
+        <Route
+          path="/user/activate/:activationtoken"
+          element={<ActivationEmail />}
+        />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+      {auth.isLoading && <FetchLoader isLoading={auth.isLoading} />}
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product/view/:slug" element={<ProductDetail />} />
-          <Route path="/products" element={<ProductsList />} />
-          <Route path="/category/:slug" element={<CurrentCategory />} />
-          <Route path="/brand/:slug" element={<CurrentBrand />} />
-          <Route path="/cart" element={<Basket />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/wishlist" element={<WishList />} />
-          <Route path="/post/view/:id" element={<PostPage />} />
-          {(token || auth.isLogged) && (
-            <>
-              <Route path="/profile" element={<OverView />} />
-              <Route path="/profile/orders" element={<MyOrders />} />
-              <Route path="/profile/addresses" element={<Addresses />} />
-              <Route path="/profile/settings" element={<Settings />} />
-              <Route path="/profile/update" element={<EditMyProfile />} />
-              <Route path="/profile/favorites" element={<Favorites />} />
-              <Route path="/check-out" element={<CheckOut />} />
-            </>
-          )}
-          <Route
-            path="/user/activate/:activationtoken"
-            element={<ActivationEmail />}
-          />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-        </Routes>
-        {auth.isLoading && <FetchLoader isLoading={auth.isLoading} />}
-
-        {pathname === "/signup" || pathname === "/signin" ? null : <Footer />}
-      </>
+      {pathname === "/signup" || pathname === "/signin" ? null : <Footer />}
     </main>
   );
 }
