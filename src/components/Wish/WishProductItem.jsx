@@ -21,7 +21,7 @@ import { deleteFromFavorite } from "../../redux/favorite";
 import { addToCart, decrementQtyItem } from "../../redux/cart";
 
 const WishProductItem = (props) => {
-  const { _id, name, images, price, ratings, discount } = props;
+  const { _id, name, images, price, ratings, discount, slug } = props;
   const dispatch = useDispatch();
   const { t } = useTranslation(["product"]);
   const { isLogged, access_token } = useSelector((state) => state.auth);
