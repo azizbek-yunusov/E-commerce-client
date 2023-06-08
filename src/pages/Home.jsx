@@ -51,11 +51,11 @@ const Home = () => {
         <BannerCarousel />
         <CategoryList />
         <BestProductsList />
-        <DiscountedProducts />
+        {/* <DiscountedProducts /> */}
         <BrandsList />
         <ListBox />
         <PostList />
-        <MobileApp />
+        {/* <MobileApp /> */}
       </main>
     </>
   );

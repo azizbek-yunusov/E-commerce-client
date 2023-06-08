@@ -98,7 +98,7 @@ const AuthButton = () => {
           onClose={handleClose}
         >
           <Link onClick={handleClose} to={"/profile"}>
-            <MenuItem>{t("profile")}</MenuItem>
+            <MenuItem>{t("cabinet")}</MenuItem>
           </Link>
           <Divider sx={{ my: 0.5 }} />
           <MenuItem onClick={signOutHandle} sx={{color: "red"}} disableRipple>

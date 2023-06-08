@@ -59,7 +59,7 @@ const Translate = ({ color }) => {
   };
   const languages = [
     {
-      name: "Uzbekcha",
+      name: "O'zbekcha",
       lng: "oz",
     },
     {

@@ -68,7 +68,7 @@ const SearchPage = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [query]);
 
   useEffect(() => {
     dispatch(getCategories());
