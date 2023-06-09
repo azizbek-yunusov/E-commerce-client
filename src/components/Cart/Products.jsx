@@ -8,7 +8,6 @@ import { BsHeart } from "react-icons/bs";
 import { HiOutlineTrash } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { productUrl } from "../../utils/baseUrls";
 import Price from "../Helpers/Price";
 import { addToCart, decrementQtyItem, deleteFromCart } from "../../redux/cart";
 import { deleteFromFavorite } from "../../redux/favorite";
@@ -226,15 +225,15 @@ const Products = ({ cart }) => {
               <input
                 type="text"
                 className="w-full px-4 text-base py-2"
-                placeholder="promo code"
+                placeholder={t("promo-code")}
               />
-              <button className="my-[2px] lowercase flex px-10 h-full py-[10px] rounded-md mx-[2px] bg_secondary text-white">
-                apply
+              <button className="my-[2px] flex px-10 h-full py-[10px] rounded-md mx-[2px] bg_secondary text-white">
+                Kiritish
               </button>
             </div>
             <div className="mt-6">
               <ul className="flex justify-between items-center text-gray-700">
-                <li className="md:text-lg">{t("deliveriy")}</li>
+                <li className="md:text-lg">{t("delivery")}</li>
                 <li className="md:text-lg">{t("free")}</li>
               </ul>
             </div>

@@ -435,7 +435,7 @@ const CheckOut = () => {
                       <Price price={totalPrice} className="" />
                     </div>
                     <div className="flex justify-between items-center text-sm my-5 md:pb-5 pb-3 border-b border-b-gray-300">
-                      <p className="">{t("shipping-cost")}</p>
+                      <p className="">{t("delivery")}</p>
                       <p className="">{t("free-shipping")}</p>
                     </div>
                     <div className="flex justify-between items-center">

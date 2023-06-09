@@ -119,16 +119,14 @@ const SearchPage = () => {
                       <Select
                         labelId="demo-simple-select-label"
                         _id="demo-simple-select"
-                        MenuProps={{
-                          disableScrollLock: true,
-                        }}
-                        value={"all"}
+                        value={"best"}
                         // onChange={(e) => setCategory(e.target.value)}
                         label={t("sorting")}
                       >
-                        <MenuItem value={"all"}>All</MenuItem>
-                        <MenuItem value={"user"}>products</MenuItem>
-                        <MenuItem value={"admin"}>Admins</MenuItem>
+                        <MenuItem value={"best"}>Ommabop</MenuItem>
+                        <MenuItem value={"all"}>Narxi arzon</MenuItem>
+                        <MenuItem value={"all"}>Narxi qimmat</MenuItem>
+                        <MenuItem value={"user"}>Reyting baland</MenuItem>
                       </Select>
                     </FormControl>
                   </div>
