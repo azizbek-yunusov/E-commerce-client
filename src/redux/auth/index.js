@@ -48,11 +48,13 @@ export const signIn = createAsyncThunk(
 export const refreshToken = createAsyncThunk("auth/refresh-token", async () => {
   try {
     if (token) {
-      const { data } = await axios.post(`${authUrl}refreshtoken`, {
+      const response = await axios.post(`${authUrl}refreshtoken`, {
         refresh_token: token,
       });
-
-      return data;
+      if (response.status === 401) {
+        localStorage.removeItem("refresh_token");
+      }
+      return response.data;
     }
   } catch (error) {
     return console.log(error);
