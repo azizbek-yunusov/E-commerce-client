@@ -17,7 +17,7 @@ import { getCategories } from "../../redux/category";
 import { HelmetTitle } from "../../utils";
 import ListProductCard from "../ProductItems/ListProductCard";
 import ProductCard from "../ProductItems/ProductCard";
-import { SearchPageLoader } from "../SkeletonLoaders";
+import SearchPageLoader from "../SkeletonLoaders/SearchPageLoader";
 import Filter from "./Filter";
 import { productUrl } from "../../utils/baseUrls";
 import { getSearchProducts } from "../../redux/product";
