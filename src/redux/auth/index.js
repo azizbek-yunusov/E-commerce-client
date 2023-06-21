@@ -57,6 +57,7 @@ export const refreshToken = createAsyncThunk("auth/refresh-token", async () => {
       return response.data;
     }
   } catch (error) {
+    localStorage.removeItem("refresh_token");
     return console.log(error);
   }
 });

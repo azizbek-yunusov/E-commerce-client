@@ -20,24 +20,25 @@ import ProductCard from "../ProductItems/ProductCard";
 import { SearchPageLoader } from "../SkeletonLoaders";
 import Filter from "./Filter";
 import { productUrl } from "../../utils/baseUrls";
+import { getSearchProducts } from "../../redux/product";
 
 const SearchPage = () => {
   const { categories } = useSelector((state) => state.category);
   const { brands } = useSelector((state) => state.brand);
+  const { filteredProducts } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   let { t } = useTranslation(["product"]);
   const navigate = useNavigate();
   const { search } = useLocation();
   const [loading, setLoading] = useState(true);
   const sp = new URLSearchParams(search); // /search?category=Shirts
-  const category = sp.get("category") || "all";
-  const brand = sp.get("brand") || "all";
-  const query = sp.get("query") || "all";
-  const price = sp.get("price") || "all";
-  const rating = sp.get("rating") || "all";
+  const category = sp.get("category");
+  const brand = sp.get("brand");
+  const query = sp.get("query");
+  const price = sp.get("price");
+  const rating = sp.get("rating");
   const order = sp.get("order") || "newest";
   const page = sp.get("page") || 1;
-  const [result, setResult] = useState([]);
   const [isList, setIsList] = useState(false);
 
   const getFilterUrl = (filter, skipPathname) => {
@@ -49,25 +50,35 @@ const SearchPage = () => {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `${
-      skipPathname ? "" : "/search?"
-    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&brand=${filterBrand}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    // return `${
+    //   skipPathname ? "" : "/search?"
+    // }category=${filterCategory}&query=${filterQuery}&page=${page}&price[gte]=${
+    //   price[0]
+    // }&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
   };
-  console.log(query);
-  const fetchData = async () => {
+  // const fetchData = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       `${productUrl}products/search?page=${page}&query=${query}&category=${category}&price=${price}&brand=${brand}&rating=${rating}&order=${order}`
+  //     );
+  //     setfilteredProducts(data.products);
+  //     setLoading(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const fetchProducts = async () => {
     try {
-      const { data } = await axios.get(
-        `${productUrl}products/search?page=${page}&query=${query}&category=${category}&price=${price}&brand=${brand}&rating=${rating}&order=${order}`
-      );
-      console.log(data);
-      setResult(data.products);
+      await dispatch(getSearchProducts({ query }));
       setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
-    fetchData();
+    fetchProducts();
   }, [query]);
 
   useEffect(() => {
@@ -75,8 +86,6 @@ const SearchPage = () => {
     dispatch(getBrands());
     window.scrollTo(0, 0);
   }, [dispatch]);
-  console.log(result);
-
   return (
     <>
       <HelmetTitle title={`${query} - ${t("search-filter")}`} />
@@ -84,7 +93,7 @@ const SearchPage = () => {
         <SearchPageLoader />
       ) : (
         <div className="container-full md:my-5 my-3">
-          {result.length ? (
+          {filteredProducts.length ? (
             <h1 className="md:text-[26px] md:mb-6 mb-5 font-semibold text-gray-700">
               <span className="text-orange-500">"{query}"</span>{" "}
               {t("search-succ")}
@@ -95,7 +104,7 @@ const SearchPage = () => {
               {t("search-reject")}
             </h1>
           )}
-          {result.length ? (
+          {filteredProducts.length ? (
             <div className="grid grid-cols-12 xl:gap-x-5 md:gap-x-3">
               <div className="md:col-span-3 lg:block hidden xl:px-2 overflow-y-scroll max-h-[500px]">
                 <Filter
@@ -151,17 +160,17 @@ const SearchPage = () => {
                     </div>
                   </div>
                 </div>
-                {result.length ? (
+                {filteredProducts.length ? (
                   <>
                     {!isList ? (
                       <div className="grid lg:grid-cols-3 xl:grid-cols-4 grid-cols-2 md:gap-4 gap-1">
-                        {result.map((item, index) => (
+                        {filteredProducts.map((item, index) => (
                           <ProductCard key={index} {...item} />
                         ))}
                       </div>
                     ) : (
                       <div className="flex flex-col items-center">
-                        {result.map((item, index) => (
+                        {filteredProducts.map((item, index) => (
                           <ListProductCard key={index} {...item} />
                         ))}
                       </div>

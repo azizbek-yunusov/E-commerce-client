@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { CategoryListLoader } from "../SkeletonLoaders";
+import CategoryListLoader from "../SkeletonLoaders/CategoryListLoader";
 import { useSelector } from "react-redux";
 import CategoryItem from "./CategoryItem";
 

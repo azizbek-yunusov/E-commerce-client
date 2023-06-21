@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Breadcrumbs, Rating, Tab, Tabs, Typography } from "@mui/material";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { ProductDetailLoader } from "../SkeletonLoaders";
 import ImageThumbs from "./ImageThumbs";
 import Comments from "./Comments";
 import { ReviewsBox } from "./ReviewsBox";
@@ -17,6 +16,7 @@ import SimilarProducts from "./SimilarProducts";
 import HelmetTitle from "../../utils/HelmetTitle";
 import { getProduct } from "../../redux/product";
 import { features } from "../../data/features";
+import ProductDetailLoader from "../SkeletonLoaders/ProductDetailLoader";
 
 const ProductDetail = () => {
   let { t } = useTranslation(["product"]);

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { BannerCarousel } from "../components/Banner";
 import BrandsList from "../components/Brand/BrandList";
-import { CategoryList } from "../components/Categories";
+import CategoryList from "../components/Categories/CategoryList";
 import MobileApp from "../components/Footer/MobileApp";
 import { PostList } from "../components/Post";
 import {

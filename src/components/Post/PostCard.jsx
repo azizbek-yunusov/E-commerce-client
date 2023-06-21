@@ -39,7 +39,7 @@ const PostCard = ({
       >
         <p className="mb-1">{title}</p>
       </Link>
-      <p className="text-zinc-500 mb-2 md:text-base text-sm">{excerpt.slice(0, 120)}...</p>
+      {/* <p className="text-zinc-500 mb-2 md:text-base text-sm">{excerpt.slice(0, 120)}...</p> */}
     </div>
   );
 };

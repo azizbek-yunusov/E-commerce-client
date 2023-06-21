@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BiSearch } from "react-icons/bi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const ratings = [
@@ -34,7 +35,23 @@ export const ratings = [
 const Filter = ({ categories, brands, getFilterUrl, category }) => {
   const { i18n } = useTranslation();
   let { t } = useTranslation(["product"]);
-  const [value, setValue] = useState([0, 10000]);
+  const { filteredProducts } = useSelector((state) => state.product);
+  const maxPriceProduct = filteredProducts.reduce((maxProduct, product) => {
+    if (product.price > maxProduct.price) {
+      return product;
+    }
+    return maxProduct;
+  });
+  const minPriceProduct = filteredProducts.reduce((minProduct, product) => {
+    if (product.price < minProduct.price) {
+      return product;
+    }
+    return minProduct;
+  });
+  const [price, setPrice] = useState([
+    minPriceProduct?.price,
+    maxPriceProduct?.price,
+  ]);
   const [termBd, setTermBd] = useState("");
   const [termCy, setTermCy] = useState("");
 
@@ -42,8 +59,6 @@ const Filter = ({ categories, brands, getFilterUrl, category }) => {
   const [showBd, setShowBd] = useState(true);
   const [showRg, setShowRg] = useState(true);
   const [showPc, setShowPc] = useState(true);
-  const [fromPrice, setFromPrice] = useState(0);
-  const [untilPrice, setUntilPrice] = useState(100000);
   const filteredBrands = brands.filter((s) => {
     const searchName = s.name;
     return searchName.toLowerCase().includes(termBd.toLowerCase());
@@ -53,9 +68,11 @@ const Filter = ({ categories, brands, getFilterUrl, category }) => {
     return searchName.toLowerCase().includes(termCy.toLowerCase());
   });
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setPrice(newValue);
   };
+  console.log(price);
 
+  console.log(maxPriceProduct);
   return (
     <div className="flex_col border border-gray-200 rounded-lg xl:p-5 p-4">
       <h1 className="text-xl text-gray-700 font-semibold md:mb-8">
@@ -72,26 +89,27 @@ const Filter = ({ categories, brands, getFilterUrl, category }) => {
         {showPc && (
           <div className="">
             <Slider
-              value={value}
+              value={price}
               onChange={handleChange}
               valueLabelDisplay="auto"
               aria-labelledby="range-slider"
-              min={0}
+              min={minPriceProduct?.price}
               color="secondary"
-              max={10000}
+              max={maxPriceProduct?.price}
             />
             <div className="flex_betwen md:my-5">
               <TextField
                 size="small"
-                // value={term}
+                value={price[0]}
                 // onChange={(e) => setTerm(e.target.value)}
                 placeholder={t("from")}
                 variant="outlined"
                 color="secondary"
-                sx={{ marginRight: "15px" }}
+                sx={{ marginRight: "10px" }}
               />
               <TextField
                 size="small"
+                value={price[1]}
                 // value={term}
                 // onChange={(e) => setTerm(e.target.value)}
                 placeholder={t("up-to")}

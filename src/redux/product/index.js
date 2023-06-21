@@ -13,6 +13,24 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+export const getSearchProducts = createAsyncThunk(
+  "product/get-search-products",
+  async (
+    { query = "", currentPage = 0, price = [0, 20000000], ratings = 0 },
+    thunkAPI
+  ) => {
+    try {
+      console.log("keyword:", query);
+      let querys = `keyword=${query}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+
+      const { data } = await axios.get(`${productUrl}search?${querys}`);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.data);
+    }
+  }
+);
+
 export const getProduct = createAsyncThunk(
   "product/get-product",
   async (slug) => {
@@ -104,6 +122,7 @@ export const replyComment = createAsyncThunk(
 
 const initialState = {
   products: [],
+  filteredProducts: [],
   product: null,
   reviews: [],
   isLoading: false,
@@ -132,7 +151,21 @@ export const productSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
-
+      .addCase(getSearchProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSearchProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.filteredProducts = action.payload.products;
+      })
+      .addCase(getSearchProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
       .addCase(getProduct.pending, (state) => {
         state.isLoading = true;
       })

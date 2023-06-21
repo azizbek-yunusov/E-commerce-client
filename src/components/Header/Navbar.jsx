@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SearchBox } from "../Search";
-import { FavoritesButton } from "../Wish";
 import { Cart } from "../Cart";
 import { AuthButton, CatalogButton, Menu, UserButton } from "../Buttons";
 import Logo from "../Helpers/Logo";
+import FavoritesButton from "../Wish/FavoritesButton";
 function useIsScrollTop() {
   const [isTop, setIsTop] = useState(true);
 

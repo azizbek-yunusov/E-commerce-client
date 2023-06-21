@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { AuthButton, HomeButton, UserButton } from "../Buttons";
 import { Cart } from "../Cart";
-import { FavoritesButton } from "../Wish";
+import FavoritesButton from "../Wish/FavoritesButton";
 
 const BottomNavigation = () => {
   const { isLogged } = useSelector((state) => state.auth);
