@@ -6,13 +6,9 @@ import LayoutP from "./LayoutP";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Button, CircularProgress } from "@mui/material";
-import NewAddress from "./NewAddress";
-import { HelmetTitle } from "../../utils";
-import {
-  deleteAddress,
-  getMyAddresses,
-  standardizationAddress,
-} from "../../redux/address";
+import { deleteAddress, getMyAddresses, standardizationAddress } from "../redux/address";
+import { HelmetTitle } from "../utils";
+import NewAddress from "../components/Profile/NewAddress";
 
 const Addresses = () => {
   let { t } = useTranslation(["user"]);

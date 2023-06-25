@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { Badge, useMediaQuery } from "@mui/material";
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { FiShoppingCart } from "react-icons/fi";
 import { useSelector } from "react-redux";
@@ -11,12 +10,13 @@ const Cart = () => {
   let { t } = useTranslation(["product"]);
   const isXl = useMediaQuery("(min-width: 1245px)");
 
-  const StyledBadge = styled(Badge)(({ theme }) => ({
+  const StyledBadge = styled(Badge)(() => ({
     "& .MuiBadge-badge": {
       right: isXl ? -3 : -2 ,
       top: 2,
       border: isXl ? `2px solid white` : "1px solid white",
       padding: isXl ? "0px 4px" : "0px 1px",
+      fontWeight: 600
     },
   }));
   return (

@@ -53,7 +53,7 @@ export const orderSlice = createSlice({
         state.isLoading = true;
         state.isSuccess = false;
       })
-      .addCase(newOrder.fulfilled, (state, action) => {
+      .addCase(newOrder.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;

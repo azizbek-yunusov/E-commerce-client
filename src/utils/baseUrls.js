@@ -1,4 +1,7 @@
-const api =  process.env.NODE_ENV === "development" ? "/api" : "https://xurmo-api.vercel.app/api";
+const api =
+  import.meta.env.MODE === "development"
+    ? "/api"
+    : "https://xurmo-api.vercel.app/api";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const reviewUrl = `${api}/review/`;
@@ -9,4 +12,4 @@ export const categoryUrl = `${api}/category/`;
 export const orderUrl = `${api}/order/`;
 export const postUrl = `${api}/post/`;
 
-export const token = localStorage.getItem("refresh_token") || false
+export const token = localStorage.getItem("refresh_token") || false;

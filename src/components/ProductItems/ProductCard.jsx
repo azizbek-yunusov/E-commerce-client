@@ -1,8 +1,6 @@
 import { IconButton, Rating } from "@mui/material";
-import React from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsFillHeartFill, BsHeart } from "react-icons/bs";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Price from "../Helpers/Price";

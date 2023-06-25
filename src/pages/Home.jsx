@@ -4,12 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BannerCarousel } from "../components/Banner";
 import BrandsList from "../components/Brand/BrandList";
 import CategoryList from "../components/Categories/CategoryList";
-import MobileApp from "../components/Footer/MobileApp";
 import { PostList } from "../components/Post";
-import {
-  BestProductsList,
-  DiscountedProducts,
-} from "../components/ProductItems";
 import { ListBox } from "../components/TopBrand";
 import { getBanners } from "../redux/banner";
 import { getBrands } from "../redux/brand/brandSlice";
@@ -17,6 +12,7 @@ import { getCategories } from "../redux/category";
 import { getPosts } from "../redux/post";
 import { getProducts } from "../redux/product";
 import { HelmetTitle } from "../utils";
+import BestProductsList from "../components/ProductItems/BestProductsList";
 
 const Home = () => {
   let { t } = useTranslation(["home"]);
@@ -26,7 +22,7 @@ const Home = () => {
   const { brands } = useSelector((state) => state.brand);
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  useEffect(() => {
+  const multimpleFetch = () => {
     if (!products.length) {
       dispatch(getProducts());
     }
@@ -42,7 +38,10 @@ const Home = () => {
     if (!posts.length) {
       dispatch(getPosts());
     }
-  }, [dispatch, products, posts, categories, brands]);
+  };
+  useEffect(() => {
+    multimpleFetch();
+  }, [products, banners, categories, brands, posts]);
 
   return (
     <>
@@ -51,11 +50,9 @@ const Home = () => {
         <BannerCarousel />
         <CategoryList />
         <BestProductsList />
-        {/* <DiscountedProducts /> */}
         <BrandsList />
         <ListBox />
         <PostList />
-        {/* <MobileApp /> */}
       </main>
     </>
   );

@@ -1,21 +1,17 @@
 import styled from "@emotion/styled";
 import {
-  Box,
   Breadcrumbs,
   Button,
   Checkbox,
-  Grid,
   IconButton,
   InputAdornment,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { HelmetTitle } from "../../utils";
-import LayoutP from "./LayoutP";
 import InputMask from "react-input-mask";
 import {
   AiOutlineEye,
@@ -23,8 +19,9 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { BiCamera, BiLockAlt, BiRefresh } from "react-icons/bi";
-import { changePassword, editProfile } from "../../redux/auth";
-import { uploadAvatar } from "../../redux/auth";
+import { changePassword, editProfile, uploadAvatar } from "../redux/auth";
+import { HelmetTitle } from "../utils";
+import LayoutP from "../components/Profile/LayoutP";
 
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
@@ -40,7 +37,7 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
   },
 }));
 
-const EditMyProfile = () => {
+const EditProfile = () => {
   const { t } = useTranslation(["user"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -389,4 +386,4 @@ const EditMyProfile = () => {
   );
 };
 
-export default EditMyProfile;
+export default EditProfile;

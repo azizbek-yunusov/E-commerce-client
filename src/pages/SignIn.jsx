@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 import {
   Button,
   Checkbox,
@@ -14,16 +13,13 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import Logo from "../components/Helpers/Logo";
 import { HelmetTitle } from "../utils";
 import { clearErrors, googleOauth, signIn } from "../redux/auth";
 
 const SignIn = () => {
   const [loader, setLoader] = useState(false);
-  const { isLoading, isLogged, isError, message } = useSelector(
-    (state) => state.auth
-  );
+  const { isLogged, isError, message } = useSelector((state) => state.auth);
 
   let { t } = useTranslation(["home"]);
   const dispatch = useDispatch();
@@ -99,8 +95,6 @@ const SignIn = () => {
       dispatch(clearErrors());
       setLoader(false);
     }
-    if (isError) {
-    }
   }, [dispatch, isError, isLogged, message]);
   return (
     <>
@@ -108,22 +102,19 @@ const SignIn = () => {
       <div className="bg-white ">
         <div className="grid grid-cols-12 min-h-screen bg-white gap-0">
           <div className="xl:col-span-8 lg:col-span-7 relative lg:flex hidden justify-center items-center overflow-hidden">
-            <LazyLoadImage
+            <img
               src="/images/loginBg.png"
               alt="Login images"
-              effect="blur"
               className="max-w-3xl w-full z-20 object-cover"
             />
-            <LazyLoadImage
+            <img
               src="/images/auth-bottom-bg.png"
               alt="Login images"
-              effect="blur"
               className="absolute left-0 bottom-0 z-10"
             />
-            <LazyLoadImage
+            <img
               src="/images/tree-bg.png"
               alt="Login images"
-              effect="blur"
               className="absolute left-0 bottom-1 z-20"
             />
           </div>

@@ -1,9 +1,8 @@
 import { Backdrop, CircularProgress } from "@mui/material";
-import React from "react";
 
 const FetchLoader = ({ isLoading }) => {
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen fixed top-0 left-0 z-50">
       <Backdrop
         sx={{
           color: "#fff",
