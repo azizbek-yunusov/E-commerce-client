@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { BiEdit, BiTrash } from "react-icons/bi";
 import { BsCheckCircle } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import LayoutP from "./LayoutP";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Button, CircularProgress } from "@mui/material";
@@ -48,7 +47,7 @@ const Addresses = () => {
 
   console.log(addresses);
   return (
-    <LayoutP>
+    <>
       <HelmetTitle title={`${t("addresses")} - ${t("personal")}`} />
       <div className="flex justify-between items-center md:my-0 my-4">
         <h1 className="text-2xl font-semibold text-gray-700">
@@ -152,7 +151,7 @@ const Addresses = () => {
       ) : (
         <CircularProgress />
       )}
-    </LayoutP>
+    </>
   );
 };
 

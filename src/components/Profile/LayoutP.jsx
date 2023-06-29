@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SideBarPf from "./SideBarPf";
-import Tabs from "./Tabs";
 import { useSelector } from "react-redux";
 import { MdLocationOn } from "react-icons/md";
 import { AiFillCalendar, AiOutlineSetting } from "react-icons/ai";
@@ -8,10 +7,17 @@ import moment from "moment";
 import { IconButton } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { HelmetTitle } from "../../utils";
+import ProfileTabs from "./ProfileTabs";
 
 const LayoutP = ({ children }) => {
   let { t } = useTranslation(["user"]);
-  const { access_token, user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabsChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -39,7 +45,7 @@ const LayoutP = ({ children }) => {
             <SideBarPf />
           </div>
           <div className="col-span-9 block md:px-12">
-            <Tabs />
+            <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
             <div className="md:my-5">{children}</div>
           </div>
         </div>
@@ -96,7 +102,7 @@ const LayoutP = ({ children }) => {
             </div>
           </div>
         </div>
-        <Tabs />
+        <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <div className="lg:my-5 md:my-3 pt-3 border-t md:border-none border-t-gray-200">
           {children}
         </div>

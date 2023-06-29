@@ -2,28 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LayoutP from "./LayoutP";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import {
   CircularProgress,
   FormControl,
-  IconButton,
   InputLabel,
   MenuItem,
-  Rating,
   Select,
 } from "@mui/material";
-import Price from "../Helpers/Price";
 import { getMyOrders } from "../../redux/order";
-import { datePicker } from "../Helpers/datePicker";
-import OrderStatus from "../Helpers/OrderStatus";
-import PaymentTypeText from "../Helpers/PaymentTypeText";
 import { HelmetTitle } from "../../utils";
-import moment from "moment";
-import OrderStatusText from "../Helpers/OrderStatusText";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { BsPencil } from "react-icons/bs";
-import { BiPencil } from "react-icons/bi";
-import { OrdersList } from "../MyOrders";
+import OrdersList from "../MyOrders/OrdersList";
 
 const MyOrders = () => {
   let { t } = useTranslation(["order"]);
@@ -39,7 +27,7 @@ const MyOrders = () => {
   }, [access_token, dispatch]);
   console.log(myOrders);
   return (
-    <LayoutP>
+    <>
       <HelmetTitle title={`${t("user:my-orders")} - ${t("user:personal")}`} />
       <div className="flex justify-between items-center ">
         <h1 className="md:text-xl font-semibold">{t("all-orders")}</h1>
@@ -77,7 +65,7 @@ const MyOrders = () => {
       ) : (
         <CircularProgress color="secondary" />
       )}
-    </LayoutP>
+    </>
   );
 };
 export default MyOrders;

@@ -31,7 +31,7 @@ export const tabsProfileData = [
   {
     id: 1,
     path: "/profile/settings",
-    name: "settings",
+    name: "edit-profile",
     icon: <AiOutlineSetting className="md:text-xl text-xl" />,
   },
 ];

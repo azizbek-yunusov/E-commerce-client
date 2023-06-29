@@ -1,16 +1,14 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { HelmetTitle } from "../../utils";
 import WishProductItem from "../Wish/WishProductItem";
-import LayoutP from "./LayoutP";
 
 const Favorites = () => {
   const { favorites } = useSelector((state) => state.favorite);
   const { t } = useTranslation();
 
   return (
-    <LayoutP>
+    <div>
       <HelmetTitle
         title={`${t("user:favorites")} - ${t("user:personal")}`}
       />
@@ -31,7 +29,7 @@ const Favorites = () => {
           </div>
         )}
       </div>
-    </LayoutP>
+    </div>
   );
 };
 

@@ -24,6 +24,7 @@ export const getSearchProducts = createAsyncThunk(
       let querys = `keyword=${query}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
       const { data } = await axios.get(`${productUrl}search?${querys}`);
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.data);
@@ -185,7 +186,7 @@ export const productSlice = createSlice({
       .addCase(addReview.pending, (state) => {
         state.isSuccess = false;
       })
-      .addCase(addReview.fulfilled, (state, action) => {
+      .addCase(addReview.fulfilled, (state) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;

@@ -45,7 +45,7 @@ const SearchBox = () => {
   };
   const SearchHandler = (e) => {
     e.preventDefault();
-    navigate(query ? `/search/?query=${query}` : "/search");
+    navigate(query ? `/search?query=${query}` : "/search");
     setFilteredData([]);
     recognition.stop();
   };

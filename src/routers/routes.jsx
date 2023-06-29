@@ -9,7 +9,6 @@ const Category = lazy(() => import("../pages/Category"));
 const Brand = lazy(() => import("../pages/Brand"));
 const Post = lazy(() => import("../pages/Post"));
 const Profile = lazy(() => import("../pages/Profile"));
-const Orders = lazy(() => import("../pages/Orders"));
 
 export const publicRoutes = [
   {
@@ -44,15 +43,15 @@ export const publicRoutes = [
     path: "/post/:slug",
     element: <Post />,
   },
+  {
+    path: "/post/view/:id",
+    element: <Post />,
+  },
 ];
 
 export const clientRoutes = [
   {
     path: "/profile",
     element: <Profile />,
-  },
-  {
-    path: "/profile/orders",
-    element: <Orders />,
   },
 ];

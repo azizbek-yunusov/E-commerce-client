@@ -11,7 +11,7 @@ import { signOut } from "../../redux/auth";
 
 const Settings = () => {
   let { t } = useTranslation(["user"]);
-  const {isLogged } = useSelector((state) => state.auth);
+  const { isLogged } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const signOutHandle = async () => {
@@ -22,7 +22,7 @@ const Settings = () => {
     toast.success("Sign out ");
   };
   return (
-    <LayoutP>
+    <>
       <HelmetTitle title={`${t("settings")} - ${t("personal")}`} />
       <div className="grid grid-cols-2 md:gap-8 gap-4 mt-5 md:px-32 h-full">
         <div className="col-span-1 rounded-xl shadow-lg shadow-indigo-500/50 bg-purple-500 h-32">
@@ -30,7 +30,7 @@ const Settings = () => {
             to={"/profile/update"}
             className="text-xl w-full flex_center h-full flex_center text-gray-50"
           >
-             <BiEdit className="text-2xl mr-2" />
+            <BiEdit className="text-2xl mr-2" />
             {t("edit")}
           </Link>
         </div>
@@ -42,7 +42,7 @@ const Settings = () => {
           <span className="">{t("sign-out")}</span>
         </div>
       </div>
-    </LayoutP>
+    </>
   );
 };
 

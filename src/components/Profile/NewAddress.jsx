@@ -10,8 +10,8 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import address from "../../data/address.json";
-import React, { useState } from "react";
+import address from "../../data/addressesUzb.json";
+import  { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress } from "../../redux/address";
@@ -19,7 +19,7 @@ import { addAddress } from "../../redux/address";
 const NewAddress = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const { access_token } = useSelector((state) => state.auth);
-  const { isSuccess, addresses } = useSelector((state) => state.address);
+  const { isSuccess } = useSelector((state) => state.address);
   const matches = useMediaQuery("(min-width:600px)");
   const { t } = useTranslation(["user"]);
   const [region, setRegion] = useState("Toshkent Viloyati");

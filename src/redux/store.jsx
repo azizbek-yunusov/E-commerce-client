@@ -6,7 +6,7 @@ import brand from "./brand/brandSlice";
 import category from "./category";
 import banner from "./banner";
 import post from "./post";
-// import auth from "./reducers/authReducer";
+import filter from "./filter";
 import address from "./address";
 import auth from "./auth";
 import favorite from "./favorite";
@@ -25,8 +25,9 @@ const store = configureStore({
     banner,
     post,
     order,
+    filter
   },
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: true,
 });
 
 function UserProvider({ children }) {
