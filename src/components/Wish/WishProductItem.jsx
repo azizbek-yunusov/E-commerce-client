@@ -1,6 +1,5 @@
 import { Rating, Tooltip } from "@mui/material";
 import axios from "axios";
-import React from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import {
@@ -19,6 +18,7 @@ import Price from "../Helpers/Price";
 import { toggleLoginModal } from "../../redux/auth";
 import { deleteFromFavorite } from "../../redux/favorite";
 import { addToCart, decrementQtyItem } from "../../redux/cart";
+import { discPriceCalc } from "../../utils/discountPriceCalc";
 
 const WishProductItem = (props) => {
   const { _id, name, images, price, ratings, discount, slug } = props;
@@ -88,7 +88,7 @@ const WishProductItem = (props) => {
           {discount > 0 ? (
             <div className="">
               <Price
-                price={price - (price * discount) / 100}
+                price={discPriceCalc(price, discount)}
                 className="md:text-lg font-semibold"
               />
               <Price

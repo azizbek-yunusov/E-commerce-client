@@ -13,12 +13,11 @@ const Post = () => {
   let { t } = useTranslation(["home"]);
   const { isLoading, post } = useSelector((state) => state.post);
   const dispatch = useDispatch();
-  const { id } = useParams();
-
+  const { slug } = useParams();
   useEffect(() => {
-    dispatch(getPost({ id }));
+    dispatch(getPost({ slug }));
     window.scrollTo(0, 0);
-  }, [dispatch, id]);
+  }, [dispatch, slug]);
   return (
     <main className="flex_center min-h-screen">
     <HelmetTitle title={`${post?.title}`} />

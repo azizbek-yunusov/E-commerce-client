@@ -1,4 +1,3 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CategoryListLoader from "../SkeletonLoaders/CategoryListLoader";
@@ -12,7 +11,7 @@ const CategoryList = () => {
       {isLoading ? (
         <CategoryListLoader />
       ) : (
-        <div className="md:my-10 mb-6 container-full">
+        <div className="md:my-7 mb-6 container-full">
           <Swiper
             breakpoints={{
               300: {
@@ -28,7 +27,7 @@ const CategoryList = () => {
                 spaceBetween: 20,
               },
               1440: {
-                slidesPerView: 6,
+                slidesPerView: 7,
                 spaceBetween: 20,
               },
             }}

@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 const PostCard = ({
   _id,
   title,
-  excerpt,
-  content,
   createdAt,
   viewsCount,
   slug,
@@ -16,7 +14,7 @@ const PostCard = ({
 }) => {
   return (
     <div className="">
-      <Link to={`/post/view/${_id}`} className="w-full flex_center tranistion_normal rounded-lg overflow-hidden">
+      <Link to={`/post/${slug}`} className="w-full flex_center tranistion_normal rounded-lg overflow-hidden">
         <img
           src={image?.url}
           className="h-40 w-full object-cover rounded-lg hover:scale-105 transition duration-100 ease-linear"

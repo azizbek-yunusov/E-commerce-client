@@ -116,5 +116,9 @@
   "deleted-user": "O'chirilgan hisob",
   "promo-code": "Promo kodni kiriting",
   "delivery": "Yetkazib berish",
-  "free": "Bepul"
+  "free": "Bepul",
+  "days": "kun",
+  "hours": "soat",
+  "minutes": "minut",
+  "day-product": "Kun mahsuloti"
 }

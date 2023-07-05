@@ -6,6 +6,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Price from "../Helpers/Price";
+import { discPriceCalc } from "../../utils/discountPriceCalc";
 
 const AdaptableCard = (props) => {
   const { _id, name, images, price, ratings, discount, index } = props;
@@ -17,7 +18,11 @@ const AdaptableCard = (props) => {
   const isFavorite = existItemWish === undefined ? false : true;
   return (
     <>
-      <div className={"block bg-white overflow-hidden w-full relative tranistion_normal md:my-2 hover:shadow-xl md:h-[200px] h-[200px] md:border border-gray-200 hover:border-gray-50 md:rounded-xl rounded-md md:p-5 p-3 md:px-4"}>
+      <div
+        className={
+          "block bg-white overflow-hidden w-full relative tranistion_normal md:my-2 hover:shadow-xl md:h-[200px] h-[200px] md:border border-gray-200 hover:border-gray-50 md:rounded-xl rounded-md md:p-5 p-3 md:px-4"
+        }
+      >
         {discount > 0 && (
           <div className="md:px-2 p-[2px] px-1 md:py-1 absolute top-3 left-3 md:text-sm text-xs font-semibold md:rounded-md rounded bg-red-600 text-white">
             -{discount}
@@ -57,7 +62,7 @@ const AdaptableCard = (props) => {
           {discount > 0 ? (
             <div className="">
               <Price
-                price={price - (price * discount) / 100}
+                price={discPriceCalc(price, discount)}
                 className="md:text-lg font-semibold"
               />
               <Price

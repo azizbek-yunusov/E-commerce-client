@@ -10,9 +10,10 @@ export const getPosts = createAsyncThunk("post/get-posts", async (thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });
-export const getPost = createAsyncThunk("post/get-post", async ({ id }) => {
+export const getPost = createAsyncThunk("post/get-post", async ({ slug }) => {
   try {
-    const { data } = await axios.get(`${postUrl}${id}`);
+    console.log(slug);
+    const { data } = await axios.get(`${postUrl}${slug}`);
     return data;
   } catch (error) {
     return console.log(error);

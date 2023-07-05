@@ -43,10 +43,6 @@ export const publicRoutes = [
     path: "/post/:slug",
     element: <Post />,
   },
-  {
-    path: "/post/view/:id",
-    element: <Post />,
-  },
 ];
 
 export const clientRoutes = [

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import { alpha, Menu, MenuItem } from "@mui/material";
 import styled from "@emotion/styled";

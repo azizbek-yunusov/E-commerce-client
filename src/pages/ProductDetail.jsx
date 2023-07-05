@@ -17,6 +17,7 @@ import Comments from "../components/ProductItems/Comments";
 import NoReviews from "../components/ProductItems/NoReviews";
 import { ReviewsBox } from "../components/ProductItems/ReviewsBox";
 import SimilarProducts from "../components/ProductItems/SimilarProducts";
+import CountdownTimer from "../components/ProductItems/CountdownTimer";
 
 const ProductDetail = () => {
   let { t } = useTranslation(["product"]);
@@ -93,6 +94,7 @@ const ProductDetail = () => {
                 </div>
                 <Stock inStock={product.inStock} />
                 <div className="main_features w-full lg:mt-4 my-3 lg:px-5">
+                  <CountdownTimer expire={product.discountExpire} />
                   <h1 className="text-gray-600 font-semibold mb-3">
                     {t("main-features")}
                   </h1>

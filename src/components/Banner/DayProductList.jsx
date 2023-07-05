@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useTranslation } from "react-i18next";
+import DayTimer from "./DayTimer";
 
 const DayProductList = ({ products }) => {
   const { t } = useTranslation(["product"]);
@@ -17,7 +18,8 @@ const DayProductList = ({ products }) => {
     <div className="h-full pb-2">
       <div className="bg-white md:rounded-md rounded-lg day_gradient_border p-1 h-full my-1 min-h-[188px]">
         <div className="flex_betwen md:px-3 px-2 md:py-2 py-1">
-          <h1 className="md:text-lg text-sm">{t("discounted-products")}</h1>
+          <h1 className="md:text-lg text-sm">{t("day-product")}</h1>
+          <DayTimer />
         </div>
         <Swiper
           modules={[Pagination]}

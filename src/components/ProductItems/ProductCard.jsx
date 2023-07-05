@@ -8,6 +8,8 @@ import AddCartForCard from "./AddCartForCard";
 import AddWishForCard from "./AddWishForCard";
 import { toggleLoginModal } from "../../redux/auth";
 import { addToFavorite, deleteFromFavorite } from "../../redux/favorite";
+import { discPriceCalc } from "../../utils/discountPriceCalc";
+import DiscountExpire from "./DiscountExpire";
 
 const ProductCard = ({
   _id,
@@ -15,7 +17,7 @@ const ProductCard = ({
   slug,
   images,
   price,
-  oldPrice,
+  discountExpire,
   ratings,
   discount,
 }) => {
@@ -50,9 +52,10 @@ const ProductCard = ({
       dispatch(deleteFromFavorite({ access_token, id }));
     }
   };
+
   return (
     <>
-      <div className="overflow-hidden relative flex tranistion_normal md:hover:shadow-xl flex-col justify-between md:h-[400px] h-[330px] md:rounded-xl rounded-md md:p-3 p-2 md:px-3">
+      <div className="overflow-hidden relative flex tranistion_normal md:hover:shadow-xl flex-col justify-between md:min-h-[400px] min-h-[330px] md:rounded-xl rounded-md md:py-2 p-2 md:px-3">
         {discount > 0 && (
           <div className="md:px-2 p-[2px] px-1 md:py-1 absolute top-2 left-2 md:text-sm text-xs font-semibold md:rounded-lg rounded bg-red-600 text-white">
             -{discount}
@@ -91,16 +94,19 @@ const ProductCard = ({
         <div className="w-full text-gray-800">
           {discount > 0 ? (
             <div className="">
-              <Price price={price} className="md:text-lg font-semibold" />
               <Price
-                price={oldPrice}
+                price={discPriceCalc(price, discount)}
+                className="md:text-lg font-semibold"
+              />
+              <Price
+                price={price}
                 className="md:text-lg line-through text-gray-400"
               />
             </div>
           ) : (
             <Price price={price} className="md:text-lg font-semibold" />
           )}
-
+          {discount > 0 && <DiscountExpire expire={discountExpire} />}
           <div className="flex items-center md:mt-1.5 mt-1">
             <h1 className="text-base text-gray-700 mr-2">
               {ratings?.toFixed(1)}
