@@ -1,17 +1,14 @@
-import React, { useState } from "react";
 import { Box, Button, LinearProgress, Rating } from "@mui/material";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Review } from "./Review";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import LoginModal from "../Helpers/LoginModal";
 import { toggleLoginModal } from "../../redux/auth";
 
 export const ReviewsBox = () => {
   let { t } = useTranslation(["product"]);
-  const { product, reviews, isLoading } = useSelector((state) => state.product);
-  const { isLogged, isLoginShow } = useSelector((state) => state.auth);
+  const { product, reviews } = useSelector((state) => state.product);
+  const { isLogged } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   // 1 star
   const findOne = reviews?.filter((item) => item.rating === 1);
