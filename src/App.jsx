@@ -7,14 +7,14 @@ import NetworkStatus from "./components/Helpers/NetworkStatus";
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const CheckOut = lazy(() => import("./components/CheckOut"));
+const CheckOut = lazy(() => import("./pages/CheckOut"));
 import { FetchLoader } from "./components/SkeletonLoaders";
 import { token } from "./utils/baseUrls";
-import LoginModal from "./components/Helpers/LoginModal";
 import { refreshToken } from "./redux/auth";
 import Layout from "./components/Layout";
 import Spinner from "./components/SkeletonLoaders/Spinner";
 import { clientRoutes, publicRoutes } from "./routers/routes";
+import { AuthModal } from "./components/Auth";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function App() {
     <main>
       <Toaster position="top-left" reverseOrder={true} />
       <NetworkStatus />
-      {isLoginShow && <LoginModal />}
+      {isLoginShow && <AuthModal />}
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="*" element={<NotFound />} />
@@ -52,11 +52,7 @@ function App() {
               <Route key={index} path={path} element={element} />
             ))}
             {clientRoutes.map(({ path, element }, index) => (
-              <Route
-                key={index}
-                path={path}
-                element={element}
-              />
+              <Route key={index} path={path} element={element} />
             ))}
           </Route>
         </Routes>

@@ -15,13 +15,13 @@ import Payme from "../assets/svg/payme.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
-import Top from "./Top";
 import addressesUzb from "../data/addressesUzb.json";
-import Price from "../Helpers/Price";
 import { newOrder } from "../redux/order";
 import { clearCart } from "../redux/cart";
 import { HelmetTitle } from "../utils";
 import { deliveryTypeData, paymentMethodData } from "../data/OrderTypeData";
+import Top from "../components/CheckOut/Top";
+import Price from "../components/Helpers/Price";
 
 const CheckOut = () => {
   const { t } = useTranslation(["order"]);
@@ -128,9 +128,6 @@ const CheckOut = () => {
       setDistrict(standart.district || "");
       setStreet(standart.street || "");
       setHouse(standart.house || "");
-    }
-    if (!cart.length) {
-      navigate(-1);
     }
     window.scrollTo(0, 0);
   }, [user, standart]);

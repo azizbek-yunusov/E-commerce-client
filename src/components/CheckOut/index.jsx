@@ -8,15 +8,15 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Payme from "../../assets/svg/payme.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import Top from "./Top";
-import address from "../../data/address.json";
+import addresses from "../../data/addressesUzb.json";
 import Price from "../Helpers/Price";
 import { deliveryTypeData, paymentMethodData } from "../../data/OrderTypeData";
 import { newOrder } from "../../redux/order";
@@ -26,7 +26,7 @@ import { clearCart } from "../../redux/cart";
 const CheckOut = () => {
   const { t } = useTranslation(["order"]);
   const disptach = useDispatch();
-  const { isLoading, isSuccess, isError } = useSelector((state) => state.order);
+  const { isLoading, isError } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { access_token } = useSelector((state) => state.auth);
@@ -58,18 +58,18 @@ const CheckOut = () => {
   };
 
   // address
-  const findStandartRegionId = address.regions.find((rg) => {
+  const findStandartRegionId = addresses.regions.find((rg) => {
     return rg.name === region;
   });
-  const defaultDistricts = address.districts.filter((value) => {
+  const defaultDistricts = addresses.districts.filter((value) => {
     return value.region_id === 11;
   });
   const handleRegion = (e) => {
     const getRegionId = e.target.value;
-    const getRegionData = address?.regions.find(
+    const getRegionData = addresses?.regions.find(
       (reg) => reg.id === getRegionId
     );
-    const getDistrictsdata = address.districts.filter(
+    const getDistrictsdata = addresses.districts.filter(
       (item) => item.region_id === getRegionId
     );
     setRegion(getRegionData.name);
@@ -316,7 +316,7 @@ const CheckOut = () => {
                         label={t("region")}
                         onChange={(e) => handleRegion(e)}
                       >
-                        {address.regions.map((item, index) => (
+                        {addresses.regions.map((item, index) => (
                           <MenuItem key={index} value={item.id}>
                             {item.name}
                           </MenuItem>

@@ -1,9 +1,11 @@
 import { AiOutlineUser } from "react-icons/ai";
 import { styled, alpha } from "@mui/material/styles";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Divider, IconButton, Menu, MenuItem } from "@mui/material";
+import { Divider, Menu, MenuItem } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { toggleLoginModal } from "../../redux/auth";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -50,6 +52,7 @@ const StyledMenu = styled((props) => (
 
 const UserButton = () => {
   let { t } = useTranslation(["home"]);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -62,7 +65,7 @@ const UserButton = () => {
     <>
       <div className="mx-2 md:mx-0 md:block hidden">
         <div
-          onClick={handleClick}
+          onClick={() => dispatch(toggleLoginModal())}
           className="flex justify-between cursor-pointer text-gray-500 active:text-orange-400 transition_normal flex-col items-center"
         >
           <AiOutlineUser className="md:text-2xl" />

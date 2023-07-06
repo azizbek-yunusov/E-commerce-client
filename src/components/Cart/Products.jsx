@@ -1,6 +1,5 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import React from "react";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -11,9 +10,9 @@ import { Link } from "react-router-dom";
 import Price from "../Helpers/Price";
 import { addToCart, decrementQtyItem, deleteFromCart } from "../../redux/cart";
 import { deleteFromFavorite } from "../../redux/favorite";
+import { discPriceCalc } from "../../utils/discountPriceCalc";
 const Products = ({ cart }) => {
   const { access_token, isLogged } = useSelector((state) => state.auth);
-  const { favorites } = useSelector((state) => state.favorite);
   const dispatch = useDispatch();
   let { t } = useTranslation(["product"]);
 
@@ -69,13 +68,27 @@ const Products = ({ cart }) => {
                             <p className="text-base text-gray-800 ">
                               {item.productId?.name}
                             </p>
-
+                            <div className="flex">
+                              <Price
+                                price={discPriceCalc(
+                                  item.productId.price,
+                                  item.productId.discount
+                                )}
+                                className="font-semibold md:flex hidden text-lg text-gray-800"
+                              />
+                              <Price
+                                price={item.productId.price}
+                                className="font-semibold md:flex hidden text-lg text-gray-400 ml-2 line-through"
+                              />
+                            </div>
                             <Price
-                              price={item.productId?.price}
-                              className="font-semibold md:flex hidden text-lg text-gray-800"
-                            />
-                            <Price
-                              price={item.quantity * item.productId?.price}
+                              price={
+                                item.quantity *
+                                discPriceCalc(
+                                  item.productId.price,
+                                  item.productId.discount
+                                )
+                              }
                               className="font-semibold md:hidden flex text-sm text-gray-800"
                             />
 
@@ -168,7 +181,10 @@ const Products = ({ cart }) => {
                           </div>
                           <div className="h-full flex md:justify-start justify-end items-center md:mt-0 mx-1 mt-2">
                             <Price
-                              price={item.price}
+                              price={discPriceCalc(
+                                item.productId.price,
+                                item.productId.discount
+                              )}
                               className="xl:text-2xl md:text-base md:flex hidden font-semibold text-gray-700"
                             />
                             <div
@@ -215,7 +231,10 @@ const Products = ({ cart }) => {
 
               <Price
                 price={cart.reduce(
-                  (a, c) => a + c.productId?.price * c.quantity,
+                  (a, c) =>
+                    a +
+                    discPriceCalc(c.productId.price, c.productId.discount) *
+                      c.quantity,
                   0
                 )}
                 className="md:text-xl xl:text-2xl mb-5 text-gray-700 font-bold"

@@ -1,7 +1,5 @@
-import React from "react";
 import { HiOutlinePhone } from "react-icons/hi";
 import Translate from "../Buttons/Translate";
-// import TransleteD from "./Buttons/Translete";
 import Logo from "../Helpers/Logo";
 import { useTranslation } from "react-i18next";
 

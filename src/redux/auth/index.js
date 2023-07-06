@@ -132,15 +132,6 @@ export const changePassword = createAsyncThunk(
   }
 );
 
-export const signOut = createAsyncThunk("auth/sign-out", async () => {
-  try {
-    localStorage.removeItem("refresh_token");
-    return null;
-  } catch (error) {
-    return console.log(error);
-  }
-});
-
 const initialState = {
   user: null,
   access_token: "",
@@ -149,6 +140,7 @@ const initialState = {
   isError: false,
   isAdmin: false,
   isLoginShow: false,
+  activModal: "signin",
   message: "",
 };
 export const authSlice = createSlice({
@@ -162,10 +154,24 @@ export const authSlice = createSlice({
     toggleLoginModal: (state) => {
       state.isLoginShow = !state.isLoginShow;
     },
+    setActiveModal: (state, action) => {
+      state.activModal = action.payload;
+    },
+    signOut: (state) => {
+      localStorage.removeItem("refresh_token");
+      state.isLoading = false;
+      state.isError = false;
+      state.isLogged = false;
+      state.user = null;
+      state.access_token = "";
+      state.role = "";
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUp.pending, (state) => {})
+      .addCase(signUp.pending, (state) => {
+        state.isLogged = false;
+      })
       .addCase(signUp.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
@@ -176,7 +182,9 @@ export const authSlice = createSlice({
         state.isLogged = false;
         state.message = action.payload;
       })
-      .addCase(verifyOtp.pending, (state) => {})
+      .addCase(verifyOtp.pending, (state) => {
+        state.isLogged = false;
+      })
       .addCase(verifyOtp.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isLogged = true;
@@ -190,7 +198,9 @@ export const authSlice = createSlice({
         state.isLogged = false;
         state.message = action.payload;
       })
-      .addCase(signIn.pending, (state) => {})
+      .addCase(signIn.pending, (state) => {
+        state.isLogged = false;
+      })
       .addCase(signIn.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
@@ -235,7 +245,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        //         state.message = action.payload;
+        state.message = action.payload;
       })
       .addCase(editProfile.pending, (state) => {})
       .addCase(editProfile.fulfilled, (state, action) => {
@@ -248,7 +258,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        //         state.message = action.payload;
+        state.message = action.payload;
       })
       .addCase(uploadAvatar.pending, (state) => {})
       .addCase(uploadAvatar.fulfilled, (state, action) => {
@@ -261,26 +271,12 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.isLogged = false;
-        //         state.message = action.payload;
-      })
-      .addCase(signOut.pending, (state) => {})
-      .addCase(signOut.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isError = false;
-        state.isLogged = false;
-        state.user = null;
-        state.access_token = "";
-        state.isAdmin = false;
-      })
-      .addCase(signOut.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.isLogged = false;
         state.message = action.payload;
       })
       .addCase(() => {});
   },
 });
-export const { toggleLoginModal, clearErrors } = authSlice.actions;
+export const { toggleLoginModal, clearErrors, setActiveModal, signOut } =
+  authSlice.actions;
 
 export default authSlice.reducer;

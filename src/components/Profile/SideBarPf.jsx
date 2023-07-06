@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -8,7 +7,7 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { BiEdit, BiLogIn } from "react-icons/bi";
-import { signOut } from "../../redux/auth";
+import { signOut, toggleLoginModal } from "../../redux/auth";
 
 const SideBarPf = () => {
   let { t } = useTranslation(["user"]);
@@ -21,7 +20,8 @@ const SideBarPf = () => {
   const signOutHandle = async () => {
     await dispatch(signOut());
     if (isLogged) {
-      navigate("/signin");
+      navigate("/");
+      dispatch(toggleLoginModal());
     }
     toast.success(t("logged-out"));
   };

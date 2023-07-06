@@ -2,37 +2,21 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
-  Backdrop,
-  Box,
   Button,
   Checkbox,
-  Fade,
   FormControlLabel,
   IconButton,
   InputAdornment,
-  Modal,
   TextField,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import HelmetTitle from "../utils/HelmetTitle";
-import { MdOutlineMarkEmailUnread } from "react-icons/md";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { authUrl } from "../utils/baseUrls";
 import OTPInput from "../components/Verify/OTPInput";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { clearErrors, googleOauth, signUp, verifyOtp } from "../redux/auth";
 import { useGoogleLogin } from "@react-oauth/google";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  boxShadow: 24,
-  p: 3,
-};
 
 const SignUp = () => {
   let { t } = useTranslation(["home"]);

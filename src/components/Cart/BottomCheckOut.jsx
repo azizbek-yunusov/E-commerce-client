@@ -4,15 +4,20 @@ import { useTranslation } from "react-i18next";
 import { AiOutlineShopping } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Price from "../Helpers/Price";
+import { discPriceCalc } from "../../utils/discountPriceCalc";
 
 const BottomCheckOut = ({ cart }) => {
   const scroll = useScrollTrigger();
   const { t } = useTranslation(["product"]);
 
-  let totalPrice = cart.reduce((a, c) => a + c.productId.price * c.quantity, 0);
+  let totalPrice = cart.reduce(
+    (a, c) =>
+      a + discPriceCalc(c.productId.price, c.productId.discount) * c.quantity,
+    0
+  );
   const totalQuantity =
     cart.length && cart?.reduce((a, c) => a + c.quantity, 0);
-  
+
   return (
     <>
       {cart.length > 0 && scroll && (
