@@ -10,13 +10,11 @@ export const ReviewsBox = () => {
   const { product, reviews } = useSelector((state) => state.product);
   const { isLogged } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  
-  const findRating = reviews.length
-    ? (num) => reviews?.filter((item) => item.rating === num).length
-    : [];
+
+  const findRating = (num) =>
+    reviews?.filter((item) => item.rating === num).length;
   const ratingPertange = (num) =>
     findRating(num) > 0 ? (findRating(num) * 100) / product?.numOfReviews : 0;
-  console.log(ratingPertange(5));
   const ratings = [1, 2, 3, 4, 5];
   return (
     <>
