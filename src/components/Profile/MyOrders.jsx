@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LayoutP from "./LayoutP";
 import { useTranslation } from "react-i18next";
 import {
   CircularProgress,
@@ -25,7 +24,6 @@ const MyOrders = () => {
       dispatch(getMyOrders(access_token));
     }
   }, [access_token, dispatch]);
-  console.log(myOrders);
   return (
     <>
       <HelmetTitle title={`${t("user:my-orders")} - ${t("user:personal")}`} />

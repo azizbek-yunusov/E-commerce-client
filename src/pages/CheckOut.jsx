@@ -42,8 +42,7 @@ const CheckOut = () => {
   const [payment, setPayment] = useState("Cash on Delivery");
   const [delivery, setDelivery] = useState("Delivery address");
   const [selectDistricts, setSelectDistricts] = useState([]);
-  const navigate = useNavigate();
-
+  
   const handlePaymentChange = (e) => {
     setPayment(e.target.value);
     if (payment !== "Cash on Delivery") {
@@ -105,7 +104,7 @@ const CheckOut = () => {
       await disptach(newOrder({ access_token, orderData }));
       if (!isLoading) {
         toast.success(t("new-order-added"));
-        navigate("/profile/orders");
+        navigate("/profile?tab=2");
         clearCart(access_token);
       }
       if (isError) {
@@ -131,7 +130,6 @@ const CheckOut = () => {
     }
     window.scrollTo(0, 0);
   }, [user, standart]);
-  console.log("Vil:", region, "Tum:", district);
   return (
     <>
       <HelmetTitle title={t("check-out")} />

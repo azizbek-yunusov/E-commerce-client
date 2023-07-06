@@ -45,7 +45,6 @@ const Addresses = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [access_token]);
 
-  console.log(addresses);
   return (
     <>
       <HelmetTitle title={`${t("addresses")} - ${t("personal")}`} />

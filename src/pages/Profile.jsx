@@ -9,14 +9,19 @@ import ProfileTabs from "../components/Profile/ProfileTabs";
 import ActiveTab from "../components/Profile/ActiveTab";
 import moment from "moment";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
   let { t } = useTranslation(["user"]);
-  const [activeTab, setActiveTab] = useState(0);
-
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  const sp = new URLSearchParams(search);
+  const tab = sp.get("tab");
+  const [activeTab, setActiveTab] = useState(Number(tab));
   const handleTabsChange = (event, newValue) => {
     setActiveTab(newValue);
+    navigate(`/profile?tab=${newValue}`)
   };
   return (
     <>
