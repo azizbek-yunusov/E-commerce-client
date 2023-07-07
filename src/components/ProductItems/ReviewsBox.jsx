@@ -46,7 +46,7 @@ export const ReviewsBox = () => {
                 className="md:my-5 my-3 flex justify-between items-center"
               >
                 <div className="flex items-center">
-                  <span className="text-zinc-700 mr-1">5</span>
+                  <span className="text-zinc-700 mr-1">{num}</span>
                   {ratings.map((rat) => (
                     <AiFillStar
                       key={rat}
