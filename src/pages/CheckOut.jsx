@@ -26,6 +26,7 @@ import Price from "../components/Helpers/Price";
 const CheckOut = () => {
   const { t } = useTranslation(["order"]);
   const disptach = useDispatch();
+  const navigate = useNavigate()
   const { isLoading, isError } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
