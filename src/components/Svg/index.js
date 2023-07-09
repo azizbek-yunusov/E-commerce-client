@@ -1,0 +1,6 @@
+export {default as Apelsin} from "./Apelsin"
+export {default as UzCard} from "./UzCard"
+export {default as Click} from "./Click"
+export {default as Humo} from "./Humo"
+export {default as Payme} from "./Payme"
+export {default as Paynet} from "./Paynet"

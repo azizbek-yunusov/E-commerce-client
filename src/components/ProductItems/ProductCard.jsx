@@ -87,7 +87,7 @@ const ProductCard = ({
               className="md:h-44 h-[140px] object-cover"
             />
           </Link>
-          <div className="w-full md:mt-2 mt-1 text-gray-800">
+          <div className="w-full md:mt-2 mt-1 text-gray-700">
             <h1 className="md:text-base text-sm font-medium">{name}</h1>
           </div>
         </div>
@@ -96,19 +96,19 @@ const ProductCard = ({
             <div className="">
               <Price
                 price={discPriceCalc(price, discount)}
-                className="md:text-lg font-semibold"
+                className="md:text-lg font-semibold text-sm"
               />
               <Price
                 price={price}
-                className="md:text-lg line-through text-gray-400"
+                className="md:text-lg line-through text-sm text-gray-400"
               />
             </div>
           ) : (
-            <Price price={price} className="md:text-lg font-semibold" />
+            <Price price={price} className="md:text-lg font-semibold text-sm" />
           )}
           {discount > 0 && <DiscountExpire expire={discountExpire} />}
           <div className="flex items-center md:mt-1.5 mt-1">
-            <h1 className="text-base text-gray-700 mr-2">
+            <h1 className="md:text-base text-sm text-gray-700 mr-2">
               {ratings?.toFixed(1)}
             </h1>
             <Rating

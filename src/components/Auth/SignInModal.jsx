@@ -56,7 +56,9 @@ const SignInModal = () => {
     // submit form if no errors
     if (Object.keys(errors).length === 0) {
       try {
+        setLoader(true)
         await dispatch(signIn({ formState }));
+        setLoader(false)
       } catch (err) {
         console.log(err);
       }

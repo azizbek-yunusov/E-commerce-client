@@ -20,8 +20,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { toast } from "react-hot-toast";
 
 const SignUpModal = () => {
-  const { user, isError, message } =
-    useSelector((state) => state.auth);
+  const { user, isError, message } = useSelector((state) => state.auth);
   const [loader, setLoader] = useState(false);
   let { t } = useTranslation(["home"]);
 
@@ -65,6 +64,7 @@ const SignUpModal = () => {
     // submit form if no errors
     if (Object.keys(errors).length === 0) {
       try {
+        setLoader(true);
         await dispatch(signUp({ formState }));
       } catch (err) {
         console.log(err);
@@ -86,6 +86,8 @@ const SignUpModal = () => {
   });
   useEffect(() => {
     if (user) {
+      setLoader(false);
+
       toast.success(t("email-otp-verify"));
       dispatch(setActiveModal("verify"));
     }
@@ -159,7 +161,7 @@ const SignUpModal = () => {
           color="secondary"
           variant="outlined"
           name="confirmPass"
-          label={t("confirmPass")}
+          label={t("confirm-password")}
           type={showPassword ? "text" : "password"}
           value={formState.confirmPass}
           onChange={handleChange}
@@ -226,7 +228,7 @@ const SignUpModal = () => {
                 {t("loading")}...
               </div>
             ) : (
-              `${t("sign-up-b")}`
+              `${t("sign-up")}`
             )}
           </Button>
         </div>

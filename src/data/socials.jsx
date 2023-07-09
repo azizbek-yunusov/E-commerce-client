@@ -1,4 +1,5 @@
 import { BsFacebook, BsInstagram, BsTelegram, BsYoutube } from "react-icons/bs";
+import { Apelsin, Click, Humo, Payme, Paynet, UzCard } from "../components/Svg";
 
 export const socials = [
   {
@@ -46,5 +47,38 @@ export const about = [
   },
   {
     name: "service-centers",
+  },
+];
+
+export const payments = [
+  {
+    name: "Payme",
+    href: "https://payme.uz/",
+    icon: <Payme />,
+  },
+  {
+    name: "Click",
+    href: "https://click.uz/",
+    icon: <Click />,
+  },
+  {
+    name: "Apelsin",
+    href: "https://apelsin.uz/",
+    icon: <Apelsin />,
+  },
+  {
+    name: "UzCard",
+    href: "https://apelsin.uz/",
+    icon: <UzCard />,
+  },
+  {
+    name: "Humo",
+    href: "https://humo.uz/",
+    icon: <Humo />,
+  },
+  {
+    name: "Paynet",
+    href: "https://paynet.uz/",
+    icon: <Paynet />,
   },
 ];
