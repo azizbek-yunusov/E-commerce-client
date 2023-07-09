@@ -1,7 +1,8 @@
-const api =
+export const apiUrl =
   import.meta.env.MODE === "development"
-    ? "/api"
-    : "https://xurmo-api.vercel.app/api";
+    ? "http://localhost:5000"
+    : "https://xurmo-api.vercel.app";
+const api = "/api";
 export const authUrl = `${api}/auth/`;
 export const productUrl = `${api}/product/`;
 export const reviewUrl = `${api}/review/`;

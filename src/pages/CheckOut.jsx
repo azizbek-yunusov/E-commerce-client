@@ -105,7 +105,7 @@ const CheckOut = () => {
       await disptach(newOrder({ access_token, orderData }));
       if (!isLoading) {
         toast.success(t("new-order-added"));
-        navigate("/profile?tab=2");
+        navigate("/profile?tab=1");
         clearCart(access_token);
       }
       if (isError) {
