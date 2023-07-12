@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { categoryUrl } from "../../utils/baseUrls";
+import { categoryUrl, config } from "../../utils/baseUrls";
 
 export const getCategories = createAsyncThunk(
   "category/get-categories",
   async (thunkAPI) => {
     try {
-      const response = await axios.get(categoryUrl);
+      const response = await axios.get(categoryUrl, config);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -18,7 +18,7 @@ export const getCategory = createAsyncThunk(
   "category/get-category",
   async ({ slug }) => {
     try {
-      const { data } = await axios.get(`${categoryUrl}client/${slug}`);
+      const { data } = await axios.get(`${categoryUrl}client/${slug}`, config);
       return data;
     } catch (error) {
       return console.log(error);

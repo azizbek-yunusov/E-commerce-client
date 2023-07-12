@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { productUrl } from "../../utils/baseUrls";
+import { config, productUrl } from "../../utils/baseUrls";
 
 export const getSearchProducts = createAsyncThunk(
   "filter/get-search-products",
@@ -14,7 +14,7 @@ export const getSearchProducts = createAsyncThunk(
       }
       let querys = `keyword=${query}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-      const { data } = await axios.get(`${productUrl}search?${querys}`);
+      const { data } = await axios.get(`${productUrl}search?${querys}`, config);
       console.log(data);
       return data;
     } catch (error) {

@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { productUrl, reviewUrl } from "../../utils/baseUrls";
+import { config, productUrl, reviewUrl } from "../../utils/baseUrls";
 
 export const getProducts = createAsyncThunk(
   "product/get-products",
   async (thunkAPI) => {
     try {
-      const { data } = await axios.get(productUrl);
+      const { data } = await axios.get(productUrl, config);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.data);
@@ -23,7 +23,7 @@ export const getSearchProducts = createAsyncThunk(
       console.log("keyword:", query);
       let querys = `keyword=${query}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-      const { data } = await axios.get(`${productUrl}search?${querys}`);
+      const { data } = await axios.get(`${productUrl}search?${querys}`, config);
       console.log(data);
       return data;
     } catch (error) {
@@ -36,7 +36,7 @@ export const getProduct = createAsyncThunk(
   "product/get-product",
   async (slug) => {
     try {
-      const { data } = await axios.get(`${productUrl}view/${slug}`);
+      const { data } = await axios.get(`${productUrl}view/${slug}`, config);
       return data;
     } catch (error) {
       return console.log(error);

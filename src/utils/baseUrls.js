@@ -14,3 +14,8 @@ export const orderUrl = `${api}/order/`;
 export const postUrl = `${api}/post/`;
 
 export const token = localStorage.getItem("refresh_token") || false;
+export const config = {
+  headers: {
+    "ngrok-skip-browser-warning": "true",
+  },
+};
