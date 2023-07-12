@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { alpha, Menu, MenuItem } from "@mui/material";
 import styled from "@emotion/styled";
@@ -74,6 +74,7 @@ const Translate = ({ color }) => {
     i18n.changeLanguage(lng);
     setAnchorEl(null);
   };
+  const selectLangs = languages.filter((item) => item.lng != i18n.language);
   return (
     <div>
       <div className="flex_betwen transition_normal">
@@ -102,7 +103,7 @@ const Translate = ({ color }) => {
         open={open}
         onClose={handleClose}
       >
-        {languages.map((item, index) => (
+        {selectLangs.map((item, index) => (
           <MenuItem
             key={index}
             onClick={() => handleLangChange(item.lng)}

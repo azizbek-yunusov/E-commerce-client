@@ -26,16 +26,16 @@ function App() {
     }
   }, [token]);
 
-  useEffect(() => {
-    window.replainSettings = { id: "9ba7af42-4b86-455f-b953-ebe0286ecce7" };
-    (function (u) {
-      var s = document.createElement("script");
-      s.async = true;
-      s.src = u;
-      var x = document.getElementsByTagName("script")[0];
-      x.parentNode.insertBefore(s, x);
-    })("https://widget.replain.cc/dist/client.js");
-  }, []);
+  // useEffect(() => {
+  //   window.replainSettings = { id: "9ba7af42-4b86-455f-b953-ebe0286ecce7" };
+  //   (function (u) {
+  //     var s = document.createElement("script");
+  //     s.async = true;
+  //     s.src = u;
+  //     var x = document.getElementsByTagName("script")[0];
+  //     x.parentNode.insertBefore(s, x);
+  //   })("https://widget.replain.cc/dist/client.js");
+  // }, []);
   return (
     <main>
       <Toaster position="top-left" reverseOrder={true} />

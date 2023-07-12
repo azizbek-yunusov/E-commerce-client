@@ -1,4 +1,3 @@
-import React from "react";
 import PaymentTypeText from "../Helpers/PaymentTypeText";
 import OrderStatusText from "../Helpers/OrderStatusText";
 import { datePicker } from "../Helpers/datePicker";

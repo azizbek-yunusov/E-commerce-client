@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import { googleOauth, setActiveModal, signIn } from "../../redux/auth";
 import { useGoogleLogin } from "@react-oauth/google";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
 const SignInModal = () => {
   const [loader, setLoader] = useState(false);
@@ -56,9 +55,9 @@ const SignInModal = () => {
     // submit form if no errors
     if (Object.keys(errors).length === 0) {
       try {
-        setLoader(true)
+        setLoader(true);
         await dispatch(signIn({ formState }));
-        setLoader(false)
+        setLoader(false);
       } catch (err) {
         console.log(err);
       }
@@ -144,9 +143,7 @@ const SignInModal = () => {
               />
             }
           />
-          <Link className="text-purple-400" to={"/signin"}>
-            {t("forgot-pass")}
-          </Link>
+          {t("forgot-pass")}
         </div>
         <div className="mt-2">
           <Button
@@ -186,7 +183,7 @@ const SignInModal = () => {
           </Button>
         </div>
       </form>
-      <p className="mt-4 text-base text-center text-gray-400">
+      <p className="mt-3 text-base text-center text-gray-400">
         {t("new-platform")}{" "}
         <button
           onClick={() => dispatch(setActiveModal("signup"))}
@@ -196,14 +193,14 @@ const SignInModal = () => {
         </button>
         .
       </p>
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between my-2">
         <div className="w-full h-[1px] bg-gray-300"></div>
         <span className="text-sm mx-5 text-gray-400">{t("or")}</span>
         <div className="w-full h-[1px] bg-gray-300"></div>
       </div>
       <button
         onClick={() => googleOAuthHandle()}
-        className="flex items-center w-full justify-center space-x-2 text-gray-600 my-3 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
+        className="flex items-center w-full justify-center space-x-2 text-gray-600 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
       >
         <svg
           className="w-5 h-5"

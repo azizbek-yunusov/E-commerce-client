@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { BiSearch } from "react-icons/bi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { gteLtePrice } from "../../redux/filter";
 
 export const ratings = [
@@ -38,14 +38,20 @@ const Filter = ({
   brands,
   getFilterUrl,
   category,
-  // price,
-  // setPrice,
+  price,
+  setPrice,
 }) => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
   let { t } = useTranslation(["product"]);
-  const { defaultPrice } = useSelector((state) => state.filter);
-  const [price, setPrice] = useState([defaultPrice[0], defaultPrice[1]]);
+  const { rangePrice } = useSelector((state) => state.filter);
+  const navigate = useNavigate();
+  const { search } = useLocation();
+
+  const sp = new URLSearchParams(search); // /search?category=Shirts
+  const query = sp.get("query");
+  const minPrice = sp.get("min-price");
+  const maxPrice = sp.get("max-price");
   const [termBd, setTermBd] = useState("");
   const [termCy, setTermCy] = useState("");
 
@@ -63,6 +69,9 @@ const Filter = ({
   });
   const handleChange = (event, newValue) => {
     setPrice(newValue);
+    navigate(
+      `/search?query=${query}&min-price=${rangePrice[0]}&max-price=${rangePrice[1]}`
+    );
     // dispatch(gteLtePrice(newValue));
   };
   return (
@@ -86,9 +95,9 @@ const Filter = ({
                 onChange={handleChange}
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
-                min={defaultPrice[0]}
+                min={rangePrice[0] || minPrice}
                 color="secondary"
-                max={defaultPrice[1]}
+                max={rangePrice[1] || maxPrice}
               />
               <div className="flex_betwen md:my-5">
                 <TextField

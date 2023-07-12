@@ -56,8 +56,14 @@ const SignUpModal = () => {
     } else if (!/\S+@\S+\.\S+/.test(formState.email)) {
       errors.email = t("email-invalid");
     }
+    if (!formState.name) {
+      errors.name = t("name-valid");
+    }
     if (!formState.password) {
       errors.password = t("password-valid");
+    }
+    if (!formState.confirmPass) {
+      errors.confirmPass = t("confirm-pass-valid");
     }
     setFormErrors(errors);
 
@@ -233,7 +239,7 @@ const SignUpModal = () => {
           </Button>
         </div>
       </form>
-      <p className="mt-4 text-base text-center text-gray-400">
+      <p className="mt-3 text-base text-center text-gray-400">
         {t("have-account")}{" "}
         <button
           onClick={() => dispatch(setActiveModal("signin"))}
@@ -243,14 +249,14 @@ const SignUpModal = () => {
         </button>
         .
       </p>
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between my-2">
         <div className="w-full h-[1px] bg-gray-300"></div>
         <span className="text-sm mx-5 text-gray-400">{t("or")}</span>
         <div className="w-full h-[1px] bg-gray-300"></div>
       </div>
       <button
         onClick={() => googleOAuthHandle()}
-        className="flex items-center w-full justify-center space-x-2 text-gray-600 my-3 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
+        className="flex items-center w-full justify-center space-x-2 text-gray-600 py-3 bg-gray-50 hover:bg-gray-200 rounded-lg border-2 border-gray-300"
       >
         <svg
           className="w-5 h-5"

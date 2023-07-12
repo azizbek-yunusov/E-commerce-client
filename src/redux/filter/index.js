@@ -27,7 +27,7 @@ const initialState = {
   products: [],
   count: 0,
   perPage: 0,
-  defaultPrice: [],
+  rangePrice: [],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -38,7 +38,7 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     gteLtePrice: (state, action) => {
-      state.defaultPrice = action.payload;
+      state.rangePrice = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -51,9 +51,26 @@ export const filterSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.products = payload.products;
-        state.count = payload.filteredProductsCount;
-        state.perPage = payload.resultPerPage;
-        state.defaultPrice = payload.defaultPrice;
+        // state.count = payload.filteredProductsCount;
+        // state.perPage = payload.resultPerPage;
+        const maxPriceProduct = payload.products.reduce(
+          (maxProduct, product) => {
+            if (product.price > maxProduct.price) {
+              return product;
+            }
+            return maxProduct;
+          }
+        );
+        const minPriceProduct = payload.products.reduce(
+          (minProduct, product) => {
+            if (product.price < minProduct.price) {
+              return product;
+            }
+            return minProduct;
+          }
+        );
+        let rangePrice = [minPriceProduct.price, maxPriceProduct.price];
+        state.rangePrice = rangePrice;
       })
       .addCase(getSearchProducts.rejected, (state, action) => {
         state.isLoading = false;

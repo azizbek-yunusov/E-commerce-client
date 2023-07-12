@@ -24,7 +24,7 @@ import { getSearchProducts } from "../redux/filter";
 const Search = () => {
   const { categories } = useSelector((state) => state.category);
   const { brands } = useSelector((state) => state.brand);
-  const { products, perPage, count, defaultPrice } = useSelector(
+  const { products, isLoading, perPage, count, rangePrice } = useSelector(
     (state) => state.filter
   );
   const dispatch = useDispatch();
@@ -34,43 +34,46 @@ const Search = () => {
 
   const [loading, setLoading] = useState(true);
   const sp = new URLSearchParams(search); // /search?category=Shirts
-  const category = sp.get("category");
-  const brand = sp.get("brand");
   const query = sp.get("query");
-  const prices = sp.get("price");
-  const rating = sp.get("rating");
-  const order = sp.get("order") || "newest";
-  const page = sp.get("page") || 1;
+  const category = sp.get("category");
+  const minPrice = sp.get("min-price") || 0;
+  const maxPrice = sp.get("max-price") || 20000000;
+
+  const [price, setPrice] = useState([rangePrice[0] || minPrice || 0, rangePrice[1] || maxPrice || 20000000]);
+
+
+  // const brand = sp.get("brand");
+
+  // const rating = sp.get("rating");
+  // const order = sp.get("order") || "newest";
+  // const page = sp.get("page") || 1;
   const [isList, setIsList] = useState(false);
 
   const getFilterUrl = (filter, skipPathname) => {};
-  const fetchData = async () => {
-    await dispatch(getSearchProducts({ query, price }));
-    setLoading(false);
-  };
-  useEffect(() => {
-    fetchData();
-  }, [dispatch, query]);
-
-  useEffect(() => {
-    dispatch(getCategories());
-    dispatch(getBrands());
-    window.scrollTo(0, 0);
-  }, [dispatch]);
-
-  const [price, setPrice] = useState([defaultPrice[0], defaultPrice[1]]);
-
   const existCategories = categories?.filter((item2) => {
     return products?.some((item1) => item1.category === item2._id);
   });
   const existBrands = brands?.filter((item2) => {
     return products?.some((item1) => item1.brand === item2._id);
   });
-  console.log("price", price);
+  useEffect(() => {
+    dispatch(getSearchProducts({ query, price }));
+    setLoading(false);
+  }, [dispatch, query, price]);
+
+  useEffect(() => {
+    dispatch(getCategories());
+    dispatch(getBrands());
+
+    window.scrollTo(0, 0);
+  }, [dispatch]);
+
+  console.log("price", price, "range:", minPrice);
+
   return (
     <>
       <HelmetTitle title={`${query} - ${t("search-filter")}`} />
-      {loading ? (
+      {isLoading ? (
         <SearchPageLoader />
       ) : (
         <div className="container-full md:my-5 my-3">
@@ -88,7 +91,7 @@ const Search = () => {
           {products.length ? (
             <div className="sticky top-5 grid grid-cols-12 xl:gap-x-5 md:gap-x-3">
               <div className="md:col-span-3 lg:block hidden xl:px-2">
-                {!loading && (
+                {!isLoading && (
                   <Filter
                     categories={existCategories}
                     brands={existBrands}

@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { AiOutlineHeart, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
@@ -11,6 +10,7 @@ import Price from "../Helpers/Price";
 import { addToCart, decrementQtyItem, deleteFromCart } from "../../redux/cart";
 import { deleteFromFavorite } from "../../redux/favorite";
 import { discPriceCalc } from "../../utils/discountPriceCalc";
+
 const Products = ({ cart }) => {
   const { access_token, isLogged } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -76,10 +76,13 @@ const Products = ({ cart }) => {
                                 )}
                                 className="font-semibold md:flex hidden text-lg text-gray-800"
                               />
-                              <Price
-                                price={item.productId.price}
-                                className="font-semibold md:flex hidden text-lg text-gray-400 ml-2 line-through"
-                              />
+                              {item.productId.discount > 0 &&
+                              (
+                                <Price
+                                  price={item.productId.price}
+                                  className="font-semibold md:flex hidden text-lg text-gray-400 ml-2 line-through"
+                                />
+                              )}
                             </div>
                             <Price
                               price={
