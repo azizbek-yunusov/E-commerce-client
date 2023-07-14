@@ -29,7 +29,7 @@ const style = {
 
 const AddReviewModal = ({ open, handleClose, productId, review }) => {
   let { t } = useTranslation(["product"]);
-  const { access_token, user } = useSelector((state) => state.auth);
+  const { access_token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [rating, setRating] = useState(review?.rating || 0);
@@ -143,13 +143,13 @@ const AddReviewModal = ({ open, handleClose, productId, review }) => {
                 {pictures.map((img, index) => (
                   <div key={index} className="p-[6px] mx-[2px] relative">
                     <div
-                      className="border border-gray-400 overflow-hidden rounded"
+                      className="border border-gray-400 overflow-hidden py-1 rounded"
                       id="file_img"
                     >
                       <img
-                        src={img}
+                        src={img.url || img}
                         alt="images"
-                        className="img-thumbnail max-w-[50px] w-full"
+                        className="img-thumbnail max-w-[70px] w-full"
                       />
                     </div>
                     <IoMdClose

@@ -9,6 +9,7 @@ export const signUp = createAsyncThunk(
       const { data } = await axios.post(`${authUrl}signup`, formState);
       return data;
     } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error.response.data.err);
     }
   }
