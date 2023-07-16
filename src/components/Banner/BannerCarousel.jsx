@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 const BannerCarousel = () => {
   const { isLoading, banners } = useSelector((state) => state.banner);
-  const { products } = useSelector((state) => state.product);
+  const { discountProducts } = useSelector((state) => state.product);
   return (
     <section>
       {!isLoading ? (
@@ -57,7 +57,7 @@ const BannerCarousel = () => {
             </Swiper>
           </div>
           <div className="xl:col-span-3 col-span-4 xl:ml-8 lg:ml-5 lg:my-0 mt-5">
-            <DayProductList products={products} />
+            <DayProductList products={discountProducts.slice(0, 5)} />
           </div>
         </div>
       ) : (

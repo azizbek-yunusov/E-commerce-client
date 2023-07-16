@@ -32,11 +32,30 @@ export const newOrder = createAsyncThunk(
     }
   }
 );
+export const checkPromoCode = createAsyncThunk(
+  "order/check-promo-code",
+  async ({ access_token, code }, thunkAPI) => {
+    try {
+      const { data } = await axios.post(
+        `${orderUrl}check-promo-code`,
+        { code },
+        {
+          headers: {
+            Authorization: access_token,
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
 
 const initialState = {
-  orders: [],
   myOrders: [],
   order: null,
+  promo: null,
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -45,7 +64,12 @@ const initialState = {
 export const orderSlice = createSlice({
   name: "orders",
   initialState,
-  reducers: {},
+  reducers: {
+    clearPromo: (state) => {
+      state.promo = null;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
 
@@ -80,8 +104,28 @@ export const orderSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+      .addCase(checkPromoCode.pending, (state) => {
+        state.isLoading = true;
+        state.promo = null;
+        state.isError = false;
+        state.message = "";
+      })
+      .addCase(checkPromoCode.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.promo = action.payload.promocode;
+      })
+      .addCase(checkPromoCode.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+      })
       .addCase(() => {});
   },
 });
+
+export const { clearPromo } = orderSlice.actions;
 
 export default orderSlice.reducer;

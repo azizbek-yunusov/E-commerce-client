@@ -120,5 +120,15 @@
   "days": "kun",
   "hours": "soat",
   "minutes": "minut",
-  "day-product": "Kun mahsuloti"
+  "day-product": "Kun mahsuloti",
+  "promocode-active": "Promo kod faollashtirildi",
+  "promocode-used": "Promo koddan foydalanib bo'lingan",
+  "promocode-expired": "Promo kodning foydalanish muddati tugagan",
+  "error": "Xatolik yuz berdi qayta urib ko'ring",
+  "This code not found": "Bunday promo kod mavjud emas!!!",
+  "verify": "Tekshirish",
+  "code-feild": "Iltimos promo kodi kiriting",
+  "discount-products": "Chegirmalar",
+  "new-products": "Yangi"
+
 }

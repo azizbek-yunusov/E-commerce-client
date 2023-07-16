@@ -45,6 +45,9 @@ export const filterSlice = createSlice({
     builder
       .addCase(getSearchProducts.pending, (state) => {
         state.isLoading = true;
+        state.perPage = 0;
+        state.rangePrice = [];
+        state.count = 0;
       })
       .addCase(getSearchProducts.fulfilled, (state, { payload }) => {
         state.isLoading = false;

@@ -67,7 +67,7 @@
   "sent-email-otp-descr": "Siznging elektron pochtangizga kod yubordik iltimos uni kiriting",
   "verify": "tasdiqlash",
   "otp-verification": "OTP tekshiruvi",
-  "loading": "kuting",
+  "loading": "Kuting...",
   "email-otp-verify": "Kirish uchun emailingizni tasdiqlang!!!",
   "didnt-receive-code": "Kodni olmadingizmi?",
   "resent": "Qayta yuborish",

@@ -10,10 +10,17 @@ import Price from "../Helpers/Price";
 import { addToCart, decrementQtyItem, deleteFromCart } from "../../redux/cart";
 import { deleteFromFavorite } from "../../redux/favorite";
 import { discPriceCalc } from "../../utils/discountPriceCalc";
+import { checkPromoCode, clearPromo } from "../../redux/order";
+import { useState } from "react";
+import { MdDiscount } from "react-icons/md";
+import { momentDate } from "../../utils/momentDate";
 
 const Products = ({ cart }) => {
   const { access_token, isLogged } = useSelector((state) => state.auth);
+  const { isError, message, promo } = useSelector((state) => state.order);
   const dispatch = useDispatch();
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
   let { t } = useTranslation(["product"]);
 
   const addToCartHandle = async (id) => {
@@ -36,6 +43,18 @@ const Products = ({ cart }) => {
     } else {
       toast.error(t("error-register"));
     }
+  };
+  const handleCheckPromoCode = (code) => {
+    if (!code) {
+      setError("code-feild");
+    } else {
+      dispatch(checkPromoCode({ access_token, code }));
+      setError("");
+    }
+  };
+  const handleClearPromo = () => {
+    dispatch(clearPromo());
+    setCode("");
   };
   return (
     <>
@@ -76,8 +95,7 @@ const Products = ({ cart }) => {
                                 )}
                                 className="font-semibold md:flex hidden text-lg text-gray-800"
                               />
-                              {item.productId.discount > 0 &&
-                              (
+                              {item.productId.discount > 0 && (
                                 <Price
                                   price={item.productId.price}
                                   className="font-semibold md:flex hidden text-lg text-gray-400 ml-2 line-through"
@@ -231,31 +249,115 @@ const Products = ({ cart }) => {
               <h1 className="md:text-xl xl:text-2xl mb-5 text-gray-700 font-bold">
                 {t("total")}
               </h1>
+              <div className="flex_betwen mb-5">
+                {promo?.status === "active" ? (
+                  <div className="flex ">
+                    <MdDiscount className="text-red-500" />
 
-              <Price
-                price={cart.reduce(
-                  (a, c) =>
-                    a +
-                    discPriceCalc(c.productId.price, c.productId.discount) *
-                      c.quantity,
-                  0
+                    <Price
+                      price={cart.reduce(
+                        (a, c) =>
+                          a +
+                          discPriceCalc(
+                            c.productId.price,
+                            c.productId.discount + promo.discount
+                          ) *
+                            c.quantity,
+                        0
+                      )}
+                      className="md:text-xl xl:text-2xl  text-gray-700 font-bold"
+                    />
+                  </div>
+                ) : (
+                  <Price
+                    price={cart.reduce(
+                      (a, c) =>
+                        a +
+                        discPriceCalc(c.productId.price, c.productId.discount) *
+                          c.quantity,
+                      0
+                    )}
+                    className="md:text-xl xl:text-2xl  text-gray-700 font-bold"
+                  />
                 )}
-                className="md:text-xl xl:text-2xl mb-5 text-gray-700 font-bold"
-              />
+              </div>
             </div>
-            <div className="border-2 border-[#ff8400] flex justify-between items-center overflow-hidden rounded-lg">
-              <input
-                type="text"
-                className="w-full px-4 text-base py-2"
-                placeholder={t("promo-code")}
-              />
-              <button className="my-[2px] flex px-10 h-full py-[10px] rounded-md mx-[2px] bg_secondary text-white">
-                Kiritish
-              </button>
+            <div className="">
+              <div className="border-2 border-[#ff8400] flex justify-between items-center overflow-hidden rounded-lg">
+                <input
+                  type="number"
+                  value={code}
+                  required
+                  onChange={(e) => setCode(e.target.value)}
+                  className="w-full px-4 text-base py-2"
+                  placeholder={t("promo-code")}
+                />
+                {promo ? (
+                  <button
+                    onClick={() => handleClearPromo()}
+                    className="my-[2px] flex px-10 h-full py-[10px] rounded-md mx-[2px] bg-red-500 text-white"
+                  >
+                    <span>{t("delete")}</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleCheckPromoCode(code)}
+                    className="my-[2px] flex px-10 h-full py-[10px] rounded-md mx-[2px] bg_secondary text-white"
+                  >
+                    <span>{t("verify")}</span>
+                  </button>
+                )}
+              </div>
+              {error ? (
+                <p className="text-red-600 text-sm">{t(error)}</p>
+              ) : null}
             </div>
-            <div className="mt-6">
+            <div className="mt-5">
+              <ul className="flex justify-between items-center space-y-2 text-gray-700">
+                <li className="">
+                  {promo === null ? null : promo.status === "active" ? (
+                    <span className="text-green-500 font-semibold">
+                      {t("promocode-active")}
+                    </span>
+                  ) : promo.status === "expired" ? (
+                    <span className="text-red-500 font-semibold">
+                      {t("promocode-expired")}
+                    </span>
+                  ) : promo.status === "used" ? (
+                    <span className="text-yellow-500 font-semibold">
+                      {t("promocode-used")}
+                    </span>
+                  ) : (
+                    <span className="text-red-500 font-semibold">
+                      {t("error")}
+                    </span>
+                  )}
+                  {isError && (
+                    <span className="text-red-500">{t(message)}</span>
+                  )}
+                </li>
+                <li className="">
+                  {promo === null ? null : promo.status === "active" ? (
+                    <span className="text-green-500 font-semibold">
+                      {promo.discount}%
+                    </span>
+                  ) : promo.status === "expired" ? (
+                    <span className="text-red-500 font-semibold">
+                      {t("promocode-expired")}
+                    </span>
+                  ) : promo.status === "used" ? (
+                    <span className="text-red-500 font-semibold">
+                      {momentDate(promo.updatedAt)}
+                    </span>
+                  ) : (
+                    <span className="text-red-500 font-semibold">
+                      {t("error")}
+                    </span>
+                  )}
+                </li>
+              </ul>
               <ul className="flex justify-between items-center text-gray-700">
-                <li className="md:text-lg">{t("delivery")}</li>
+                <li className="md:text-lg"> {t("delivery")}</li>
                 <li className="md:text-lg">{t("free")}</li>
               </ul>
             </div>

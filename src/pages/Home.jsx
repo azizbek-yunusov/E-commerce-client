@@ -10,21 +10,28 @@ import { getBanners } from "../redux/banner";
 import { getBrands } from "../redux/brand/brandSlice";
 import { getCategories } from "../redux/category";
 import { getPosts } from "../redux/post";
-import { getProducts } from "../redux/product";
+import { getDiscountProducts, getNewProducts } from "../redux/product";
 import { HelmetTitle } from "../utils";
 import BestProductsList from "../components/ProductItems/BestProductsList";
+import NewProducts from "../components/ProductItems/NewProducts";
+import DiscountProducts from "../components/ProductItems/DiscountProducts";
 
 const Home = () => {
   let { t } = useTranslation(["home"]);
-  const { products } = useSelector((state) => state.product);
+  const { products, discountProducts, newProducts } = useSelector(
+    (state) => state.product
+  );
   const { banners } = useSelector((state) => state.banner);
   const { categories } = useSelector((state) => state.category);
   const { brands } = useSelector((state) => state.brand);
   const { posts } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const multimpleFetch = () => {
-    if (!products.length) {
-      dispatch(getProducts());
+    if (!discountProducts.length) {
+      dispatch(getDiscountProducts());
+    }
+    if (!newProducts.length) {
+      dispatch(getNewProducts());
     }
     if (!banners.length) {
       dispatch(getBanners());
@@ -49,7 +56,8 @@ const Home = () => {
         <HelmetTitle title={t("home")} />
         <BannerCarousel />
         <CategoryList />
-        <BestProductsList />
+        <NewProducts />
+        <DiscountProducts />
         <BrandsList />
         <ListBox />
         <PostList />

@@ -16,18 +16,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import addressesUzb from "../data/addressesUzb.json";
-import { newOrder } from "../redux/order";
+import { clearPromo, newOrder } from "../redux/order";
 import { clearCart } from "../redux/cart";
 import { HelmetTitle } from "../utils";
 import { deliveryTypeData, paymentMethodData } from "../data/OrderTypeData";
 import Top from "../components/CheckOut/Top";
 import Price from "../components/Helpers/Price";
+import { discPriceCalc } from "../utils/discountPriceCalc";
 
 const CheckOut = () => {
   const { t } = useTranslation(["order"]);
   const disptach = useDispatch();
-  const navigate = useNavigate()
-  const { isLoading, isError } = useSelector((state) => state.order);
+  const navigate = useNavigate();
+  const { isLoading, isError, promo } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { access_token } = useSelector((state) => state.auth);
@@ -43,7 +44,7 @@ const CheckOut = () => {
   const [payment, setPayment] = useState("Cash on Delivery");
   const [delivery, setDelivery] = useState("Delivery address");
   const [selectDistricts, setSelectDistricts] = useState([]);
-  
+
   const handlePaymentChange = (e) => {
     setPayment(e.target.value);
     if (payment !== "Cash on Delivery") {
@@ -79,7 +80,16 @@ const CheckOut = () => {
   // New Order Placed
   const totalPrice =
     cart.length &&
-    cart?.reduce((a, c) => a + c.productId.price * c.quantity, 0);
+    cart?.reduce(
+      (a, c) =>
+        a +
+        discPriceCalc(
+          c.productId.price,
+          c.productId.discount + (promo ? promo.discount : 0)
+        ) *
+          c.quantity,
+      0
+    );
   const totalQuantity =
     cart.length && cart?.reduce((a, c) => a + c.quantity, 0);
 
@@ -101,12 +111,14 @@ const CheckOut = () => {
         deliveryType: delivery,
         totalPrice,
         orderStatus: "Accepted",
+        code: promo?.code || 0
       };
       await disptach(newOrder({ access_token, orderData }));
       if (!isLoading) {
         toast.success(t("new-order-added"));
         navigate("/profile?tab=1");
         clearCart(access_token);
+        disptach(clearPromo())
       }
       if (isError) {
         toast.error("Something Went Wrong!");

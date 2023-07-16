@@ -13,6 +13,31 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+
+export const getNewProducts = createAsyncThunk(
+  "product/get-new-products",
+  async (thunkAPI) => {
+    try {
+      const { data } = await axios.get(`${productUrl}home/new`, config);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.data);
+    }
+  }
+);
+
+export const getDiscountProducts = createAsyncThunk(
+  "product/get-discount-products",
+  async (thunkAPI) => {
+    try {
+      const { data } = await axios.get(`${productUrl}home/discounts`, config);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.data);
+    }
+  }
+);
+
 export const getSearchProducts = createAsyncThunk(
   "product/get-search-products",
   async (
@@ -65,6 +90,7 @@ export const addReview = createAsyncThunk(
       return data.product;
     } catch (error) {
       return console.log(error);
+      
     }
   }
 );
@@ -87,7 +113,7 @@ export const likeReview = createAsyncThunk(
 
 export const unLikeReview = createAsyncThunk(
   "product/unlike-review",
-  async ({ access_token, id }, thunkApi) => {
+  async ({ access_token, id }, thunkAPI) => {
     try {
       const response = await axios.patch(`${reviewUrl}${id}/unlike`, null, {
         headers: {
@@ -96,14 +122,15 @@ export const unLikeReview = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return console.log(error);
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.response.data.msg);
     }
   }
 );
 
 export const replyComment = createAsyncThunk(
   "product/reply-review",
-  async ({ access_token, id, text }, thunkApi) => {
+  async ({ access_token, id, text }, thunkAPI) => {
     try {
       const response = await axios.put(
         `${reviewUrl}reply/${id}`,
@@ -116,13 +143,16 @@ export const replyComment = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return console.log(error);
+      console.log(error)
+      return thunkAPI.rejectWithValue(error.response.data.msg);
     }
   }
 );
 
 const initialState = {
   products: [],
+  newProducts: [],
+  discountProducts: [],
   filteredProducts: [],
   product: null,
   reviews: [],
@@ -146,7 +176,38 @@ export const productSlice = createSlice({
         state.isSuccess = true;
         state.products = action.payload;
       })
+      
       .addCase(getProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(getNewProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getNewProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.newProducts = action.payload;
+      })
+      .addCase(getNewProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(getDiscountProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getDiscountProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.discountProducts = action.payload;
+      })
+      .addCase(getDiscountProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
