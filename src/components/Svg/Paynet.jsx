@@ -3,7 +3,7 @@ function Paynet() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      className="h-6 w-24"
+      className="md:h-6 h-5 md:w-24 w-20"
       viewBox="0 0 84 20"
     >
       <path fill="url(#pattern0)" d="M0 0.5H84V19.5H0z"></path>

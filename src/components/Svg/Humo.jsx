@@ -1,7 +1,7 @@
 
 function Humo() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-14 h-8" viewBox="0 0 52 32">
+    <svg xmlns="http://www.w3.org/2000/svg" className="md:w-14 md:h-8 w-12 h-7" viewBox="0 0 52 32">
       <g clipPath="url(#clip0_101_681)">
         <path
           fill="#fff"

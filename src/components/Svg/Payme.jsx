@@ -1,6 +1,6 @@
 function Payme() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-6" viewBox="0 0 76 22">
+    <svg xmlns="http://www.w3.org/2000/svg" className="md:w-20 w-16 md:h-6 h-5" viewBox="0 0 76 22">
       <path
         fill="#333"
         fillRule="evenodd"

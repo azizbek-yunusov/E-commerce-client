@@ -62,11 +62,11 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="">
-              <div className="grid grid-cols-3 gap-x-10 gap-y-2 mt-9">
+              <div className="grid grid-cols-3 md:gap-x-10 gap-x-8 md:gap-y-2 gap-y-1 md:mt-9">
                 {payments.map((item, index) => (
                   <div
                     key={index}
-                    className="bg-white  hover:bg-gray-200 flex_center w-28 h-14 rounded-xl cursor-pointer"
+                    className="bg-white  hover:bg-gray-200 flex_center md:w-28 w-24 md:h-14 h-12 rounded-xl cursor-pointer"
                   >
                     <a
                       className=""

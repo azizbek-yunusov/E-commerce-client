@@ -2,7 +2,7 @@ function Apelsin() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="icon icon__apelsin h-6"
+      className="icon icon__apelsin md:h-6 h-5"
       viewBox="0 0 80 20"
     >
       <path

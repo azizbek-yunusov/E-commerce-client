@@ -3,7 +3,7 @@ function UzCard() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-7"
+      className="md:h-7 h-6"
       viewBox="0 0 40 32"
     >
       <path
